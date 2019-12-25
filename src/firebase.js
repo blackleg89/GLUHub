@@ -1,3 +1,8 @@
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/database';
+import 'firebase/storage'
+
 var firebaseConfig = {
     apiKey: "AIzaSyDN86Y3l0lF_m6281bW_N5KyheQp-lIPiE",
     authDomain: "gluhub.firebaseapp.com",
@@ -10,4 +15,5 @@ var firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
-firebase.analytics();
+
+export default firebase
