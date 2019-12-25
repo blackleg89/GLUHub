@@ -8,8 +8,8 @@ let mainWindow,
     loadingScreen,
     windowParams = {
         fullscreen: false,
-        frame: false,
-        show: false
+        frame: true,
+        show: true
     };
 // where public folder on the root dir
 
