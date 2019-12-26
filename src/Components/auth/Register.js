@@ -1,11 +1,15 @@
 import React, {Component} from 'react'
 import firebase from '../../firebase'
 import md5 from 'md5'
-import{
+import {
     Grid,
     Form,
-    Button
-} from 'semantic-ui-react'
+    Segment,
+    Button,
+    Header,
+    Message,
+    Icon
+  } from "semantic-ui-react";
 
 class Register extends Component {
     state ={
@@ -119,53 +123,61 @@ class Register extends Component {
             loading
         } = this.state;
         return(
-            <Form onSubmit={this.handleSubmit} size="large">
-                <Form.Input
-                    fluid
-                    name="username"
-                    placeholder="Username"
-                    onChange={this.handleChange}
-                    value={username}
-                    type="text"
-                />
-                
-                <Form.Input
-                    fluid
-                    name="email"
-                    placeholder="Email Address"
-                    onChange={this.handleChange}
-                    value={email}
-                    type="email"
-                />
+            <Grid textAlign="center" verticalAlign="middle" className="register-App">
+                <Grid.Column style={{maxWidth: 450}}>
+                    <Header as="h1" icon color="blue" textAlign="center">
+                        <Icon name="hand spock" color="blue"/>
+                        Register for GLU-Hub
+                    </Header>
+                    <Form onSubmit={this.handleSubmit} size="large">
+                        <Form.Input
+                            fluid
+                            name="username"
+                            placeholder="Username"
+                            onChange={this.handleChange}
+                            value={username}
+                            type="text"
+                        />
+                        
+                        <Form.Input
+                            fluid
+                            name="email"
+                            placeholder="Email Address"
+                            onChange={this.handleChange}
+                            value={email}
+                            type="email"
+                        />
 
-                <Form.Input
-                    fluid
-                    name="password"
-                    placeholder="Password"
-                    onChange={this.handleChange}
-                    value={password}
-                    type="password"
-                />
+                        <Form.Input
+                            fluid
+                            name="password"
+                            placeholder="Password"
+                            onChange={this.handleChange}
+                            value={password}
+                            type="password"
+                        />
 
-                <Form.Input 
-                    fluid
-                    name="passwordConfirmation"
-                    placeholder="Confirmation"
-                    onChange={this.handleChange}
-                    value={passwordConfirmation}
-                    type="password"
-                />
+                        <Form.Input 
+                            fluid
+                            name="passwordConfirmation"
+                            placeholder="Confirmation"
+                            onChange={this.handleChange}
+                            value={passwordConfirmation}
+                            type="password"
+                        />
 
-                <Button
-                    disabled={loading}
-                    className={loading ? "loading" : ""}
-                    color="black"
-                    fluid
-                    size="large"
-                >
-                    Submit
-                </Button>
-            </Form>
+                        <Button
+                            disabled={loading}
+                            className={loading ? "loading" : ""}
+                            color="black"
+                            fluid
+                            size="large"
+                        >
+                            Submit
+                        </Button>
+                    </Form>
+                </Grid.Column>
+            </Grid>
         )
     }
 }
