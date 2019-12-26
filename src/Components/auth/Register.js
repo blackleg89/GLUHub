@@ -176,6 +176,12 @@ class Register extends Component {
                             Register
                         </Button>
                     </Form>
+                    {errors.length > 0 && (
+                        <Message error>
+                            <h3>Error</h3>
+                            {this.displayErrors(errors)}
+                        </Message>
+                    )}
                     <Message>
                         Already have an account? <Link to="/login">Login</Link>
                     </Message>

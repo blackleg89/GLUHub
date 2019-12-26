@@ -53,7 +53,7 @@ class Login extends React.Component{
     }
 
     render(){
-        const {email, password,loading} = this.state
+        const {email, errors,  password,loading} = this.state
         return(
             <Grid textAlign="center" verticalAlign="middle" className="login-App">
                 <Grid.Column style={{maxWidth:450}}>
@@ -94,6 +94,12 @@ class Login extends React.Component{
                             Login
                         </Button>
                     </Form>
+                    {errors.length > 0 && (
+                    <Message error>
+                        <h3>Error</h3>
+                        {this.displayErrors(errors)}
+                        </Message>
+                    )}
                     <Message>
                         Don't have an account? <Link to="/register">Register</Link>
                     </Message>
