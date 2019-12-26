@@ -5,6 +5,7 @@ import serviceWorker from './serviceWorker'
 import firebase from './firebase'
 import Spinner from './Spinner'
 import App from './App'
+import Login from './Components/auth/Login'
 import {
     BrowserRouter as Router,
     Switch,
@@ -26,7 +27,7 @@ class Root extends React.Component{
                 this.props.setUser(user);
                 this.props.history.push("/")
             }else{
-                this.props.history.push("/register")
+                this.props.history.push("/login")
                 this.props.clearUser()
             }
         })
@@ -39,6 +40,7 @@ class Root extends React.Component{
             <Switch>
                 <Route exact path="/" component={App}/>
                 <Route path="/register" component={Register} />
+                <Route path="/login" component={Login} />
             </Switch>
         )
     }

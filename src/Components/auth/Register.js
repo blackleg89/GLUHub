@@ -9,8 +9,8 @@ import {
     Header,
     Message,
     Icon
-  } from "semantic-ui-react";
-
+} from "semantic-ui-react";
+import { Link } from 'react-router-dom'
 class Register extends Component {
     state ={
         username:"",
@@ -173,9 +173,12 @@ class Register extends Component {
                             fluid
                             size="large"
                         >
-                            Submit
+                            Register
                         </Button>
                     </Form>
+                    <Message>
+                        Already have an account? <Link to="/login">Login</Link>
+                    </Message>
                 </Grid.Column>
             </Grid>
         )
