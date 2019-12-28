@@ -1,45 +1,23 @@
 import React from "react";
 import firebase from "../../firebase";
-import AvatarEditor from "react-avatar-editor";
-// prettier-ignore
-import { Grid, Header, Icon, Dropdown, Image, Modal, Input, Button } from "semantic-ui-react";
+// import AvatarModal from './AvatarModal'
 
+
+// prettier-ignore
+
+import { Grid, Header, Icon, Image, Modal, Input, Button } from "semantic-ui-react";
 class UserPanel extends React.Component {
   state = {
     user: this.props.currentUser,
     modal: false,
-    previewImage: "",
-    croppedImage: "",
-    blob: null,
-    uploadedCroppedImage: "",
-    storageRef: firebase.storage().ref(),
-    userRef: firebase.auth().currentUser,
-    usersRef: firebase.database().ref("users"),
-    metadata: {
-      contentType: "image/jpeg"
-    }
+
   };
 
   openModal = () => this.setState({ modal: true });
 
   closeModal = () => this.setState({ modal: false });
 
-
-  uploadCroppedImage = () =>{
-    const{storageRef, userRef, blob, metadata} = this.state
-
-
-    storageRef
-      .child(`avatars/users/${userRef.uid}`)
-      .put(blob, metadata)
-      .then(snap => {
-        snap.ref.getDownloadURL().then(downloadURL => {
-          this.setState({uploadCroppedImage: downloadURL}, () =>{
-            this.changeAvatar()
-          })
-        })
-      })
-  }
+  
 
   handleSignout = () => {
     firebase
@@ -63,12 +41,12 @@ class UserPanel extends React.Component {
                 <Modal.Content image>
                   <Image wrapped size="small" src={user.photoURL} />
                   <Modal.Description>
-                    <Header>
-                      <Button>Change avatar</Button>
-                    </Header>
+                    <Button>Change Avatar</Button>
                     <Button onClick={this.handleSignout}>Sign out</Button>
                   </Modal.Description>
                 </Modal.Content>
+                <Modal.Actions>
+                </Modal.Actions>
               </Modal>
             </Header>
           </Grid.Row>
