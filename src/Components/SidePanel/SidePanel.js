@@ -9,6 +9,7 @@ class SidePanel extends React.Component {
 
     return (
       <Menu
+        className="app"
         size="large"
         inverted
         fixed="left"

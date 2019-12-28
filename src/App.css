@@ -2,6 +2,11 @@ html,
 body,
 .app {
   height: 100vh;
-  background: #eee;
+  background: #1b1c1d;
   padding: 1em;
+}
+.black-text{
+  color:white;
+  font-weight: bold;
+  text-decoration: underline;
 }

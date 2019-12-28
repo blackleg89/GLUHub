@@ -1,3 +1,5 @@
+'user strict';
+
 const electron = require('electron');
 // Module to control application life.
 const app = electron.app;
@@ -6,6 +8,8 @@ const BrowserWindow = electron.BrowserWindow;
 
 const path = require('path');
 const url = require('url');
+
+require("electron-reload")(__dirname)
 
 let mainWindow;
 

@@ -6,7 +6,8 @@ import {
     Button,
     Header,
     Message,
-    Icon
+    Icon,
+    Segment
 } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
@@ -56,55 +57,59 @@ class Login extends React.Component{
         const {email, errors,  password,loading} = this.state
         return(
             <Grid textAlign="center" verticalAlign="middle" className="app">
-                <Grid.Column style={{maxWidth:450}}>
-                    <Header as="h1" icon color="violet" textAlign="center">
-                        <Icon name="bolt" color="violet"/>
-                        Login to GLU-Hub
-                    </Header>
-                    <Form onSubmit={this.handleSubmit} size="large">
-                        <Form.Input
-                            fluid
-                            name="email"
-                            icon="mail"
-                            iconPosition="left"
-                            placeHolder="email"
-                            onChange={this.handleChange}
-                            value={email}
-                            type="email"
-                        />
+            <Grid.Column style={{ maxWidth: 450 }}>
+                <Header as="h1" icon color="blue" textAlign="center">
+                    <Icon name="ticket" color="blue"/>
+                    Login to Glu-Hub
+                </Header>
+                <Form onSubmit={this.handleSubmit} size="large">
+                    <Segment stacked>
+                    <Form.Input
+                        fluid
+                        name="email"
+                        icon="mail"
+                        iconPosition="left"
+                        placeholder="Email Address"
+                        onChange={this.handleChange}
+                        value={email}
+                        className={this.handleInputError(errors, "email")}
+                        type="email"
+                    />
 
-                        <Form.Input
-                            fluid
-                            name="password"
-                            icon="lock"
-                            iconPosition="left"
-                            placeHolder="Password"
-                            onChange={this.handleChange}
-                            value={password}
-                            type="password"
-                        />
+                    <Form.Input
+                        fluid
+                        name="password"
+                        icon="lock"
+                        iconPosition="left"
+                        placeholder="Password"
+                        onChange={this.handleChange}
+                        value={password}
+                        className={this.handleInputError(errors, "password")}
+                        type="password"
+                    />
 
-                        <Button
-                            disabled={loading}
-                            className={loading ? "loading" : ""}
-                            color="violet"
-                            fluid
-                            size="large"
-                        >
-                            Login
-                        </Button>
-                    </Form>
-                    {errors.length > 0 && (
-                    <Message error>
-                        <h3>Error</h3>
-                        {this.displayErrors(errors)}
-                        </Message>
-                    )}
-                    <Message>
-                        Don't have an account? <Link to="/register">Register</Link>
-                    </Message>
-                </Grid.Column>
-            </Grid>
+                    <Button
+                        disabled={loading}
+                        className={loading ? "loading" : ""}
+                        color="blue"
+                        fluid
+                        size="large"
+                    >
+                        Submit
+                    </Button>
+                </Segment>
+          </Form>
+          {errors.length > 0 && (
+            <Message error>
+              <h3>Error</h3>
+              {this.displayErrors(errors)}
+            </Message>
+          )}
+          <Message>
+            Don't have an account? <Link to="/register">Register</Link><br/>
+          </Message>
+        </Grid.Column>
+      </Grid>
         )
     }
 

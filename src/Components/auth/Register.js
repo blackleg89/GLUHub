@@ -76,7 +76,10 @@ class Register extends Component {
               console.log(createdUser);
               createdUser.user
                 .updateProfile({
-                  displayName: this.state.username
+                  displayName: this.state.username,
+                  photoURL: `http://gravatar.com/avatar/${md5(
+                      createdUser.user.email
+                  )}?d=identicon`
                 })
                 .then(() => {
                   this.saveUser(createdUser).then(() => {
@@ -103,7 +106,8 @@ class Register extends Component {
 
     saveUser = createdUser =>{
         return this.state.usersRef.child(createdUser.user.uid).set({
-            name: createdUser.user.displayName
+            name: createdUser.user.displayName,
+            avatar: createdUser.user.photoURL
         })
     }
 
@@ -137,6 +141,8 @@ class Register extends Component {
                             onChange={this.handleChange}
                             value={username}
                             type="text"
+                            icon="user"
+                            iconPosition="left"
                         />
                         
                         <Form.Input
@@ -146,6 +152,8 @@ class Register extends Component {
                             onChange={this.handleChange}
                             value={email}
                             type="email"
+                            icon="mail"
+                            iconPosition="left"
                         />
 
                         <Form.Input
@@ -155,6 +163,8 @@ class Register extends Component {
                             onChange={this.handleChange}
                             value={password}
                             type="password"
+                            icon="lock"
+                            iconPosition="left"
                         />
 
                         <Form.Input 
@@ -164,12 +174,14 @@ class Register extends Component {
                             onChange={this.handleChange}
                             value={passwordConfirmation}
                             type="password"
+                            icon="lock"
+                            iconPosition="left"
                         />
 
                         <Button
                             disabled={loading}
                             className={loading ? "loading" : ""}
-                            color="black"
+                            color="blue"
                             fluid
                             size="large"
                         >
