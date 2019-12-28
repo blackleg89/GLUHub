@@ -55,7 +55,7 @@ class Login extends React.Component{
     render(){
         const {email, errors,  password,loading} = this.state
         return(
-            <Grid textAlign="center" verticalAlign="middle" className="login-App">
+            <Grid textAlign="center" verticalAlign="middle" className="app">
                 <Grid.Column style={{maxWidth:450}}>
                     <Header as="h1" icon color="violet" textAlign="center">
                         <Icon name="bolt" color="violet"/>

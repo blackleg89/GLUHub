@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import firebase from './firebase'
 import {Button} from 'semantic-ui-react'
-
+import './App.css'
 class App extends Component {
   state ={
     user: this.props.currentUser,

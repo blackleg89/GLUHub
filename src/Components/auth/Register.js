@@ -123,7 +123,7 @@ class Register extends Component {
             loading
         } = this.state;
         return(
-            <Grid textAlign="center" verticalAlign="middle" className="register-App">
+            <Grid textAlign="center" verticalAlign="middle" className="app">
                 <Grid.Column style={{maxWidth: 450}}>
                     <Header as="h1" icon color="blue" textAlign="center">
                         <Icon name="hand spock" color="blue"/>
