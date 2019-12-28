@@ -1,29 +1,21 @@
-import React, {Component} from 'react'
-import firebase from './firebase'
-import {Button} from 'semantic-ui-react'
-import './App.css'
-class App extends Component {
-  state ={
-    user: this.props.currentUser,
-    storageRef: firebase.storage().ref(),
-    userRef: firebase.auth().currentUser,
-    usersRef: firebase.database().ref("users")
-  }
+import React from "react";
+import { Grid } from "semantic-ui-react";
+import "./App.css";
+import { connect } from "react-redux";
+import SidePanel from "./Components/SidePanel/SidePanel";
+// prettier-ignore
+const App = ({ currentUser }) => (
+  <Grid columns="equal" className="app">
+    <SidePanel
+      key={currentUser && currentUser.uid}
+      currentUser={currentUser}
 
-  handleSignout = () => {
-    firebase
-      .auth()
-      .signOut()
-      .then(() => console.log("signed out"))
-  }
+    />
+  </Grid>
+);
 
-  render(){ 
-    return(
-      <div className="App">
-        <Button onClick={this.handleSignout}>Sign out</Button>
-      </div>
-    )
-  }
-}
+const mapStateToProps = state => ({
+  currentUser: state.user.currentUser,
+});
 
-export default App 
+export default connect(mapStateToProps)(App);
