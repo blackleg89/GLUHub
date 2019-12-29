@@ -17,7 +17,6 @@ class SidePanel extends React.Component {
         style={{fontSize: "1.2rem" }}
       >
         <UserPanel currentUser={currentUser} />
-        <Link to="/chat">Chat</Link>
       </Menu>
     );
   }
