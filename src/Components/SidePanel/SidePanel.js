@@ -1,6 +1,6 @@
 import React from "react";
 import { Menu } from "semantic-ui-react";
-
+import {Link} from 'react-router-dom'
 import UserPanel from "./UserPanel";
 
 class SidePanel extends React.Component {
@@ -17,6 +17,7 @@ class SidePanel extends React.Component {
         style={{fontSize: "1.2rem" }}
       >
         <UserPanel currentUser={currentUser} />
+        <Link to="/chat">Chat</Link>
       </Menu>
     );
   }
