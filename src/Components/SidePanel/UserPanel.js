@@ -35,7 +35,7 @@ class UserPanel extends React.Component {
           <Grid.Row style={{ padding: "1.2em", margin: 0 }}>
             <Header style={{ padding: "0.25em" }} as="h4" inverted>
               <h1>Good day, </h1>
-              <h1 className="black-text" onClick={this.openModal}>{user.displayName}</h1>
+              <h1 className="lmao" onClick={this.openModal}>{user.displayName}</h1>
               <Modal open={modal} onClose={this.closeModal}>
                 <Modal.Header>Settings for {user.displayName}</Modal.Header>
                 <Modal.Content image>
