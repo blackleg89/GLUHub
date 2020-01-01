@@ -6,7 +6,7 @@ import firebase from './firebase'
 import Spinner from './Spinner'
 import App from './App'
 import Login from './Components/auth/Login'
-// import Chat from './Components/Chat/Chat'
+import Chat from './Components/Chat/Chat'
 import {
     BrowserRouter as Router,
     Switch,
@@ -42,7 +42,7 @@ class Root extends React.Component{
                 <Route exact path="/" component={App}/>
                 <Route path="/register" component={Register} />
                 <Route path="/login" component={Login} />
-                {/* <Route path='/chat' component={Chat} /> */}
+                <Route path='/chat' component={Chat} />
             </Switch>
         )
     }
