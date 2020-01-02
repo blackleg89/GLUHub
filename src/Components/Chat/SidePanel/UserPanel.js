@@ -3,7 +3,7 @@ import firebase from "../../../firebase";
 import AvatarEditor from "react-avatar-editor";
 // prettier-ignore
 import { Grid, Header, Icon, Dropdown, Image, Modal, Input, Button } from "semantic-ui-react";
-
+import {Link} from 'react-router-dom'
 class UserPanel extends React.Component {
   state = {
     user: this.props.currentUser,
@@ -125,7 +125,7 @@ class UserPanel extends React.Component {
             {/* App Header */}
             <Header inverted floated="left" as="h2">
               <Icon name="code" />
-              <Header.Content>DevChat</Header.Content>
+              <Header.Content color="white"><Link to="/" color="white" style={{textDecoration: 'none'}}>Glu-Chat</Link></Header.Content>
             </Header>
 
             {/* User Dropdown  */}
