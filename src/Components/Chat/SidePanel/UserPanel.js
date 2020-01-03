@@ -125,7 +125,7 @@ class UserPanel extends React.Component {
             {/* App Header */}
             <Header inverted floated="left" as="h2">
               <Icon name="code" />
-              <Header.Content color="white"><Link to="/" color="white" style={{textDecoration: 'none'}}>Glu-Chat</Link></Header.Content>
+              <Header.Content color="white">Glu-Chat</Header.Content>
             </Header>
 
             {/* User Dropdown  */}

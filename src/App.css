@@ -15,6 +15,7 @@ body,
 .messages {
   height: 62vh;
   overflow-y: scroll;
+  max-width:1200px!important;
 }
 
 /* MessageForm.js */
@@ -39,6 +40,7 @@ body,
 
 .message__image {
   padding: 1em;
+  max-width:400px!important;
 }
 
 /* ProgressBar.js */
@@ -181,4 +183,56 @@ body,
   bottom: 5px;
   left: 40px;
   right: 20px;
+}
+
+.hahaxd{
+  color:white;
+  text-decoration: none;
+}
+
+.hahaxd:visited{
+  color:white;
+}
+
+.hahaxd:hover{
+  color:white;
+}
+
+.link-chat{
+  color:black;
+
+}
+
+.link-chat:visited{
+  color:black;
+}
+
+.link-chat:hover{
+  color:black;
+  text-decoration: underline;
+}
+
+.lmao{
+  font-weight: bold;
+}
+
+.lmao:hover{
+  text-decoration: underline;
+  color:gray;
+  cursor: pointer;
+}
+
+.link-app{
+  color:black;
+  text-decoration: none;
+}
+
+.link-app:visited{
+  color:black;
+}
+
+.link-app:hover{
+  cursor:pointed;
+  color:black;
+  text-decoration: underline;
 }

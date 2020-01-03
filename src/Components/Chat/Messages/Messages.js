@@ -301,6 +301,7 @@ class Messages extends React.Component {
         </Segment>
 
         <MessageForm
+          className="test"
           messagesRef={messagesRef}
           currentChannel={channel}
           currentUser={user}

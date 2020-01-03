@@ -40,7 +40,7 @@ class MessageForm extends React.Component {
   };
 
   handleKeyDown = event => {
-    if (event.ctrlKey && event.keyCode === 13) {
+    if (event.keyCode === 13) {
       this.sendMessage();
     }
 
@@ -243,14 +243,6 @@ class MessageForm extends React.Component {
           placeholder="Write your message"
         />
         <Button.Group icon widths="2">
-          <Button
-            onClick={this.sendMessage}
-            disabled={loading}
-            color="orange"
-            content="Add Reply"
-            labelPosition="left"
-            icon="edit"
-          />
           <Button
             color="teal"
             disabled={uploadState === "uploading"}

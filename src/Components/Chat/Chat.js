@@ -7,10 +7,10 @@ import SidePanel from "./SidePanel/SidePanel";
 import Messages from "./Messages/Messages";
 
 const Chat = ({ currentUser, currentChannel, isPrivateChannel }) => (
-  <Grid columns="equal" className="app" style={{ background: "#696969" }}>
+  <Grid columns="equal" className="app" style={{ background: "#1b1c1d" }}>
     <SidePanel key={currentUser && currentUser.uid} currentUser={currentUser} />
 
-    <Grid.Column style={{ marginLeft: 320 }}>
+    <Grid.Column style={{ marginLeft: 320}}>
       <Messages
         key={currentChannel && currentChannel.id}
         currentChannel={currentChannel}

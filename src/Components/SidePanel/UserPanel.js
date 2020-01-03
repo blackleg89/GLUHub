@@ -1,6 +1,5 @@
 import React from "react";
 import firebase from "../../firebase";
-// import AvatarModal from './AvatarModal'
 import {Link} from 'react-router-dom'
 
 // prettier-ignore
@@ -36,7 +35,7 @@ class UserPanel extends React.Component {
             <Header style={{ padding: "0.25em" }} as="h4" inverted>
               <h1>Good day, </h1>
               <h1 className="lmao" onClick={this.openModal}>{user.displayName}</h1>
-               <Link to="/chat">Chat</Link>
+              <Link className="link-chat" to="/chat"><Button className="button-chat">Chat</Button></Link>
               <Modal open={modal} onClose={this.closeModal}>
                 <Modal.Header>Settings for {user.displayName}</Modal.Header>
                 <Modal.Content image>

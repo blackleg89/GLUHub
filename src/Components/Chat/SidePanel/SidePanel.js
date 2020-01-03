@@ -1,6 +1,6 @@
 import React from "react";
-import { Menu } from "semantic-ui-react";
-
+import { Menu, Button } from "semantic-ui-react";
+import {Link} from 'react-router-dom'
 import UserPanel from "./UserPanel";
 import Channels from "./Channels";
 import DirectMessages from "./DirectMessages";
@@ -22,6 +22,7 @@ class SidePanel extends React.Component {
         <Starred currentUser={currentUser} />
         <Channels currentUser={currentUser} />
         <DirectMessages currentUser={currentUser} />
+        <Link className="link-app" to="/"><Button className="button-app">Return to Hub</Button></Link>
       </Menu>
     );
   }
