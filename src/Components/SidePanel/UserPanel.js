@@ -9,15 +9,16 @@ class UserPanel extends React.Component {
   state = {
     user: this.props.currentUser,
     modal: false,
-
+    usersRef: firebase.database().ref("users"),
+    adminRef: firebase.database().ref("users/admin")
   };
 
   openModal = () => this.setState({ modal: true });
 
   closeModal = () => this.setState({ modal: false });
 
+  handleTest= () => console.log(this.state.adminRef)
   
-
   handleSignout = () => {
     firebase
       .auth()
@@ -43,6 +44,7 @@ class UserPanel extends React.Component {
                   <Modal.Description>
                     <Button>Change Avatar</Button>
                     <Button onClick={this.handleSignout}>Sign out</Button>
+                    <Button onClick={this.handleTest}>Test</Button>
                   </Modal.Description>
                 </Modal.Content>
                 <Modal.Actions>

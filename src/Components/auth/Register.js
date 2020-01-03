@@ -4,11 +4,10 @@ import md5 from 'md5'
 import {
     Grid,
     Form,
-    Segment,
     Button,
     Header,
     Message,
-    Icon
+    Icon,
 } from "semantic-ui-react";
 import { Link } from 'react-router-dom'
 class Register extends Component {
@@ -19,7 +18,8 @@ class Register extends Component {
         passwordConfirmation:"",
         errors:[],
         loading:false,
-        usersRef: firebase.database().ref("users")
+        usersRef: firebase.database().ref("users"),
+        admin:false
     }
 
     isFormValid =() => {
@@ -68,7 +68,7 @@ class Register extends Component {
     handleSubmit = event => {
         event.preventDefault();
         if (this.isFormValid()) {
-          this.setState({ errors: [], loading: true });
+          this.setState({ errors: [], loading: true, admin:true });
           firebase
             .auth()
             .createUserWithEmailAndPassword(this.state.email, this.state.password)
@@ -79,7 +79,8 @@ class Register extends Component {
                   displayName: this.state.username,
                   photoURL: `http://gravatar.com/avatar/${md5(
                       createdUser.user.email
-                  )}?d=identicon`
+                  )}?d=identicon`,
+                  admin:this.state.admin
                 })
                 .then(() => {
                   this.saveUser(createdUser).then(() => {
@@ -107,7 +108,8 @@ class Register extends Component {
     saveUser = createdUser =>{
         return this.state.usersRef.child(createdUser.user.uid).set({
             name: createdUser.user.displayName,
-            avatar: createdUser.user.photoURL
+            avatar: createdUser.user.photoURL,
+            admin:this.state.admin
         })
     }
 
@@ -197,7 +199,7 @@ class Register extends Component {
                     <Message>
                         Already have an account? <Link to="/login">Login</Link>
                     </Message>
-                </Grid.Column>
+                </Grid.Column>  
             </Grid>
         )
     }
