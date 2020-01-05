@@ -10,7 +10,7 @@ import {
     Icon,
 } from "semantic-ui-react";
 import { Link } from 'react-router-dom'
-class Register extends Component {
+class Secret extends Component {
     state ={
         username:"",
         email:"",
@@ -18,7 +18,6 @@ class Register extends Component {
         passwordConfirmation:"",
         errors:[],
         loading:false,
-        usersRef: firebase.database().ref("users"),
         adminsRef: firebase.database().ref("admins")
     }
 
@@ -68,7 +67,7 @@ class Register extends Component {
     handleSubmit = event => {
         event.preventDefault();
         if (this.isFormValid()) {
-          this.setState({ errors: [], loading: true});
+          this.setState({ errors: [], loading: true, admin:true});
           firebase
             .auth()
             .createUserWithEmailAndPassword(this.state.email, this.state.password)
@@ -106,13 +105,13 @@ class Register extends Component {
     };
 
     saveUser = createdUser =>{
-        return this.state.usersRef.child(createdUser.user.uid).set({
+        return this.state.adminsRef.child(createdUser.user.uid).set({
             name: createdUser.user.displayName,
             avatar: createdUser.user.photoURL,
             admin:this.state.admin
         })
     }
-    
+
     handleInputError = (errors, inputName) =>{
         return errors.some(error => error.message.toLowerCase().includes(inputName))
         ? "error"
@@ -197,7 +196,7 @@ class Register extends Component {
                         </Message>
                     )}
                     <Message>
-                        Already have an account? <Link to="/secret">Secret</Link>
+                        Already have an account? <Link to="/login">Login</Link>
                     </Message>
                 </Grid.Column>  
             </Grid>
@@ -205,4 +204,4 @@ class Register extends Component {
     }
 }
 
-export default Register
+export default Secret

@@ -4,20 +4,24 @@ import {Link} from 'react-router-dom'
 
 // prettier-ignore
 
-import { Grid, Header, Icon, Image, Modal, Input, Button } from "semantic-ui-react";
+import { Grid, Header, Icon, Image, Modal, Input, Button, Message } from "semantic-ui-react";
 class UserPanel extends React.Component {
   state = {
     user: this.props.currentUser,
     modal: false,
     usersRef: firebase.database().ref("users"),
-    adminRef: firebase.database().ref("users/admin")
+    adminRef: firebase.database().ref("admin")
   };
 
   openModal = () => this.setState({ modal: true });
 
   closeModal = () => this.setState({ modal: false });
 
-  handleTest= () => console.log(this.state.adminRef)
+  handleTest= () =>{
+    this.state.adminRef.on("value", snap =>{
+      console.log(snap)
+    })
+  }
   
   handleSignout = () => {
     firebase
@@ -43,8 +47,11 @@ class UserPanel extends React.Component {
                   <Image wrapped size="small" src={user.photoURL} />
                   <Modal.Description>
                     <Button>Change Avatar</Button>
-                    <Button onClick={this.handleSignout}>Sign out</Button>
+                    <Button onClick={this.handleSignout}>Signout</Button>
                     <Button onClick={this.handleTest}>Test</Button>
+                    <Message>
+                      {`Boolean Value: ${this.state.usersRef}`}
+                    </Message>
                   </Modal.Description>
                 </Modal.Content>
                 <Modal.Actions>
