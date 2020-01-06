@@ -10,7 +10,6 @@ class UserPanel extends React.Component {
     user: this.props.currentUser,
     modal: false,
     usersRef: firebase.database().ref("users"),
-    adminRef: firebase.database().ref("admin")
   };
          
   openModal = () => this.setState({ modal: true });
@@ -18,7 +17,13 @@ class UserPanel extends React.Component {
   closeModal = () => this.setState({ modal: false });
 
   handleTest= () =>{
-
+    var userId = this.state.user.uid
+    firebase.database().ref('admins/' + userId + '/admin').on('value', snap =>{
+      console.log(snap)
+      if(snap.val() === true){
+        console.log('xd')
+      }
+    })
   }
   
   handleSignout = () => {
