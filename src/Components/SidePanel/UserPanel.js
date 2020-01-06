@@ -12,15 +12,13 @@ class UserPanel extends React.Component {
     usersRef: firebase.database().ref("users"),
     adminRef: firebase.database().ref("admin")
   };
-
+         
   openModal = () => this.setState({ modal: true });
 
   closeModal = () => this.setState({ modal: false });
 
   handleTest= () =>{
-    this.state.adminRef.on("value", snap =>{
-      console.log(snap)
-    })
+
   }
   
   handleSignout = () => {
