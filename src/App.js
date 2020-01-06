@@ -9,6 +9,7 @@ const App = ({ currentUser }) => (
     <SidePanel
       key={currentUser && currentUser.uid}
       currentUser={currentUser}
+      
     />
   </Grid>
 );

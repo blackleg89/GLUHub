@@ -6,11 +6,8 @@ const BrowserWindow = electron.BrowserWindow;
 const globalShortcut = electron.globalShortcut
 const path = require('path');
 const url = require('url');
-
-require("electron-reload")(__dirname)
-
 let mainWindow;
-
+require('electron-reload')(__dirname)
 function createWindow() {
     mainWindow = new BrowserWindow({width: 800, height: 600});
 
