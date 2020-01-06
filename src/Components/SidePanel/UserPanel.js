@@ -1,31 +1,33 @@
 import React from "react";
 import firebase from "../../firebase";
-import {Link} from 'react-router-dom'
-
 // prettier-ignore
-
-import { Grid, Header, Icon, Image, Modal, Input, Button, Message } from "semantic-ui-react";
+import { Grid, Header, Icon,  Image, Modal, Button } from "semantic-ui-react";
+import {Link} from 'react-router-dom'
 class UserPanel extends React.Component {
   state = {
     user: this.props.currentUser,
     modal: false,
     usersRef: firebase.database().ref("users"),
+    admin:false
   };
-         
+
   openModal = () => this.setState({ modal: true });
 
   closeModal = () => this.setState({ modal: false });
 
-  handleTest= () =>{
+
+  componentDidMount(){
     var userId = this.state.user.uid
     firebase.database().ref('admins/' + userId + '/admin').on('value', snap =>{
-      console.log(snap)
       if(snap.val() === true){
-        console.log('xd')
+        this.setState({admin:true})
       }
     })
   }
-  
+
+  handleTest = () =>{
+    console.log(this.state.admin)
+  }
   handleSignout = () => {
     firebase
       .auth()
@@ -34,34 +36,37 @@ class UserPanel extends React.Component {
   };
 
   render() {
-    const { user, modal } = this.state;
+    const { user, modal} = this.state;
+    const { primaryColor } = this.props;
 
     return (
-      <Grid>
+      <Grid style={{ background: primaryColor }}>
         <Grid.Column>
           <Grid.Row style={{ padding: "1.2em", margin: 0 }}>
+            {/* App Header */}
+            <Header inverted floated="left" as="h2">
+              <Icon name="code" />
+              <Header.Content color="white">Glu-Chat</Header.Content>
+            </Header>
+
+            {/* User Dropdown  */}
             <Header style={{ padding: "0.25em" }} as="h4" inverted>
-              <h1>Good day, </h1>
-              <h1 className="lmao" onClick={this.openModal}>{user.displayName}</h1>
-              <Link className="link-chat" to="/chat"><Button className="button-chat">Chat</Button></Link>
-              <Modal open={modal} onClose={this.closeModal}>
-                <Modal.Header>Settings for {user.displayName}</Modal.Header>
-                <Modal.Content image>
-                  <Image wrapped size="small" src={user.photoURL} />
-                  <Modal.Description>
-                    <Button>Change Avatar</Button>
-                    <Button onClick={this.handleSignout}>Signout</Button>
-                    <Button onClick={this.handleTest}>Test</Button>
-                    <Message>
-                      {`Boolean Value: ${this.state.usersRef}`}
-                    </Message>
-                  </Modal.Description>
-                </Modal.Content>
-                <Modal.Actions>
-                </Modal.Actions>
-              </Modal>
+              <span >
+                <Image src={user.photoURL} spaced="right" avatar onClick={this.openModal} />
+                {user.displayName}
+              </span>                    
             </Header>
           </Grid.Row>
+          <Modal open={modal} onClose={this.closeModal}>
+            <Modal.Header>Settings for {user.displayName}</Modal.Header>
+            <Modal.Content image>
+              <Image wrapped small size="small" src={user.photoURL} />
+              <Modal.Description>
+                <Button onClick={this.handleSignout}>Sign out</Button>
+                {this.state.admin === true && <Link to="/admin"><Button>Admin</Button></Link>}
+              </Modal.Description>
+            </Modal.Content>
+          </Modal>
         </Grid.Column>
       </Grid>
     );

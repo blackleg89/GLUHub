@@ -4,10 +4,10 @@ import Register from './Components/auth/Register'
 import serviceWorker from './serviceWorker'
 import firebase from './firebase'
 import Spinner from './Spinner'
-import App from './App'
+import App from './Components/App'
 import Login from './Components/auth/Login'
-import Chat from './Components/Chat/Chat'
-import Secret from './Components/auth/SecretAdminPanel'
+import AdminPanel from './Components/Admin/Panel'
+
 import {
     BrowserRouter as Router,
     Switch,
@@ -43,8 +43,7 @@ class Root extends React.Component{
                 <Route exact path="/" component={App}/>
                 <Route path="/register" component={Register} />
                 <Route path="/login" component={Login} />
-                <Route path='/chat' component={Chat} />
-                <Route path="/secret" component={Secret}/>
+                <Route path="/admin" component={AdminPanel}/>
             </Switch>
         )
     }

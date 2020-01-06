@@ -1,12 +1,12 @@
 import React from "react";
 import { Grid } from "semantic-ui-react";
-import "../../App.css";
+import "../App.css";
 import { connect } from "react-redux";
 
 import SidePanel from "./SidePanel/SidePanel";
 import Messages from "./Messages/Messages";
 
-const Chat = ({ currentUser, currentChannel, isPrivateChannel }) => (
+const App = ({ currentUser, currentChannel, isPrivateChannel }) => (
   <Grid columns="equal" className="app" style={{ background: "#1b1c1d" }}>
     <SidePanel key={currentUser && currentUser.uid} currentUser={currentUser} />
 
@@ -28,4 +28,4 @@ const mapStateToProps = state => ({
   isPrivateChannel: state.channel.isPrivateChannel,
 });
 
-export default connect(mapStateToProps)(Chat);
+export default connect(mapStateToProps)(App);
