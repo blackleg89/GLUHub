@@ -25,7 +25,7 @@ class UserPanel extends React.Component {
             <Header style={{ padding: "0.25em" }} as="h4" inverted>
               <h1>Welcome, </h1>
               <h1 className="lmao" onClick={this.openModal}>{user.displayName}</h1>
-              <Link to="/"><Button>Return to hub</Button></Link>
+              <Link to="/"><Button>Return to chat</Button></Link>
             </Header>
           </Grid.Row>
         </Grid.Column>

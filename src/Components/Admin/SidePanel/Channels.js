@@ -62,7 +62,7 @@ class Channels extends React.Component {
   closeModal = () => this.setState({ modal: false });
 
   render() {
-    const { channels, modal } = this.state;
+    const { modal } = this.state;
 
     return (
       <React.Fragment>

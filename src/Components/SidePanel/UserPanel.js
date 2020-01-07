@@ -1,7 +1,7 @@
 import React from "react";
 import firebase from "../../firebase";
 // prettier-ignore
-import { Grid, Header, Icon,  Image, Modal, Button } from "semantic-ui-react";
+import { Grid, Header, Icon,  Image, Modal, Button , Message} from "semantic-ui-react";
 import {Link} from 'react-router-dom'
 class UserPanel extends React.Component {
   state = {
@@ -51,8 +51,8 @@ class UserPanel extends React.Component {
 
             {/* User Dropdown  */}
             <Header style={{ padding: "0.25em" }} as="h4" inverted>
-              <span >
-                <Image src={user.photoURL} spaced="right" avatar onClick={this.openModal} />
+              <span className="span-userpanel" onClick={this.openModal}>
+                <Image src={user.photoURL} spaced="right" avatar />
                 {user.displayName}
               </span>                    
             </Header>
@@ -64,6 +64,7 @@ class UserPanel extends React.Component {
               <Modal.Description>
                 <Button onClick={this.handleSignout}>Sign out</Button>
                 {this.state.admin === true && <Link to="/admin"><Button>Admin</Button></Link>}
+                {this.state.admin === true && <Message>Admin</Message>}
               </Modal.Description>
             </Modal.Content>
           </Modal>

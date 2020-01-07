@@ -28,6 +28,16 @@ body,
   z-index: 200;
 }
 
+
+.span-userpanel:hover{
+  cursor: pointer;
+}
+
+span:hover{
+  text-decoration: underline;
+  transition: 0.5s;
+}
+
 .emoijpicker {
   position: absolute;
 }
