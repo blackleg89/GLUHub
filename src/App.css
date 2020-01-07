@@ -29,6 +29,22 @@ body,
 }
 
 
+.hehexd:hover{
+  color:black;
+  text-decoration:underline;
+  cursor: pointer;
+}
+li{
+  text-decoration: none;
+}
+
+ul{
+  text-decoration: none;
+}
+.hehexd{
+  font-size:16px;
+}
+
 .span-userpanel:hover{
   cursor: pointer;
 }

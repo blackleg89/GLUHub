@@ -25,9 +25,6 @@ class UserPanel extends React.Component {
     })
   }
 
-  handleTest = () =>{
-    console.log(this.state.admin)
-  }
   handleSignout = () => {
     firebase
       .auth()
