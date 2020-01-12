@@ -7,7 +7,6 @@ import {
     Button,
     Header,
     Message,
-    Icon,
 } from "semantic-ui-react";
 import { Link } from 'react-router-dom'
 class Secret extends Component {
@@ -130,9 +129,8 @@ class Secret extends Component {
         return(
             <Grid textAlign="center" verticalAlign="middle" className="app">
                 <Grid.Column style={{maxWidth: 450}}>
-                    <Header as="h1" icon color="blue" textAlign="center">
-                        <Icon name="hand spock" color="blue"/>
-                        Register for GLU-Hub
+                    <Header as="h1" textAlign="center">
+                        Register an Admin
                     </Header>
                     <Form onSubmit={this.handleSubmit} size="large">
                         <Form.Input
@@ -195,9 +193,6 @@ class Secret extends Component {
                             {this.displayErrors(errors)}
                         </Message>
                     )}
-                    <Message>
-                        Already have an account? <Link to="/login">Login</Link>
-                    </Message>
                 </Grid.Column>  
             </Grid>
         )

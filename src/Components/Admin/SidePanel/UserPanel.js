@@ -31,6 +31,12 @@ class UserPanel extends React.Component {
     });
   };
 
+  handleSignout = () => {
+    firebase
+      .auth()
+      .signOut()
+      .then(() => console.log("signed out!"));
+  };
 
 
 
@@ -70,6 +76,7 @@ class UserPanel extends React.Component {
                   <Button onClick={this.handleSignout}>Sign out</Button>
                   <Channels currentUser={this.props.currentUser}/>
                   <Button onClick={this.openModalTwo}>Delete channel</Button>
+                  <Link to="/adminregister"><Button>Make user Admin</Button></Link> 
                 </Modal.Description>
               </Modal.Content>
             </Modal>

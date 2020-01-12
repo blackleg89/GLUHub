@@ -7,6 +7,7 @@ import Spinner from './Spinner'
 import App from './Components/App'
 import Login from './Components/auth/Login'
 import AdminPanel from './Components/Admin/Panel'
+import Secret from './Components/AdminRegister/Register'
 
 import {
     BrowserRouter as Router,
@@ -44,6 +45,7 @@ class Root extends React.Component{
                 <Route path="/register" component={Register} />
                 <Route path="/login" component={Login} />
                 <Route path="/admin" component={AdminPanel}/>
+                <Route path="/adminregister" component={Secret}/>
             </Switch>
         )
     }
