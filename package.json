@@ -13,6 +13,7 @@
     "classnames": "^2.2.6",
     "cross-env": "^6.0.3",
     "electron-is-dev": "^1.1.0",
+    "electron-reload": "^1.5.0",
     "emoji-mart": "^2.11.2",
     "firebase": "^7.6.1",
     "md5": "^2.2.1",
@@ -48,6 +49,6 @@
     "electron-build": "electron-builder",
     "release": "yarn react-build && electron-builder --publish=always",
     "build": "yarn react-build && yarn electron-build",
-    "start": "concurrently \"cross-env BROWSER=none yarn react-start\" \"wait-on http://localhost:3000 && electron .\""
+    "start": "concurrently \"cross-env BROWSER=none npm run react-start\" \"wait-on http://localhost:3000 && electron .\""
   }
 }
