@@ -7,10 +7,9 @@ import {
     Button,
     Header,
     Message,
-    Icon,
 } from "semantic-ui-react";
 import { Link } from 'react-router-dom'
-class Register extends Component {
+class Secret extends Component {
     state ={
         username:"",
         email:"",
@@ -18,7 +17,6 @@ class Register extends Component {
         passwordConfirmation:"",
         errors:[],
         loading:false,
-        usersRef: firebase.database().ref("users"),
         adminsRef: firebase.database().ref("admins")
     }
 
@@ -68,7 +66,7 @@ class Register extends Component {
     handleSubmit = event => {
         event.preventDefault();
         if (this.isFormValid()) {
-          this.setState({ errors: [], loading: true});
+          this.setState({ errors: [], loading: true, admin:true});
           firebase
             .auth()
             .createUserWithEmailAndPassword(this.state.email, this.state.password)
@@ -106,13 +104,13 @@ class Register extends Component {
     };
 
     saveUser = createdUser =>{
-        return this.state.usersRef.child(createdUser.user.uid).set({
+        return this.state.adminsRef.child(createdUser.user.uid).set({
             name: createdUser.user.displayName,
             avatar: createdUser.user.photoURL,
             admin:this.state.admin
         })
     }
-    
+
     handleInputError = (errors, inputName) =>{
         return errors.some(error => error.message.toLowerCase().includes(inputName))
         ? "error"
@@ -131,9 +129,8 @@ class Register extends Component {
         return(
             <Grid textAlign="center" verticalAlign="middle" className="app">
                 <Grid.Column style={{maxWidth: 450}}>
-                    <Header as="h1" icon color="blue" textAlign="center">
-                        <Icon name="hand spock" color="blue"/>
-                        Register for GLU-Hub
+                    <Header as="h1" textAlign="center">
+                        Register an Admin
                     </Header>
                     <Form onSubmit={this.handleSubmit} size="large">
                         <Form.Input
@@ -196,13 +193,10 @@ class Register extends Component {
                             {this.displayErrors(errors)}
                         </Message>
                     )}
-                    <Message>
-                        Already have an account? <Link to="/secret">Secret</Link>
-                    </Message>
                 </Grid.Column>  
             </Grid>
         )
     }
 }
 
-export default Register
+export default Secret
