@@ -43,7 +43,7 @@ class UserPanel extends React.Component {
             {/* App Header */}
             <Header inverted floated="left" as="h2">
               <Icon name="code" />
-              <Header.Content color="white">Glu-lmao</Header.Content>
+              <Header.Content color="white">Bureau-Chat</Header.Content>
             </Header>
 
             {/* User Dropdown  */}

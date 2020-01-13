@@ -1,5 +1,5 @@
 import React from "react";
-import { Segment, Comment } from "semantic-ui-react";
+import { Segment, Comment, Modal } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { setUserPosts } from "../../actions";
 import firebase from "../../firebase";
@@ -28,7 +28,8 @@ class Messages extends React.Component {
     typingRef: firebase.database().ref("typing"),
     typingUsers: [],
     connectedRef: firebase.database().ref(".info/connected"),
-    listeners: []
+    listeners: [],
+    modal:false
   };
 
   componentDidMount() {
@@ -58,6 +59,8 @@ class Messages extends React.Component {
     }
   }
 
+  openModal = () => this.setState({modal:true})
+  closeModal = () => this.setState({modal:false})
   addToListeners = (id, ref, event) => {
     const index = this.state.listeners.findIndex(listener => {
       return (
@@ -275,40 +278,46 @@ class Messages extends React.Component {
 
   render() {
     // prettier-ignore
-    const { messagesRef, messages, channel, user, numUniqueUsers, searchTerm, searchResults, searchLoading, privateChannel, isChannelStarred, typingUsers, messagesLoading } = this.state;
+    const { messagesRef, messages, channel, user, numUniqueUsers, modal, searchTerm, searchResults, searchLoading, privateChannel, isChannelStarred, typingUsers, messagesLoading } = this.state;
 
     return (
-      <React.Fragment>
-        <MessagesHeader
-          channelName={this.displayChannelName(channel)}
-          numUniqueUsers={numUniqueUsers}
-          handleSearchChange={this.handleSearchChange}
-          searchLoading={searchLoading}
-          isPrivateChannel={privateChannel}
-          handleStar={this.handleStar}
-          isChannelStarred={isChannelStarred}
-        />
+      <div>
+        <React.Fragment>
+          <MessagesHeader
+            channelName={this.displayChannelName(channel)}
+            numUniqueUsers={numUniqueUsers}
+            handleSearchChange={this.handleSearchChange}
+            searchLoading={searchLoading}
+            isPrivateChannel={privateChannel}
+            handleStar={this.handleStar}
+            isChannelStarred={isChannelStarred}
+          />
 
-        <Segment>
-          <Comment.Group className="messages">
-            {this.displayMessageSkeleton(messagesLoading)}
-            {searchTerm
-              ? this.displayMessages(searchResults)
-              : this.displayMessages(messages)}
-            {this.displayTypingUsers(typingUsers)}
-            <div ref={node => (this.messagesEnd = node)} />
-          </Comment.Group>
-        </Segment>
+          <Segment>
+            <Comment.Group className="messages" onClick={this.openModal}>
+              {this.displayMessageSkeleton(messagesLoading)}
+              {searchTerm
+                ? this.displayMessages(searchResults)
+                : this.displayMessages(messages)}
+              {this.displayTypingUsers(typingUsers)}
+              <div ref={node => (this.messagesEnd = node)} />
+            </Comment.Group>
+          </Segment>
 
-        <MessageForm
-          className="test"
-          messagesRef={messagesRef}
-          currentChannel={channel}
-          currentUser={user}
-          isPrivateChannel={privateChannel}
-          getMessagesRef={this.getMessagesRef}
-        />
-      </React.Fragment>
+          <MessageForm
+            messagesRef={messagesRef}
+            currentChannel={channel}
+            currentUser={user}
+            isPrivateChannel={privateChannel}
+            getMessagesRef={this.getMessagesRef}
+          />
+        </React.Fragment>
+        <Modal open={modal} onClose={this.closeModal}>
+          <Modal.Header as="h1">
+            {`Settings for ${user.displayName}`}
+          </Modal.Header>
+        </Modal>
+      </div>
     );
   }
 }
