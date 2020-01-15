@@ -314,8 +314,15 @@ class Messages extends React.Component {
         </React.Fragment>
         <Modal open={modal} onClose={this.closeModal}>
           <Modal.Header as="h1">
-            {`Settings for ${user.displayName}`}
+            {`${event.target.user.displayName}`}
           </Modal.Header>
+          <Modal.Description className="userProfile">
+              <Modal.Content>
+                <Description wrapper="left" size="small">
+                  <Image size="small" src={user.photoURL}/>
+                </Description>
+              </Modal.Content>
+          </Modal.Description>
         </Modal>
       </div>
     );
