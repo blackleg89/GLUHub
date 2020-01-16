@@ -19,7 +19,7 @@ class Register extends Component {
         errors:[],
         loading:false,
         usersRef: firebase.database().ref("users"),
-        adminsRef: firebase.database().ref("admins")
+        admin:false
     }
 
     isFormValid =() => {
@@ -68,7 +68,7 @@ class Register extends Component {
     handleSubmit = event => {
         event.preventDefault();
         if (this.isFormValid()) {
-          this.setState({ errors: [], loading: true});
+          this.setState({ errors: [], loading: true, admin:true});
           firebase
             .auth()
             .createUserWithEmailAndPassword(this.state.email, this.state.password)

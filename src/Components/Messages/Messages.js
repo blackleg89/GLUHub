@@ -59,8 +59,7 @@ class Messages extends React.Component {
     }
   }
 
-  openModal = () => this.setState({modal:true})
-  closeModal = () => this.setState({modal:false})
+ 
   addToListeners = (id, ref, event) => {
     const index = this.state.listeners.findIndex(listener => {
       return (
@@ -294,7 +293,7 @@ class Messages extends React.Component {
           />
 
           <Segment>
-            <Comment.Group className="messages" onClick={this.openModal}>
+            <Comment.Group className="messages">
               {this.displayMessageSkeleton(messagesLoading)}
               {searchTerm
                 ? this.displayMessages(searchResults)
@@ -313,16 +312,9 @@ class Messages extends React.Component {
           />
         </React.Fragment>
         <Modal open={modal} onClose={this.closeModal}>
-          <Modal.Header as="h1">
-            {`${event.target.user.displayName}`}
+          <Modal.Header>
+            {user.displayName}
           </Modal.Header>
-          <Modal.Description className="userProfile">
-              <Modal.Content>
-                <Description wrapper="left" size="small">
-                  <Image size="small" src={user.photoURL}/>
-                </Description>
-              </Modal.Content>
-          </Modal.Description>
         </Modal>
       </div>
     );

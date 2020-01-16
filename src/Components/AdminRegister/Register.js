@@ -17,7 +17,8 @@ class Secret extends Component {
         passwordConfirmation:"",
         errors:[],
         loading:false,
-        adminsRef: firebase.database().ref("admins")
+        adminsRef: firebase.database().ref("users"),
+        admin:false
     }
 
     isFormValid =() => {

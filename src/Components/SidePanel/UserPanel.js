@@ -18,7 +18,7 @@ class UserPanel extends React.Component {
 
   componentDidMount(){
     var userId = this.state.user.uid
-    firebase.database().ref('admins/' + userId + '/admin').on('value', snap =>{
+    firebase.database().ref('users/' + userId + '/admin').on('value', snap =>{
       if(snap.val() === true){
         this.setState({admin:true})
       }
