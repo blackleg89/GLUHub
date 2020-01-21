@@ -68,7 +68,7 @@ class Register extends Component {
     handleSubmit = event => {
         event.preventDefault();
         if (this.isFormValid()) {
-          this.setState({ errors: [], loading: true, admin:true});
+          this.setState({ errors: [], loading: true});
           firebase
             .auth()
             .createUserWithEmailAndPassword(this.state.email, this.state.password)
@@ -197,7 +197,7 @@ class Register extends Component {
                         </Message>
                     )}
                     <Message>
-                        Already have an account? <Link to="/secret">Secret</Link>
+                        Already have an acount? <Link to="/register">Login</Link>
                     </Message>
                 </Grid.Column>  
             </Grid>
