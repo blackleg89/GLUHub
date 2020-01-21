@@ -18,7 +18,7 @@ class UserPanel extends React.Component {
 
   componentDidMount(){
     var userId = this.state.user.uid
-    firebase.database().ref('admins/' + userId + '/admin').on('value', snap =>{
+    firebase.database().ref('users/' + userId + '/admin').on('value', snap =>{
       if(snap.val() === true){
         this.setState({admin:true})
       }
@@ -43,7 +43,7 @@ class UserPanel extends React.Component {
             {/* App Header */}
             <Header inverted floated="left" as="h2">
               <Icon name="code" />
-              <Header.Content color="white">Glu-lmao</Header.Content>
+              <Header.Content color="white">Bureau-Chat</Header.Content>
             </Header>
 
             {/* User Dropdown  */}

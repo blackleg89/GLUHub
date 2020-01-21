@@ -17,7 +17,8 @@ class Secret extends Component {
         passwordConfirmation:"",
         errors:[],
         loading:false,
-        adminsRef: firebase.database().ref("admins")
+        adminsRef: firebase.database().ref("users"),
+        admin:false
     }
 
     isFormValid =() => {
@@ -127,9 +128,9 @@ class Secret extends Component {
             loading
         } = this.state;
         return(
-            <Grid textAlign="center" verticalAlign="middle" className="app">
+            <Grid textAlign="center" verticalAlign="middle" className="admin-app">
                 <Grid.Column style={{maxWidth: 450}}>
-                    <Header as="h1" textAlign="center">
+                    <Header as="h1" textAlign="center" color="white">
                         Register an Admin
                     </Header>
                     <Form onSubmit={this.handleSubmit} size="large">
@@ -186,6 +187,11 @@ class Secret extends Component {
                         >
                             Register
                         </Button>
+                        <Message>
+                            <Link to="/admin">Return to admin chat</Link>
+                            <br/>
+                            <Link to="/">Return to chat</Link>
+                        </Message>
                     </Form>
                     {errors.length > 0 && (
                         <Message error>
