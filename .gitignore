@@ -3,3 +3,4 @@ firebase.json
 database.rules.json
 firebase.js
 storage.rules
+build/
