@@ -2,8 +2,6 @@ import React from "react";
 import uuidv4 from "uuid/v4";
 import firebase from "../../../firebase";
 import { Segment, Button, Input } from "semantic-ui-react";
-import { Picker, emojiIndex } from "emoji-mart";
-import "emoji-mart/css/emoji-mart.css";
 
 import FileModal from "./FileModal";
 import ProgressBar from "./ProgressBar";
@@ -59,31 +57,6 @@ class MessageForm extends React.Component {
     }
   };
 
-  handleTogglePicker = () => {
-    this.setState({ emojiPicker: !this.state.emojiPicker });
-  };
-
-  handleAddEmoji = emoji => {
-    const oldMessage = this.state.message;
-    const newMessage = this.colonToUnicode(` ${oldMessage} ${emoji.colons} `);
-    this.setState({ message: newMessage, emojiPicker: false });
-    setTimeout(() => this.messageInputRef.focus(), 0);
-  };
-
-  colonToUnicode = message => {
-    return message.replace(/:[A-Za-z0-9_+-]+:/g, x => {
-      x = x.replace(/:/g, "");
-      let emoji = emojiIndex.emojis[x];
-      if (typeof emoji !== "undefined") {
-        let unicode = emoji.native;
-        if (typeof unicode !== "undefined") {
-          return unicode;
-        }
-      }
-      x = ":" + x + ":";
-      return x;
-    });
-  };
 
   createMessage = (fileUrl = null) => {
     const message = {
@@ -206,19 +179,10 @@ class MessageForm extends React.Component {
 
   render() {
     // prettier-ignore
-    const { errors, message, loading, modal, uploadState, percentUploaded, emojiPicker } = this.state;
+    const { errors, message, loading, modal, uploadState, percentUploaded } = this.state;
 
     return (
       <Segment className="message__form">
-        {emojiPicker && (
-          <Picker
-            set="apple"
-            onSelect={this.handleAddEmoji}
-            className="emojipicker"
-            title="Pick your emoji"
-            emoji="point_up"
-          />
-        )}
         <Input
           fluid
           name="message"
@@ -229,10 +193,13 @@ class MessageForm extends React.Component {
           style={{ marginBottom: "0.7em" }}
           label={
             <Button
-              icon={emojiPicker ? "close" : "add"}
-              content={emojiPicker ? "Close" : null}
-              onClick={this.handleTogglePicker}
-            />
+            color="teal"
+            disabled={uploadState === "uploading"}
+            onClick={this.openModal}
+            content="Upload Media"
+            labelPosition="right"
+            icon="cloud upload"
+          />
           }
           labelPosition="left"
           className={
@@ -242,16 +209,6 @@ class MessageForm extends React.Component {
           }
           placeholder="Write your message"
         />
-        <Button.Group icon widths="2">
-          <Button
-            color="teal"
-            disabled={uploadState === "uploading"}
-            onClick={this.openModal}
-            content="Upload Media"
-            labelPosition="right"
-            icon="cloud upload"
-          />
-        </Button.Group>
         <FileModal
           modal={modal}
           closeModal={this.closeModal}
