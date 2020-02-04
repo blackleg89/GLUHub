@@ -43,7 +43,7 @@ class UserPanel extends React.Component {
             {/* App Header */}
             <Header inverted floated="left" as="h2">
               <Icon name="code" />
-              <Header.Content color="white">Bureau-Chat</Header.Content>
+              <Header.Content color="white">Scuffed-Chat</Header.Content>
             </Header>
 
             {/* User Dropdown  */}
@@ -60,7 +60,7 @@ class UserPanel extends React.Component {
               <Image wrapped small size="small" src={user.photoURL} />
               <Modal.Description>
                 <Button onClick={this.handleSignout}>Sign out</Button>
-                {this.state.admin === true && <Link to="/admin"><Button>Admin</Button></Link>}
+                {this.state.admin === true && <Link to="/weirdchamp"><Button>Admin</Button></Link>}
                 {this.state.admin === true && <Message>Admin</Message>}
               </Modal.Description>
             </Modal.Content>

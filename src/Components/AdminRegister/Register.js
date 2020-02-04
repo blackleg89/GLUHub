@@ -188,7 +188,7 @@ class Secret extends Component {
                             Register
                         </Button>
                         <Message>
-                            <Link to="/admin">Return to admin chat</Link>
+                            <Link to="/weirdchamp">Return to admin chat</Link>
                             <br/>
                             <Link to="/">Return to chat</Link>
                         </Message>

@@ -10,7 +10,7 @@ const Warning = () =>{
                 We zitten op dit moment op versie 0.5, en er komen nog veel uitbreidingen en integraties in de app.
                 Er komt bijvoorbeeld de mogelijkheid om vrienden toe tevoegen, een integratie voor github en de gitlab - en voor designers een adobe xd integratie.
 
-                <div className="wrapper"><Link to="/login"><Button className="warning">Okiedo</Button></Link></div>
+                <div className="wrapper"><Link to="/owo"><Button className="warning">Okiedo</Button></Link></div>
             </h1>
         </div>
     )

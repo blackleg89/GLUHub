@@ -197,7 +197,7 @@ class Register extends Component {
                         </Message>
                     )}
                     <Message>
-                        Already have an acount? <Link to="/login">Login</Link>
+                        Already have an acount? <Link to="/owo">Login</Link>
                     </Message>
                 </Grid.Column>  
             </Grid>

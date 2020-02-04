@@ -42,9 +42,9 @@ class Root extends React.Component{
         ) : (
             <Switch>
                 <Route exact path="/" component={App}/>
-                <Route path="/register" component={Register} />
-                <Route path="/login" component={Login} />
-                <Route path="/admin" component={AdminPanel}/>
+                <Route path="/umu" component={Register} />
+                <Route path="/owo" component={Login} />
+                <Route path="/weirdchamp" component={AdminPanel}/>
                 <Route path="/adminregister" component={Secret}/>
                 <Route path="/uwu" component={Warning}/>
             </Switch>
