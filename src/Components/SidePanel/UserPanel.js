@@ -62,6 +62,7 @@ class UserPanel extends React.Component {
                 <Button onClick={this.handleSignout}>Sign out</Button>
                 {this.state.admin === true && <Link to="/weirdchamp"><Button>Admin</Button></Link>}
                 {this.state.admin === true && <Message>Admin</Message>}
+                <Button href="https://discord.gg/hfhT2HV" target="_blank">Support Discord Server</Button>
               </Modal.Description>
             </Modal.Content>
           </Modal>
