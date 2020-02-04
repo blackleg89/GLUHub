@@ -2,27 +2,29 @@ import React from "react";
 import firebase from "../../firebase";
 // prettier-ignore
 import { Grid, Header, Icon,  Image, Modal, Button , Message} from "semantic-ui-react";
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
 class UserPanel extends React.Component {
   state = {
     user: this.props.currentUser,
     modal: false,
     usersRef: firebase.database().ref("users"),
-    admin:false
+    admin: false
   };
 
   openModal = () => this.setState({ modal: true });
 
   closeModal = () => this.setState({ modal: false });
 
-
-  componentDidMount(){
-    var userId = this.state.user.uid
-    firebase.database().ref('users/' + userId + '/admin').on('value', snap =>{
-      if(snap.val() === true){
-        this.setState({admin:true})
-      }
-    })
+  componentDidMount() {
+    var userId = this.state.user.uid;
+    firebase
+      .database()
+      .ref("users/" + userId + "/admin")
+      .on("value", snap => {
+        if (snap.val() === true) {
+          this.setState({ admin: true });
+        }
+      });
   }
 
   handleSignout = () => {
@@ -33,7 +35,7 @@ class UserPanel extends React.Component {
   };
 
   render() {
-    const { user, modal} = this.state;
+    const { user, modal } = this.state;
     const { primaryColor } = this.props;
 
     return (
@@ -51,7 +53,7 @@ class UserPanel extends React.Component {
               <span className="span-userpanel" onClick={this.openModal}>
                 <Image src={user.photoURL} spaced="right" avatar />
                 {user.displayName}
-              </span>                    
+              </span>
             </Header>
           </Grid.Row>
           <Modal open={modal} onClose={this.closeModal}>
@@ -60,9 +62,15 @@ class UserPanel extends React.Component {
               <Image wrapped small size="small" src={user.photoURL} />
               <Modal.Description>
                 <Button onClick={this.handleSignout}>Sign out</Button>
-                {this.state.admin === true && <Link to="/weirdchamp"><Button>Admin</Button></Link>}
+                {this.state.admin === true && (
+                  <Link to="/weirdchamp">
+                    <Button>Admin</Button>
+                  </Link>
+                )}
                 {this.state.admin === true && <Message>Admin</Message>}
-                <Button href="https://discord.gg/hfhT2HV" target="_blank">Support Discord Server</Button>
+                <Button href="https://discord.gg/hfhT2HV" target="_blank">
+                  Support Discordd Server
+                </Button>
               </Modal.Description>
             </Modal.Content>
           </Modal>
