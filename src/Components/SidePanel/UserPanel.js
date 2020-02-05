@@ -45,15 +45,16 @@ class UserPanel extends React.Component {
             {/* App Header */}
             <Header inverted floated="left" as="h2">
               <Icon name="code" />
-              <Header.Content color="white">lmao-Chat</Header.Content>
+              <Header.Content color="white">Scuffed-Chat</Header.Content>
             </Header>
 
             {/* User Dropdown  */}
             <Header style={{ padding: "0.25em" }} as="h4" inverted>
-              <span className="span-userpanel" onClick={this.openModal}>
+              <span className="span-userpanel">
                 <Image src={user.photoURL} spaced="right" avatar />
                 {user.displayName}
               </span>
+              <Icon name="setting" size="small" className="setting-user" spaced="right" style={{display:"inline-block", paddingLeft:"20px"}} onClick={this.openModal}/>
             </Header>
           </Grid.Row>
           <Modal open={modal} onClose={this.closeModal}>
@@ -69,7 +70,7 @@ class UserPanel extends React.Component {
                 )}
                 {this.state.admin === true && <Message>Admin</Message>}
                 <Button href="https://discord.gg/hfhT2HV" target="_blank">
-                  Support Discordd Server
+                  Support Discord Server
                 </Button>
               </Modal.Description>
             </Modal.Content>

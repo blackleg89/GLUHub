@@ -249,6 +249,11 @@ span:hover{
   text-decoration: none;
 } */
 
+.setting-user:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
+
 .menuUserpanel{
   overflow-y: scroll;
 }
