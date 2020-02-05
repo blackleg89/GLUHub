@@ -18,7 +18,7 @@ class Channels extends React.Component {
     typingRef: firebase.database().ref("typing"),
     notifications: [],
     firstLoad: true
-  };
+  }; 
 
   componentDidMount() {
     this.addListeners();
@@ -124,6 +124,7 @@ class Channels extends React.Component {
     }
   };
 
+
   setActiveChannel = channel => {
     this.setState({ activeChannel: channel.id });
   };
@@ -148,8 +149,9 @@ class Channels extends React.Component {
         onClick={() => this.changeChannel(channel)}
         name={channel.name}
         style={{ opacity: 0.7 }}
-        active={channel.id === this.state.activeChannel}
+        active={channel.id === this.state.activeChannel}  
       >
+        <Icon name="favorite" className="favorite-channels"/>
         {this.getNotificationCount(channel) && (
           <Label color="red">{this.getNotificationCount(channel)}</Label>
         )}
@@ -166,7 +168,7 @@ class Channels extends React.Component {
 
   render() {
     const { channels, modal } = this.state;
-
+    
     return (
       <React.Fragment>
         <Menu.Menu className="menu">

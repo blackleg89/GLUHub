@@ -254,6 +254,11 @@ span:hover{
     text-decoration: underline;
 }
 
+.channels-app:hover{
+  
+}
+
+
 .menuUserpanel{
   overflow-y: scroll;
 }
