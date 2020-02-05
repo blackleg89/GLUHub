@@ -3,7 +3,7 @@ import firebase from "../../firebase";
 import { connect } from "react-redux";
 import { setCurrentChannel, setPrivateChannel } from "../../actions";
 // prettier-ignore
-import { Menu, Icon, Modal, Form, Input, Button, Label } from "semantic-ui-react";
+import { Menu, Icon, Label } from "semantic-ui-react";
 
 class Channels extends React.Component {
   state = {
