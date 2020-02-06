@@ -253,6 +253,10 @@ span:hover{
     cursor: pointer;
     text-decoration: underline;
 }
+ .add-icon:hover{
+   cursor: pointer;
+ }
+
 
 .channels-app:hover{
   
