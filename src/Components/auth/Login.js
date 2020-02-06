@@ -19,7 +19,8 @@ class Login extends React.Component{
         errors: [],
         loading: false,
         auth: firebase.auth(),
-        modal:false
+        modal:false,
+        provider: new firebase.auth.GithubAuthProvider()
     }
 
     displayErrors=  errors =>   
@@ -36,6 +37,16 @@ class Login extends React.Component{
         event.preventDefault();
         this.state.auth.sendPasswordResetEmail(this.state.email).then(function(){
             console.log('Email send')
+        }).catch(function(error){
+            console.error(error)
+        })
+    }
+
+    //login with github
+    loginGithub = () =>{
+        firebase.auth().signInWithPopup(this.state.provider).then(function(result){
+            let token = result.credential.accessToken
+            let user = result.user
         }).catch(function(error){
             console.error(error)
         })
@@ -151,6 +162,7 @@ class Login extends React.Component{
             Don't have an account? <Link to="/umu">Register</Link><br/>
           </Message>
             <Button onClick={this.openModal}>Wachtwoord vergeten?</Button>
+            <Button onClick={this.loginGithub}>Login met github</Button>
         </Grid.Column>
       </Grid>
         )
