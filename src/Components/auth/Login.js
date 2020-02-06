@@ -151,6 +151,7 @@ class Login extends React.Component{
                         </Button>
                   </Form>
               </Modal.Content>
+              
           </Modal>
           {errors.length > 0 && (
             <Message error>
