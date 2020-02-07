@@ -3,7 +3,7 @@ import firebase from "../../firebase";
 import { connect } from "react-redux";
 import { setCurrentChannel, setPrivateChannel } from "../../actions";
 // prettier-ignore
-import { Menu, Icon, Modal, Form, Input, Button, Label } from "semantic-ui-react";
+import { Menu, Icon, Label, Modal, Form, Input, Button } from "semantic-ui-react";
 
 class Channels extends React.Component {
   state = {
@@ -17,11 +17,21 @@ class Channels extends React.Component {
     messagesRef: firebase.database().ref("messages"),
     typingRef: firebase.database().ref("typing"),
     notifications: [],
-    firstLoad: true
-  };
+    firstLoad: true,
+    admin:false
+  }; 
 
   componentDidMount() {
     this.addListeners();
+    var userId = this.state.user.uid;
+    firebase
+      .database()
+      .ref("users/" + userId + "/admin")
+      .on("value", snap => {
+        if (snap.val() === true) {
+          this.setState({admin:true});
+        }
+      });
   }
 
   componentWillUnmount() {
@@ -36,6 +46,46 @@ class Channels extends React.Component {
       this.addNotificationListener(snap.key);
     });
   };
+
+  addChannel = () => {
+    const { channelsRef, channelName, channelDetails, user } = this.state;
+
+    const key = channelsRef.push().key;
+
+    const newChannel = {
+      id: key,
+      name: channelName,
+      details: channelDetails,
+      createdBy: {
+        name: user.displayName,
+        avatar: user.photoURL
+      }
+    };
+
+    channelsRef
+      .child(key)
+      .update(newChannel)
+      .then(() => {
+        this.setState({ channelName: "", channelDetails: "" });
+        this.closeModal();
+        console.log("channel added");
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  };
+
+  handleSubmit = event => {
+    event.preventDefault();
+    if (this.isFormValid(this.state)) {
+      this.addChannel();
+    }
+  };
+
+  handleChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
+
 
   addNotificationListener = channelId => {
    this.state.messagesRef.child(channelId).on("value", snap => {
@@ -93,9 +143,6 @@ class Channels extends React.Component {
   };
 
 
-  handleChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
 
   changeChannel = channel => {
     this.setActiveChannel(channel);
@@ -124,6 +171,7 @@ class Channels extends React.Component {
     }
   };
 
+
   setActiveChannel = channel => {
     this.setState({ activeChannel: channel.id });
   };
@@ -148,7 +196,7 @@ class Channels extends React.Component {
         onClick={() => this.changeChannel(channel)}
         name={channel.name}
         style={{ opacity: 0.7 }}
-        active={channel.id === this.state.activeChannel}
+        active={channel.id === this.state.activeChannel}  
       >
         {this.getNotificationCount(channel) && (
           <Label color="red">{this.getNotificationCount(channel)}</Label>
@@ -166,20 +214,53 @@ class Channels extends React.Component {
 
   render() {
     const { channels, modal } = this.state;
-
+    
     return (
       <React.Fragment>
         <Menu.Menu className="menu">
           <Menu.Item>
             <span>
-              <Icon name="exchange" /> CHANNELS
+              <Icon name="exchange" /> CHANNELS 
             </span>{" "}
             ({channels.length})
+            {this.state.admin === true && <Icon name="plus" className="add-icon" onClick={this.openModal}/>}
           </Menu.Item>
           {this.displayChannels(channels)}
         </Menu.Menu>
+        <Modal basic open={modal} onClose={this.closeModal}>
+        <Modal.Header>Add a Channel</Modal.Header>
+          <Modal.Content>
+            <Form onSubmit={this.handleSubmit}>
+              <Form.Field>
+                <Input
+                  fluid
+                  label="Name of Channel"
+                  name="channelName"
+                  onChange={this.handleChange}
+                />
+              </Form.Field>
 
+              <Form.Field>
+                <Input
+                  fluid
+                  label="About the Channel"
+                  name="channelDetails"
+                  onChange={this.handleChange}
+                />
+              </Form.Field>
+            </Form>
+          </Modal.Content>
+          <Modal.Actions>
+            <Button color="red" inverted onClick={this.closeModal}>
+              <Icon name="remove" /> Cancel
+            </Button>
+            <Button color="green" inverted onClick={this.handleSubmit}>
+              <Icon name="checkmark" /> Add
+            </Button>
+          </Modal.Actions>
+        </Modal>
       </React.Fragment>
+
     );
   }
 }

@@ -2,7 +2,6 @@ import React from "react";
 import uuidv4 from "uuid/v4";
 import firebase from "../../firebase";
 import { Segment, Button, Input } from "semantic-ui-react";
-
 import FileModal from "./FileModal";
 import ProgressBar from "./ProgressBar";
 

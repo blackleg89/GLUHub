@@ -7,7 +7,8 @@ import {
     Header,
     Message,
     Icon,
-    Segment
+    Segment,
+    Modal
 } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
@@ -16,7 +17,10 @@ class Login extends React.Component{
         email: "",
         password: "",
         errors: [],
-        loading: false
+        loading: false,
+        auth: firebase.auth(),
+        modal:false,
+        provider: new firebase.auth.GithubAuthProvider()
     }
 
     displayErrors=  errors =>   
@@ -25,6 +29,29 @@ class Login extends React.Component{
     handleChange = event =>{
         this.setState({ [event.target.name]: event.target.value})
     }
+
+    openModal = () => this.setState({modal:true})
+    closeModal = () => this.setState({modal:false})
+
+    resetPassword = event =>{
+        event.preventDefault();
+        this.state.auth.sendPasswordResetEmail(this.state.email).then(function(){
+            console.log('Email send')
+        }).catch(function(error){
+            console.error(error)
+        })
+    }
+
+    //login with github
+    loginGithub = () =>{
+        firebase.auth().signInWithPopup(this.state.provider).then(function(result){
+            let token = result.credential.accessToken
+            let user = result.user
+        }).catch(function(error){
+            console.error(error)
+        })
+    }
+
 
     handleSubmit = event => {
         event.preventDefault();
@@ -54,7 +81,7 @@ class Login extends React.Component{
     }
 
     render(){
-        const {email, errors,  password,loading} = this.state
+        const {email, errors,  password,loading, modal} = this.state
         return(
             <Grid textAlign="center" verticalAlign="middle" className="app">
             <Grid.Column style={{ maxWidth: 450 }}>
@@ -99,6 +126,33 @@ class Login extends React.Component{
                     </Button>
                 </Segment>
           </Form>
+          <Modal size="mini" open={modal} onClose={this.closeModal}>
+              <Modal.Header>
+                  Wachtwoord vergeten
+              </Modal.Header>
+              <Modal.Content>
+                  <Form onSubmit={this.resetPassword} size="mini">
+                        <Form.Input
+                            fluid
+                            name="email"
+                            icon="mail"
+                            placeholder="email"
+                            onChange={this.handleChange}
+                            value={email}
+                            className={this.handleInputError(errors, "email")}
+                            type="email"
+                        />
+                        <Button
+                            color="grey"
+                            fluid
+                            size="large"
+                        >
+                            Submit
+                        </Button>
+                  </Form>
+              </Modal.Content>
+              
+          </Modal>
           {errors.length > 0 && (
             <Message error>
               <h3>Error</h3>
@@ -106,8 +160,10 @@ class Login extends React.Component{
             </Message>
           )}
           <Message>
-            Don't have an account? <Link to="/register">Register</Link><br/>
+            Don't have an account? <Link to="/umu">Register</Link><br/>
           </Message>
+            <Button onClick={this.openModal}>Wachtwoord vergeten?</Button>
+            <Button onClick={this.loginGithub}>Login met github</Button>
         </Grid.Column>
       </Grid>
         )

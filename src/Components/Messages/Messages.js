@@ -53,6 +53,9 @@ class Messages extends React.Component {
     });
   };
 
+  openModal = () => this.setState({modal:true})
+  closeModal = () => this.setState({modal:false})
+
   componentDidUpdate(prevProps, prevState) {
     if (this.messagesEnd) {
       this.scrollToBottom();
@@ -294,6 +297,7 @@ class Messages extends React.Component {
 
           <Segment>
             <Comment.Group className="messages">
+            
               {this.displayMessageSkeleton(messagesLoading)}
               {searchTerm
                 ? this.displayMessages(searchResults)
