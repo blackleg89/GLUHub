@@ -3,7 +3,7 @@ import firebase from "../../firebase";
 import { connect } from "react-redux";
 import { setCurrentChannel, setPrivateChannel } from "../../actions";
 // prettier-ignore
-import { Menu, Icon, Modal, Form, Input, Button, Label } from "semantic-ui-react";
+import { Menu, Icon, Label, Modal, Form, Input, Button, Dropdown } from "semantic-ui-react";
 
 class Channels extends React.Component {
   state = {
@@ -17,11 +17,27 @@ class Channels extends React.Component {
     messagesRef: firebase.database().ref("messages"),
     typingRef: firebase.database().ref("typing"),
     notifications: [],
-    firstLoad: true
-  };
+    firstLoad: true,
+    admin:false,
+    isHovering:false,
+    lmao:false,
+    activeChannelName: ''
+  }; 
+  
+  isHovering= () => this.setState({isHovering:true})
+  isNotHovering= () => this.setState({isHovering:false})
 
   componentDidMount() {
     this.addListeners();
+    var userId = this.state.user.uid;
+    firebase
+      .database()
+      .ref("users/" + userId + "/admin")
+      .on("value", snap => {
+        if (snap.val() === true) {
+          this.setState({admin:true});
+        }
+      });
   }
 
   componentWillUnmount() {
@@ -36,6 +52,46 @@ class Channels extends React.Component {
       this.addNotificationListener(snap.key);
     });
   };
+
+  addChannel = () => {
+    const { channelsRef, channelName, channelDetails, user } = this.state;
+
+    const key = channelsRef.push().key;
+
+    const newChannel = {
+      id: key,
+      name: channelName,
+      details: channelDetails,
+      createdBy: {
+        name: user.displayName,
+        avatar: user.photoURL
+      }
+    };
+
+    channelsRef
+      .child(key)
+      .update(newChannel)
+      .then(() => {
+        this.setState({ channelName: "", channelDetails: "" });
+        this.closeModal();
+        console.log("channel added");
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  };
+
+  handleSubmit = event => {
+    event.preventDefault();
+    if (this.isFormValid(this.state)) {
+      this.addChannel();
+    }
+  };
+
+  handleChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
+
 
   addNotificationListener = channelId => {
    this.state.messagesRef.child(channelId).on("value", snap => {
@@ -93,9 +149,6 @@ class Channels extends React.Component {
   };
 
 
-  handleChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
 
   changeChannel = channel => {
     this.setActiveChannel(channel);
@@ -124,8 +177,16 @@ class Channels extends React.Component {
     }
   };
 
+  deleteChannel = () =>{
+    let channelToDelete = firebase.database().ref("channels/" + this.state.activeChannel)
+    channelToDelete.remove()
+  }
+
+
+  openLmao= () => this.setState({lmao:true})
+  closeLmao =() => this.setState({lmao:false})
   setActiveChannel = channel => {
-    this.setState({ activeChannel: channel.id });
+    this.setState({ activeChannel: channel.id, activeChannelName: channel.name });
   };
 
   getNotificationCount = channel => {
@@ -143,18 +204,41 @@ class Channels extends React.Component {
   displayChannels = channels =>
     channels.length > 0 &&
     channels.map(channel => (
-      <Menu.Item
-        key={channel.id}
-        onClick={() => this.changeChannel(channel)}
-        name={channel.name}
-        style={{ opacity: 0.7 }}
-        active={channel.id === this.state.activeChannel}
-      >
-        {this.getNotificationCount(channel) && (
-          <Label color="red">{this.getNotificationCount(channel)}</Label>
-        )}
-        # {channel.name}
-      </Menu.Item>
+      <div>
+        <Menu.Item
+          key={channel.id}
+          onClick={() => this.changeChannel(channel)}
+          name={channel.name}
+          style={{ opacity: 0.7 }}
+          active={channel.name === this.state.activeChannelName}  
+          onMouseEnter={this.isHovering}
+          onMouseLeave={this.isNotHovering}
+        >
+          {this.state.admin === true && this.state.isHovering === true && <Icon name="ellipsis vertical" size="normal" onClick={this.openLmao}/>}
+          {this.getNotificationCount(channel) && (
+            <Label color="red">{this.getNotificationCount(channel)}</Label>
+          )}
+          # {channel.name}
+            <Modal 
+              basic
+              open={this.state.lmao} 
+              closeIcon 
+              onClose={this.closeLmao}
+              size="mini"
+            >
+              <Modal.Header>
+                Kanaal opties voor {this.state.activeChannelName}
+              </Modal.Header>
+              <Modal.Description>
+                <Button onClick={this.deleteChannel}>Verwijder kanaal</Button>
+              </Modal.Description>
+            </Modal>
+          
+        </Menu.Item>
+
+        
+      </div>
+  
     ));
 
   isFormValid = ({ channelName, channelDetails }) =>
@@ -165,21 +249,60 @@ class Channels extends React.Component {
   closeModal = () => this.setState({ modal: false });
 
   render() {
-    const { channels, modal } = this.state;
-
+    const { channels, modal, lmao, channel } = this.state;
+    
     return (
       <React.Fragment>
         <Menu.Menu className="menu">
           <Menu.Item>
             <span>
-              <Icon name="exchange" /> CHANNELS
+              <Icon name="exchange" /> CHANNELS 
             </span>{" "}
             ({channels.length})
+            {this.state.admin === true && <Icon name="plus" className="add-icon" onClick={this.openModal}/>}
           </Menu.Item>
-          {this.displayChannels(channels)}
+          {this.displayChannels(channels)} 
         </Menu.Menu>
+        <Modal basic open={modal} closeIcon size="small" onClose={this.closeModal}>
+        <Modal.Header>Add a Channel</Modal.Header>
+          <Modal.Content>
+            <Form onSubmit={this.handleSubmit}>
+              <Form.Field>
+                <Input
+                  fluid
+                  label="Name of Channel"
+                  name="channelName"
+                  onChange={this.handleChange}
+                />
+              </Form.Field>
+
+              <Form.Field>
+                <Input
+                  fluid
+                  label="About the Channel"
+                  name="channelDetails"
+                  onChange={this.handleChange}
+                />
+              </Form.Field>
+            </Form>
+          </Modal.Content>
+          <Modal.Actions>
+            <Button color="red" inverted onClick={this.closeModal}>
+              <Icon name="remove" /> Cancel
+            </Button>
+            <Button color="green" inverted onClick={this.handleSubmit}>
+              <Icon name="checkmark" /> Add
+            </Button>
+          </Modal.Actions>
+        </Modal> 
+        {/* <Modal open={lmao} closeIcon size='small' onClose={this.closeLmao}>
+          <Modal.Header>
+            Weet je zeker dat je {}  wilt verwijderen?
+          </Modal.Header>
+        </Modal> */}
 
       </React.Fragment>
+
     );
   }
 }

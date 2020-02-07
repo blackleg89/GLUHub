@@ -10,7 +10,9 @@ body,
 .menu {
   padding-bottom: 2em;
 }
-
+.white{
+  color:white!important;
+}
 /* Messages.js */
 .messages {
   height: 66vh;
@@ -30,8 +32,34 @@ body,
 
 }
 
+.big{
+  font-size:32px!important;
+  vertical-align: middle;
+}
 
+.centered{
+  text-align: center!important;
+}
 
+.warning{
+  position: absolute;
+  top: 25%;
+
+}
+
+button{
+  vertical-align: middle;
+  text-align: center;
+}
+
+.wrapper{
+  text-align: center;
+}
+
+link{
+  vertical-align: middle;
+  text-align: center;
+}
 
 .hehexd:hover{
   color:black;
@@ -151,7 +179,7 @@ span:hover{
   }
 }
 
-/* Skeleton.js */
+/* Skeleton.js
 .skeleton {
   position: relative;
   overflow: hidden;
@@ -214,11 +242,29 @@ span:hover{
   bottom: 5px;
   left: 40px;
   right: 20px;
-}
+} */
 
-.hahaxd{
+/* .hahaxd{
   color:white;
   text-decoration: none;
+} */
+
+.setting-user:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
+ .add-icon:hover{
+   cursor: pointer;
+ }
+
+
+.channels-app:hover{
+  
+}
+
+
+.menuUserpanel{
+  overflow-y: scroll;
 }
 
 .hahaxd:visited{

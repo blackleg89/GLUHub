@@ -1,5 +1,5 @@
 import React from "react";
-import { Segment, Comment, Modal } from "semantic-ui-react";
+import { Segment, Comment, Modal, Icon } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { setUserPosts } from "../../actions";
 import firebase from "../../firebase";
@@ -52,6 +52,9 @@ class Messages extends React.Component {
       listener.ref.child(listener.id).off(listener.event);
     });
   };
+
+  openModal = () => this.setState({modal:true})
+  closeModal = () => this.setState({modal:false})
 
   componentDidUpdate(prevProps, prevState) {
     if (this.messagesEnd) {
@@ -242,11 +245,14 @@ class Messages extends React.Component {
   displayMessages = messages =>
     messages.length > 0 &&
     messages.map(message => (
-      <Message
-        key={message.timestamp}
-        message={message}
-        user={this.state.user}
-      />
+      <div>
+        <Message
+          key={message.timestamp}
+          message={message}
+          user={this.state.user}
+        />
+        
+      </div>
     ));
 
   displayChannelName = channel => {
@@ -294,6 +300,7 @@ class Messages extends React.Component {
 
           <Segment>
             <Comment.Group className="messages">
+            
               {this.displayMessageSkeleton(messagesLoading)}
               {searchTerm
                 ? this.displayMessages(searchResults)

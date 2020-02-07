@@ -6,9 +6,7 @@ import firebase from './firebase'
 import Spinner from './Spinner'
 import App from './Components/App'
 import Login from './Components/auth/Login'
-import AdminPanel from './Components/Admin/Panel'
-import Secret from './Components/AdminRegister/Register'
-
+import Warning from './Components/Warning'
 import {
     BrowserRouter as Router,
     Switch,
@@ -30,7 +28,7 @@ class Root extends React.Component{
                 this.props.setUser(user);
                 this.props.history.push("/")
             }else{
-                this.props.history.push("/login")
+                this.props.history.push("/uwu")
                 this.props.clearUser()
             }
         })
@@ -42,10 +40,9 @@ class Root extends React.Component{
         ) : (
             <Switch>
                 <Route exact path="/" component={App}/>
-                <Route path="/register" component={Register} />
-                <Route path="/login" component={Login} />
-                <Route path="/admin" component={AdminPanel}/>
-                <Route path="/adminregister" component={Secret}/>
+                <Route path="/umu" component={Register} />
+                <Route path="/owo" component={Login} />
+                <Route path="/uwu" component={Warning}/>
             </Switch>
         )
     }
