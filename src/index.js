@@ -6,8 +6,6 @@ import firebase from './firebase'
 import Spinner from './Spinner'
 import App from './Components/App'
 import Login from './Components/auth/Login'
-import AdminPanel from './Components/Admin/Panel'
-import Secret from './Components/AdminRegister/Register'
 import Warning from './Components/Warning'
 import {
     BrowserRouter as Router,
@@ -44,8 +42,6 @@ class Root extends React.Component{
                 <Route exact path="/" component={App}/>
                 <Route path="/umu" component={Register} />
                 <Route path="/owo" component={Login} />
-                <Route path="/weirdchamp" component={AdminPanel}/>
-                <Route path="/adminregister" component={Secret}/>
                 <Route path="/uwu" component={Warning}/>
             </Switch>
         )

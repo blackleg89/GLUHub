@@ -63,15 +63,10 @@ class UserPanel extends React.Component {
               <Image wrapped small size="small" src={user.photoURL} />
               <Modal.Description>
                 <Button onClick={this.handleSignout}>Sign out</Button>
-                {this.state.admin === true && (
-                  <Link to="/weirdchamp">
-                    <Button>Admin</Button>
-                  </Link>
-                )}
-                {this.state.admin === true && <Message>Admin</Message>}
                 <Button href="https://discord.gg/hfhT2HV" target="_blank">
                   Support Discord Server
                 </Button>
+                {this.state.admin === true && <Message>Admin</Message>}
               </Modal.Description>
             </Modal.Content>
           </Modal>

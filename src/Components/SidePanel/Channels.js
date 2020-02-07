@@ -3,7 +3,7 @@ import firebase from "../../firebase";
 import { connect } from "react-redux";
 import { setCurrentChannel, setPrivateChannel } from "../../actions";
 // prettier-ignore
-import { Menu, Icon, Label, Modal, Form, Input, Button } from "semantic-ui-react";
+import { Menu, Icon, Label, Modal, Form, Input, Button, Dropdown } from "semantic-ui-react";
 
 class Channels extends React.Component {
   state = {
@@ -18,8 +18,14 @@ class Channels extends React.Component {
     typingRef: firebase.database().ref("typing"),
     notifications: [],
     firstLoad: true,
-    admin:false
+    admin:false,
+    isHovering:false,
+    lmao:false,
+    activeChannelName: ''
   }; 
+  
+  isHovering= () => this.setState({isHovering:true})
+  isNotHovering= () => this.setState({isHovering:false})
 
   componentDidMount() {
     this.addListeners();
@@ -171,9 +177,16 @@ class Channels extends React.Component {
     }
   };
 
+  deleteChannel = () =>{
+    let channelToDelete = firebase.database().ref("channels/" + this.state.activeChannel)
+    channelToDelete.remove()
+  }
 
+
+  openLmao= () => this.setState({lmao:true})
+  closeLmao =() => this.setState({lmao:false})
   setActiveChannel = channel => {
-    this.setState({ activeChannel: channel.id });
+    this.setState({ activeChannel: channel.id, activeChannelName: channel.name });
   };
 
   getNotificationCount = channel => {
@@ -191,18 +204,41 @@ class Channels extends React.Component {
   displayChannels = channels =>
     channels.length > 0 &&
     channels.map(channel => (
-      <Menu.Item
-        key={channel.id}
-        onClick={() => this.changeChannel(channel)}
-        name={channel.name}
-        style={{ opacity: 0.7 }}
-        active={channel.id === this.state.activeChannel}  
-      >
-        {this.getNotificationCount(channel) && (
-          <Label color="red">{this.getNotificationCount(channel)}</Label>
-        )}
-        # {channel.name}
-      </Menu.Item>
+      <div>
+        <Menu.Item
+          key={channel.id}
+          onClick={() => this.changeChannel(channel)}
+          name={channel.name}
+          style={{ opacity: 0.7 }}
+          active={channel.name === this.state.activeChannelName}  
+          onMouseEnter={this.isHovering}
+          onMouseLeave={this.isNotHovering}
+        >
+          {this.state.admin === true && this.state.isHovering === true && <Icon name="ellipsis vertical" size="normal" onClick={this.openLmao}/>}
+          {this.getNotificationCount(channel) && (
+            <Label color="red">{this.getNotificationCount(channel)}</Label>
+          )}
+          # {channel.name}
+            <Modal 
+              basic
+              open={this.state.lmao} 
+              closeIcon 
+              onClose={this.closeLmao}
+              size="mini"
+            >
+              <Modal.Header>
+                Kanaal opties voor {this.state.activeChannelName}
+              </Modal.Header>
+              <Modal.Description>
+                <Button onClick={this.deleteChannel}>Verwijder kanaal</Button>
+              </Modal.Description>
+            </Modal>
+          
+        </Menu.Item>
+
+        
+      </div>
+  
     ));
 
   isFormValid = ({ channelName, channelDetails }) =>
@@ -213,7 +249,7 @@ class Channels extends React.Component {
   closeModal = () => this.setState({ modal: false });
 
   render() {
-    const { channels, modal } = this.state;
+    const { channels, modal, lmao, channel } = this.state;
     
     return (
       <React.Fragment>
@@ -225,9 +261,9 @@ class Channels extends React.Component {
             ({channels.length})
             {this.state.admin === true && <Icon name="plus" className="add-icon" onClick={this.openModal}/>}
           </Menu.Item>
-          {this.displayChannels(channels)}
+          {this.displayChannels(channels)} 
         </Menu.Menu>
-        <Modal basic open={modal} onClose={this.closeModal}>
+        <Modal basic open={modal} closeIcon size="small" onClose={this.closeModal}>
         <Modal.Header>Add a Channel</Modal.Header>
           <Modal.Content>
             <Form onSubmit={this.handleSubmit}>
@@ -258,7 +294,13 @@ class Channels extends React.Component {
               <Icon name="checkmark" /> Add
             </Button>
           </Modal.Actions>
-        </Modal>
+        </Modal> 
+        {/* <Modal open={lmao} closeIcon size='small' onClose={this.closeLmao}>
+          <Modal.Header>
+            Weet je zeker dat je {}  wilt verwijderen?
+          </Modal.Header>
+        </Modal> */}
+
       </React.Fragment>
 
     );

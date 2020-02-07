@@ -13,14 +13,10 @@ const isImage = message => {
 
 const timeFromNow = timestamp => moment(timestamp).fromNow();
 
-// const userModal = () =>{
-//   console.log('lmao')
-// }
 
 
 const Message = ({ message, user }) => (
   <div>
-
     <Comment>
       <Comment.Avatar src={message.user.avatar} />
       <Comment.Content className={isOwnMessage(message, user)}>

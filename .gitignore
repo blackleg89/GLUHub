@@ -5,3 +5,4 @@ firebase.js
 storage.rules
 build/
 .firebase/
+dist/
