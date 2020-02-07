@@ -1,0 +1,1 @@
+{this.state.admin === true && this.state.isHovering === true && <Icon name="ellipsis vertical" size="normal"/>}
