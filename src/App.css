@@ -264,7 +264,7 @@ span:hover{
 
 
 .menuUserpanel{
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .hahaxd:visited{
