@@ -1,6 +1,20 @@
 # Changelog GLUHUB
 # 08/02/2020
 
+## Patch version 0.6.0
+### Features added
+- Avatar Editor
+    - Crop, view and upload your own custom avatars
+- Typing animation in DMs
+
+### Features removed
+- We didn't remove anything this patch, only annoying bugs!
+
+### What will patch 0.7.0 bring?
+- Gitlab integration(this'll take a lot of figuring out so for now this'll be the only feature on the roadmap)
+
+# 08/02/2020
+
 ## Patch version 0.5.5
 ### Features added
 - Admin functionality through main chat
@@ -13,6 +27,9 @@
 - Scroll functionality sidebar
 ### Features removed
 - Admin panel
+    - This feature wasn't necessary anymore as you can now do your cool admin thingies through the main chat
+- Admin chat
+    - There will be a alternative where admins can discuss their private things, sit tight!
 
 ### What will patch 0.6 bring?
 - Custom avatars

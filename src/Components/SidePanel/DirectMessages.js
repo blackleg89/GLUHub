@@ -185,7 +185,9 @@ class DirectMessages extends React.Component {
               name="circle"
               color={this.isUserOnline(user) ? "green" : "red"}
             />
-            <Label color="red">{this.getNotificationCount(user)}</Label>
+            {this.getNotificationCount(user) && (
+              <Label color="red">{this.getNotificationCount(user)}</Label>
+            )}
             @ {user.name}
           </Menu.Item>
         ))}
