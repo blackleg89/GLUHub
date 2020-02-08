@@ -62,7 +62,7 @@ class UserPanel extends React.Component {
     })
     .then(() => {
       console.log("PhotoURL updated");
-      this.closeModal();
+      this.closeLmao();
     })
     .catch(err => {
       console.error(err);
