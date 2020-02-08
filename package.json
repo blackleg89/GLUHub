@@ -5,16 +5,9 @@
   "description": "GluHub",
   "author": "Giovanni",
   "build": {
-    "appId": "gluhub.electron",
-    "files":[
-      "build/**/*",
-      "node_modules/**/*"
-    ],
-    "directories":{
-      "buildResources": "assets"
-    }
+    "appId": "lmao"
   },
-  "main": "./public/electron.js",
+  "main": "./public/index.html",
   "homepage": "./",
   "dependencies": {
     "classnames": "^2.2.6",
@@ -38,24 +31,15 @@
     "uuid": "^3.3.3",
     "v8-compile-cache": "^2.1.0"
   },
-  "devDependencies": {
-    "concurrently": "^5.1.0",
-    "electron": "^7.1.11",
-    "electron-builder": "^21.2.0",
-    "electron-connect": "^0.6.3",
-    "wait-on": "^3.3.0"
-  },
+  "devDependencies": {},
   "scripts": {
     "react-start": "react-scripts start",
     "react-build": "react-scripts build",
     "react-test": "react-scripts test --env=jsdom",
     "react-eject": "react-scripts eject",
     "electron-build": "electron-builder",
-    "electron-pack":"build --em.main=build/electron.js",
     "release": "npm react-build && electron-builder --publish=always",
     "build": "react-scripts build",
-    "dev": "concurrently \"cross-env BROWSER=none npm run react-start\" \"wait-on http://localhost:3000 && electron .\"",
-    "start": "react-scripts start",
-    "preelectron-pack": "npm run build"
+    "start": "react-scripts start"
   }
 }
