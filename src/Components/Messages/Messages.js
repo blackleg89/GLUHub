@@ -1,5 +1,5 @@
 import React from "react";
-import { Segment, Comment, Modal } from "semantic-ui-react";
+import { Segment, Comment, Modal, Icon } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { setUserPosts } from "../../actions";
 import firebase from "../../firebase";
@@ -29,7 +29,8 @@ class Messages extends React.Component {
     typingUsers: [],
     connectedRef: firebase.database().ref(".info/connected"),
     listeners: [],
-    modal:false
+    modal:false,
+    isHovering:false
   };
 
   componentDidMount() {
@@ -47,6 +48,8 @@ class Messages extends React.Component {
     this.state.connectedRef.off();
   }
 
+  isHovering = () => this.setState({isHovering:true})
+  isNotHovering =() => this.setState({isHovering:false})
   removeListeners = listeners => {
     listeners.forEach(listener => {
       listener.ref.child(listener.id).off(listener.event);
@@ -165,6 +168,7 @@ class Messages extends React.Component {
     );
   };
 
+
   starChannel = () => {
     if (this.state.isChannelStarred) {
       this.state.usersRef.child(`${this.state.user.uid}/starred`).update({
@@ -245,11 +249,16 @@ class Messages extends React.Component {
   displayMessages = messages =>
     messages.length > 0 &&
     messages.map(message => (
-      <Message
-        key={message.timestamp}
-        message={message}
-        user={this.state.user}
-      />
+      <div>
+        <Message
+          key={message.timestamp}
+          message={message}
+          user={this.state.user}
+          onMouseEnter={this.isHovering}
+          onMouseLeave={this.isNotHovering}
+        />
+        
+      </div>
     ));
 
   displayChannelName = channel => {

@@ -19,7 +19,7 @@ class MessagesHeader extends React.Component {
           </span>
           <Header.Subheader>{numUniqueUsers}</Header.Subheader>
         </Header>
-
+      {/* REVIEW: */} 
         {/* Channel Search Input */}
         <Header floated="right">
           <Input

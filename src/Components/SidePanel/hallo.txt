@@ -62,7 +62,7 @@ class UserPanel extends React.Component {
     })
     .then(() => {
       console.log("PhotoURL updated");
-      this.closeLmao();
+      this.closeModal();
     })
     .catch(err => {
       console.error(err);
@@ -136,7 +136,7 @@ class UserPanel extends React.Component {
               <Icon name="setting" size="small" className="setting-user" spaced="right" style={{display:"inline-block", paddingLeft:"20px"}} onClick={this.openModal}/>
             </Header>
           </Grid.Row>
-          <Modal open={modal} onClose={this.closeModal} basic closeIcon> 
+          {/* <Modal open={modal} onClose={this.closeModal} basic closeIcon> 
             <Modal.Header>Settings for {user.displayName}</Modal.Header>
             <Modal.Content image>
               <Image wrapped small size="small" src={user.photoURL} />
@@ -149,8 +149,8 @@ class UserPanel extends React.Component {
                 {this.state.admin === true && <Message>Admin</Message>}
               </Modal.Description>
             </Modal.Content>
-          </Modal>
-          <Modal basic open={lmao} onClose={this.closeLmao}>
+          </Modal> */}
+          <Modal basic open={modal} onClose={this.closeModal}>
             <Modal.Header>Change Avatar</Modal.Header>
             <Modal.Content>
                 <Input
@@ -200,7 +200,7 @@ class UserPanel extends React.Component {
               <Button color="green" inverted onClick={this.handleCropImage}>
                 <Icon name="image" /> Preview
               </Button>
-              <Button color="red" inverted onClick={this.closeLmao}>
+              <Button color="red" inverted onClick={this.closeModal}>
                 <Icon name="remove" /> Cancel
               </Button>
             </Modal.Actions>
