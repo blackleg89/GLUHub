@@ -2,7 +2,7 @@ import React from "react";
 import firebase from "../../firebase";
 import { connect } from "react-redux";
 import { setCurrentChannel, setPrivateChannel } from "../../actions";
-import { Menu, Icon } from "semantic-ui-react";
+import { Menu, Icon, Label } from "semantic-ui-react";
 
 class DirectMessages extends React.Component {
   state = {
@@ -11,7 +11,10 @@ class DirectMessages extends React.Component {
     users: [],
     usersRef: firebase.database().ref("users"),
     connectedRef: firebase.database().ref(".info/connected"),
-    presenceRef: firebase.database().ref("presence")
+    presenceRef: firebase.database().ref("presence"),
+    dmRef: firebase.database().ref('privateMessages'),
+    typingRef: firebase.database().ref("typing"),
+    notifications:[]
   };
 
   componentDidMount() {
@@ -39,13 +42,17 @@ class DirectMessages extends React.Component {
         user["status"] = "offline";
         loadedUsers.push(user);
         this.setState({ users: loadedUsers });
+        this.addNotificationListener(snap.key)
       }
+
+
     });
 
     this.state.connectedRef.on("value", snap => {
       if (snap.val() === true) {
         const ref = this.state.presenceRef.child(currentUserUid);
         ref.set(true);
+        this.addNotificationListener(snap.key)
         ref.onDisconnect().remove(err => {
           if (err !== null) {
             console.error(err);
@@ -66,6 +73,61 @@ class DirectMessages extends React.Component {
       }
     });
   };
+
+  addNotificationListener = userId =>{
+    this.state.dmRef.child(userId).on('value', snap =>{
+      if(this.state.activeChannel){
+        this.handleNotifications(
+          userId,
+          this.state.activeChannel,
+          this.state.notifications,
+          snap,
+        )
+      }
+    })  
+  }
+
+  
+  handleNotifications = (userId, currentUserId, notifications, snap) => {
+    let lastTotal = 0;
+
+    let index = notifications.findIndex(
+      notification => notification.id === userId
+    );
+
+    if (index !== -1) {
+      if (userId !== currentUserId) {
+        lastTotal = notifications[index].total;
+
+        if (snap.numChildren() - lastTotal > 0) {
+          notifications[index].count = snap.numChildren() - lastTotal;
+        }
+      }
+      notifications[index].lastKnownTotal = snap.numChildren();
+    } else {
+      notifications.push({
+        id: userId,
+        total: snap.numChildren(),
+        lastKnownTotal: snap.numChildren(),
+        count: 0
+      });
+    }
+
+    this.setState({ notifications });
+  };
+
+  getNotificationCount = user => {
+    let count = 0;
+
+    this.state.notifications.forEach(notification => {
+      if (notification.id === user.id) {
+        count = notification.count;
+      }
+    });
+
+    if (count > 0) return count;
+  };
+
 
   addStatusToUser = (userId, connected = true) => {
     const updatedUsers = this.state.users.reduce((acc, user) => {
@@ -123,6 +185,7 @@ class DirectMessages extends React.Component {
               name="circle"
               color={this.isUserOnline(user) ? "green" : "red"}
             />
+            <Label color="red">{this.getNotificationCount(user)}</Label>
             @ {user.name}
           </Menu.Item>
         ))}
