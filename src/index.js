@@ -7,6 +7,7 @@ import Spinner from './Spinner'
 import App from './Components/App'
 import Login from './Components/auth/Login'
 import Warning from './Components/Warning'
+import GitLogin from './Components/Git/Login'
 import {
     BrowserRouter as Router,
     Switch,
@@ -43,6 +44,7 @@ class Root extends React.Component{
                 <Route path="/umu" component={Register} />
                 <Route path="/owo" component={Login} />
                 <Route path="/uwu" component={Warning}/>
+                <Route path="/shindeiru" component={GitLogin}/>
             </Switch>
         )
     }

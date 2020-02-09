@@ -1,6 +1,6 @@
 import React from "react";
 import firebase from "../../firebase";
-import AvatarEditor from 'react-avatar-editor'
+import AvatarEditor from "react-avatar-editor";
 // prettier-ignore
 import { Grid, Header, Icon,  Image, Modal, Button , Message, Input} from "semantic-ui-react";
 import { Link } from "react-router-dom";
@@ -10,23 +10,28 @@ class UserPanel extends React.Component {
     modal: false,
     usersRef: firebase.database().ref("users"),
     admin: false,
-    lmao:false,
+    lmao: false,
+    git: false,
     uploadedCroppedImage: "",
     previewImage: "",
-    croppedImage:"",
-    blob:null,
+    croppedImage: "",
+    blob: null,
     userRef: firebase.auth().currentUser,
     storageRef: firebase.storage().ref(),
-    metadata:{
-      contentType:"image/png"
+    gitName: "",
+    gitEmail: "",
+    gitUID: "",
+    metadata: {
+      contentType: "image/png"
     }
   };
 
   openModal = () => this.setState({ modal: true });
   closeModal = () => this.setState({ modal: false });
-  openLmao = () => this.setState({lmao:true})
-  closeLmao = () => this.setState({lmao:false})
-
+  openLmao = () => this.setState({ lmao: true });
+  closeLmao = () => this.setState({ lmao: false });
+  openGit = () => this.setState({ git: true });
+  closeGit = () => this.setState({ git: false });
 
   componentDidMount() {
     var userId = this.state.user.uid;
@@ -38,7 +43,35 @@ class UserPanel extends React.Component {
           this.setState({ admin: true });
         }
       });
+
+    if(this.state.user != null){
+      this.state.user.providerData.forEach(profile =>{
+        this.state.user.updateProfile({
+          displayName: profile.displayName
+        })
+      })
+    }
   }
+
+  checkUser = () => {
+    if (this.state.user != null) {
+      this.state.user.providerData.forEach(profile => {
+        console.log("Sign in provider :" + profile.providerId);
+        console.log("  Provider-specific UID: " + profile.uid);
+        console.log("  Name: " + profile.displayName);
+        console.log("  Email: " + profile.email);
+        console.log("  Photo URL: " + profile.photoURL);
+        this.setState({gitName: profile.displayName})
+        this.state.user.updateProfile({
+          displayName: profile.displayName
+        })
+      });
+      console.log(this.state.user.email);
+      console.log(this.state.user.displayName)
+    }
+  
+
+  };
 
   uploadCroppedImage = () => {
     const { storageRef, userRef, blob, metadata } = this.state;
@@ -56,27 +89,27 @@ class UserPanel extends React.Component {
   };
 
   changeAvatar = () => {
-  this.state.userRef
-    .updateProfile({
-      photoURL: this.state.uploadedCroppedImage
-    })
-    .then(() => {
-      console.log("PhotoURL updated");
-      this.closeLmao();
-    })
-    .catch(err => {
-      console.error(err);
-    });
+    this.state.userRef
+      .updateProfile({
+        photoURL: this.state.uploadedCroppedImage
+      })
+      .then(() => {
+        console.log("PhotoURL updated");
+        this.closeLmao();
+      })
+      .catch(err => {
+        console.error(err);
+      });
 
-  this.state.usersRef
-    .child(this.state.user.uid)
-    .update({ avatar: this.state.uploadedCroppedImage })
-    .then(() => {
-      console.log("User avatar updated");
-    })
-    .catch(err => {
-      console.error(err);
-    });
+    this.state.usersRef
+      .child(this.state.user.uid)
+      .update({ avatar: this.state.uploadedCroppedImage })
+      .then(() => {
+        console.log("User avatar updated");
+      })
+      .catch(err => {
+        console.error(err);
+      });
   };
 
   handleChange = event => {
@@ -110,11 +143,16 @@ class UserPanel extends React.Component {
       .then(() => console.log("signed out!"));
   };
 
-  
-
-
   render() {
-    const { user, modal, lmao, previewImage, croppedImage } = this.state;
+    const {
+      user,
+      userName,
+      modal,
+      lmao,
+      previewImage,
+      croppedImage,
+      git
+    } = this.state;
     const { primaryColor } = this.props;
 
     return (
@@ -128,65 +166,83 @@ class UserPanel extends React.Component {
             </Header>
 
             {/* User Dropdown  */}
-            <Header style={{ padding: "0.25em" }} as="h4" inverted>
+            <Header style={{ padding: "0.25em"}} as="h4" inverted>
               <span className="span-userpanel">
                 <Image src={user.photoURL} spaced="right" avatar />
-                {user.displayName}
+                {user.displayName != null
+                  ? user.displayName
+                  : user.email}
               </span>
-              <Icon name="setting" size="small" className="setting-user" spaced="right" style={{display:"inline-block", paddingLeft:"20px"}} onClick={this.openModal}/>
+              <Icon
+                name="setting"
+                size="small"
+                className="setting-user"
+                spaced="right"
+                style={{ display: "inline-block", paddingLeft: "20px" }}
+                onClick={this.openModal}
+              />
             </Header>
           </Grid.Row>
-          <Modal open={modal} onClose={this.closeModal} basic closeIcon> 
-            <Modal.Header>Settings for {user.displayName}</Modal.Header>
+          <Modal open={modal} onClose={this.closeModal} basic closeIcon>
+            <Modal.Header>
+              Settings for{" "}
+              {user.displayName}
+            </Modal.Header>
             <Modal.Content image>
               <Image wrapped small size="small" src={user.photoURL} />
               <Modal.Description>
                 <Button onClick={this.handleSignout}>Sign out</Button>
                 <Button href="https://discord.gg/hfhT2HV" target="_blank">
-                  Support Discord Server
+                  Support Discord
                 </Button>
                 <Button onClick={this.openLmao}>Change avatar</Button>
                 {this.state.admin === true && <Message>Admin</Message>}
+                {this.state.admin === true && (
+                  <Link to="/shindeiru">
+                    <Button>Github</Button>
+                  </Link>
+                )}
+                <Button onClick={this.checkUser}>Check me!</Button>
               </Modal.Description>
             </Modal.Content>
           </Modal>
           <Modal basic open={lmao} onClose={this.closeLmao}>
             <Modal.Header>Change Avatar</Modal.Header>
             <Modal.Content>
-                <Input
-                  onChange={this.handleChange}
-                  fluid
-                  type="file"
-                  label="New Avatar"
-                  name="previewImage"
-                />
-                <Grid centered stackable columns={2}>
-                  <Grid.Row centered>
-                    <Grid.Column className="ui center aligned grid">
-                      {previewImage && (
-                        <AvatarEditor
-                          ref={node => (this.avatarEditor = node)}
-                          image={previewImage}
-                          width={120}
-                          height={120}
-                          border={50}
-                          scale={1.2}
-                        />
-                      )}
-                    </Grid.Column>
-                    <Grid.Column>
-                      {croppedImage && (
-                        <Image
-                          style={{ margin: "3.5em auto" }}
-                          width={100}
-                          height={100}
-                          src={croppedImage}
-                        />
-                      )}
-                    </Grid.Column>
-                  </Grid.Row>
-                </Grid>
-              </Modal.Content>
+              <Input
+                onChange={this.handleChange}
+                fluid
+                type="file"
+                label="New Avatar"
+                name="previewImage"
+              />
+              <Grid centered stackable columns={2}>
+                <Grid.Row centered>
+                  <Grid.Column className="ui center aligned grid">
+                    {previewImage && (
+                      <AvatarEditor
+                        ref={node => (this.avatarEditor = node)}
+                        image={previewImage}
+                        width={120}
+                        height={120}
+                        border={50}
+                        scale={1.2}
+                      />
+                    )}
+                  </Grid.Column>
+                  <Grid.Column>
+                    {croppedImage && (
+                      <Image
+                        style={{ margin: "3.5em auto" }}
+                        width={100}
+                        height={100}
+                        src={croppedImage}
+                      />
+                    )}
+                  </Grid.Column>
+                </Grid.Row>
+              </Grid>
+            </Modal.Content>
             <Modal.Actions>
               {croppedImage && (
                 <Button
