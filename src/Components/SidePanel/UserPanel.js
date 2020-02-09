@@ -53,25 +53,7 @@ class UserPanel extends React.Component {
     }
   }
 
-  checkUser = () => {
-    if (this.state.user != null) {
-      this.state.user.providerData.forEach(profile => {
-        console.log("Sign in provider :" + profile.providerId);
-        console.log("  Provider-specific UID: " + profile.uid);
-        console.log("  Name: " + profile.displayName);
-        console.log("  Email: " + profile.email);
-        console.log("  Photo URL: " + profile.photoURL);
-        this.setState({gitName: profile.displayName})
-        this.state.user.updateProfile({
-          displayName: profile.displayName
-        })
-      });
-      console.log(this.state.user.email);
-      console.log(this.state.user.displayName)
-    }
-  
 
-  };
 
   uploadCroppedImage = () => {
     const { storageRef, userRef, blob, metadata } = this.state;
@@ -146,12 +128,10 @@ class UserPanel extends React.Component {
   render() {
     const {
       user,
-      userName,
       modal,
       lmao,
       previewImage,
       croppedImage,
-      git
     } = this.state;
     const { primaryColor } = this.props;
 
@@ -202,7 +182,6 @@ class UserPanel extends React.Component {
                     <Button>Github</Button>
                   </Link>
                 )}
-                <Button onClick={this.checkUser}>Check me!</Button>
               </Modal.Description>
             </Modal.Content>
           </Modal>
