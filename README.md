@@ -1,6 +1,16 @@
 # Changelog GLUHUB
-# 08/02/2020
 
+# 09/02/2020
+## Patch version 0.6.5
+### Features added
+- Ability to login with Github
+    - You can now login with Github and use the app through your Github account!
+### Features removed
+- We didn't remove anything this patch. We added a lot of the back end code needed to successfully implement the Github feature the way we envision it.
+### What will patch 0.7.0 bring?
+- The first stable release of the Github integration.
+
+# 08/02/2020
 ## Patch version 0.6.0
 ### Features added
 - Avatar Editor
