@@ -1,84 +1,16 @@
 import React from "react";
-import firebase from "../../firebase";
-// prettier-ignore
-import { Grid, Header, Icon,  Image, Modal, Button , Message, Input} from "semantic-ui-react";
-import { Link } from "react-router-dom";
-class UserPanel extends React.Component {
-  state = {
-    user: firebase.auth().currentUser,
-    modal: false,
-    usersRef: firebase.database().ref("users"),
-    admin: false,
-    userRef: firebase.auth().currentUser,
-    storageRef: firebase.storage().ref(),
-  };
+import { Grid } from "semantic-ui-react";
+import { connect } from "react-redux";
+import SidePanel from "./Sidepanel/SidePanel";
 
-  openModal = () => this.setState({ modal: true });
-  closeModal = () => this.setState({ modal: false });
+const Git = ({ currentUser, currentChannel, }) => (
+  <Grid columns="equal" className="git-app" style={{ background: "#1b1c1d" }}>
+    <SidePanel key={currentUser && currentUser.uid} currentUser={currentUser} />
+  </Grid>
+);
 
-  componentDidMount() {
-    var userId = this.state.user.uid;
-    firebase
-      .database()
-      .ref("users/" + userId + "/admin")
-      .on("value", snap => {
-        if (snap.val() === true) {
-          this.setState({ admin: true });
-        }
-      });
+const mapStateToProps = state => ({
+  currentUser: state.user.currentUser,
+});
 
-    if(this.state.user != null){
-      this.state.user.providerData.forEach(profile =>{
-        this.state.user.updateProfile({
-          displayName: profile.displayName
-        })
-      })
-    }
-  }
-
-  handleSignout = () => {
-    firebase
-      .auth()
-      .signOut()
-      .then(() => console.log("signed out!"));
-  };
-
-  render() {
-    const {
-      user,
-      modal,
-    } = this.state;
-
-    return (
-      <Grid style={{ background: "#000"}}>
-        <Grid.Column>
-          <Grid.Row style={{ padding: "1.2em", margin: 0}}>
-            {/* App Header */}
-            <Header inverted floated="left"as="h2">
-              <Icon name="github alternate" />
-              <Header.Content color="white">GLU-Git</Header.Content>
-            </Header>
-
-            {/* User Dropdown  */}
-            <Header  as="h3" inverted style={{paddingTop:"50px"}}>
-              <span className="span-gitpanel">
-                <Image src={user.photoURL} spaced="right" avatar />
-                {user.displayName}
-              </span>
-              <Icon
-                name="setting"
-                size="small"
-                className="setting-user"
-                spaced="right"
-                style={{ display: "inline-block", paddingLeft: "20px" }}
-                onClick={this.openModal}
-              />
-            </Header>
-          </Grid.Row>
-        </Grid.Column>
-      </Grid>
-    );
-  }
-}
-
-export default UserPanel;
+export default connect(mapStateToProps)(Git);
