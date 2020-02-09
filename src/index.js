@@ -6,8 +6,7 @@ import firebase from './firebase'
 import Spinner from './Spinner'
 import App from './Components/App'
 import Login from './Components/auth/Login'
-import Warning from './Components/Warning'
-import GitLogin from './Components/Git/Login'
+import Git from './Components/Git/Git'
 import {
     BrowserRouter as Router,
     Switch,
@@ -43,8 +42,7 @@ class Root extends React.Component{
                 <Route exact path="/" component={App}/>
                 <Route path="/umu" component={Register} />
                 <Route path="/owo" component={Login} />
-                <Route path="/uwu" component={Warning}/>
-                <Route path="/shindeiru" component={GitLogin}/>
+                <Route path="/uwu" component={Git}/>
             </Switch>
         )
     }

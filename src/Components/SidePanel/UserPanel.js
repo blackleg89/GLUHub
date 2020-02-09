@@ -177,11 +177,9 @@ class UserPanel extends React.Component {
                 </Button>
                 <Button onClick={this.openLmao}>Change avatar</Button>
                 {this.state.admin === true && <Message>Admin</Message>}
-                {this.state.admin === true && (
-                  <Link to="/shindeiru">
+                  <Link to="/uwu">
                     <Button>Github</Button>
                   </Link>
-                )}
               </Modal.Description>
             </Modal.Content>
           </Modal>
