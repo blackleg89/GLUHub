@@ -141,17 +141,15 @@ class UserPanel extends React.Component {
           <Grid.Row style={{ padding: "1.2em", margin: 0 }}>
             {/* App Header */}
             <Header inverted floated="left" as="h2">
-              <Icon name="code" />
+              <Icon name="chat" />
               <Header.Content color="white">GLU-Chat</Header.Content>
             </Header>
 
             {/* User Dropdown  */}
-            <Header style={{ padding: "0.25em"}} as="h4" inverted>
+            <Header style={{ padding: "0.25em"}} as="h3" inverted>
               <span className="span-userpanel">
                 <Image src={user.photoURL} spaced="right" avatar />
-                {user.displayName != null
-                  ? user.displayName
-                  : user.email}
+                {user.displayName}
               </span>
               <Icon
                 name="setting"
@@ -176,9 +174,9 @@ class UserPanel extends React.Component {
                   Support Discord
                 </Button>
                 <Button onClick={this.openLmao}>Change avatar</Button>
-                {this.state.admin === true && <Message>Admin</Message>}
+                {this.state.admin === true ? <Message>Admin</Message> : <Message>Not an Admin</Message>}
                   <Link to="/uwu">
-                    <Button>Github</Button>
+                    <Button>GLU-Git</Button>
                   </Link>
               </Modal.Description>
             </Modal.Content>
