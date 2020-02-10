@@ -75,6 +75,17 @@ class UserPanel extends React.Component {
               />
             </Header>
           </Grid.Row>
+          <Modal open={modal} closeIcon basic onClose={this.closeModal}>
+            <Modal.Header>Settings for {user.displayName}</Modal.Header>
+            <Modal.Content image>
+              <Image src={user.photoURL} wrapped size="small" spaced="left"/>
+              <Modal.Description>
+                <Link to="/"><Button>Go back to chat</Button></Link> 
+                <Button onClick={this.handleSignout}>Signout</Button>
+                <Button href="https://discord.gg/hfhT2HV" target="_blank">Support Discord server</Button>
+              </Modal.Description>
+            </Modal.Content>
+          </Modal>
         </Grid.Column>
       </Grid>
     );
