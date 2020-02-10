@@ -21,6 +21,7 @@ class UserPanel extends React.Component {
     gitName: "",
     gitEmail: "",
     gitUID: "",
+    isHovering:false,
     metadata: {
       contentType: "image/png"
     }
@@ -32,7 +33,8 @@ class UserPanel extends React.Component {
   closeLmao = () => this.setState({ lmao: false });
   openGit = () => this.setState({ git: true });
   closeGit = () => this.setState({ git: false });
-
+  onHover = () => this.setState({isHovering:true})
+  stoppedHover =() => this.setState({isHovering:false})
   componentDidMount() {
     var userId = this.state.user.uid;
     firebase
@@ -152,11 +154,14 @@ class UserPanel extends React.Component {
                 {user.displayName}
               </span>
               <Icon
+                onMouseEnter = {this.onHover}
+                onMouseLeave = {this.stoppedHover}
+                loading = {this.state.isHovering === true }
                 name="setting"
                 size="small"
                 className="setting-user"
                 spaced="right"
-                style={{ display: "inline-block", paddingLeft: "20px" }}
+                style={{ display: "inline-block" }}
                 onClick={this.openModal}
               />
             </Header>
@@ -169,7 +174,12 @@ class UserPanel extends React.Component {
             <Modal.Content image>
               <Image wrapped small size="small" src={user.photoURL} />
               <Modal.Description>
-                <Button onClick={this.handleSignout}>Sign out</Button>
+                <Button animated onClick={this.handleSignout}>
+                  <Button.Content visible>Sign out</Button.Content>
+                  <Button.Content hidden>
+                    <Icon name="arrow right"/>
+                  </Button.Content>
+                </Button>
                 <Button href="https://discord.gg/hfhT2HV" target="_blank">
                   Support Discord
                 </Button>
