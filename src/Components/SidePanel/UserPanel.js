@@ -192,7 +192,7 @@ class UserPanel extends React.Component {
                     <Icon name="picture"/>
                   </Button.Content>
                 </Button>
-                {this.state.admin === true ? <Message basic>Admin</Message> : <Message>Not an Admin</Message>}
+                {this.state.admin === true ? <Message>Admin</Message> : <Message>Not an Admin</Message>}
                   <Link to="/uwu">
                     <Button animated>
                       <Button.Content visible>Glu-Git</Button.Content>
