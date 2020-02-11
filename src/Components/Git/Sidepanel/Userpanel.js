@@ -70,7 +70,7 @@ class UserPanel extends React.Component {
                 size="small"
                 className="setting-user"
                 spaced="right"
-                style={{ display: "inline-block", paddingLeft: "20px" }}
+                style={{ display: "inline-block" }}
                 onClick={this.openModal}
               />
             </Header>
