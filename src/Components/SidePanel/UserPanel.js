@@ -180,13 +180,26 @@ class UserPanel extends React.Component {
                     <Icon name="arrow right"/>
                   </Button.Content>
                 </Button>
-                <Button href="https://discord.gg/hfhT2HV" target="_blank">
-                  Support Discord
+                <Button animated href="https://discord.gg/hfhT2HV" target="_blank">
+                  <Button.Content visible>Support</Button.Content>
+                  <Button.Content hidden>
+                    <Icon name="discord"/>
+                  </Button.Content>
+                </Button> 
+                <Button onClick={this.openLmao} animated>
+                  <Button.Content visible>Avatar</Button.Content>
+                  <Button.Content hidden>
+                    <Icon name="picture"/>
+                  </Button.Content>
                 </Button>
-                <Button onClick={this.openLmao}>Change avatar</Button>
-                {this.state.admin === true ? <Message>Admin</Message> : <Message>Not an Admin</Message>}
+                {this.state.admin === true ? <Message basic>Admin</Message> : <Message>Not an Admin</Message>}
                   <Link to="/uwu">
-                    <Button>GLU-Git</Button>
+                    <Button animated>
+                      <Button.Content visible>Glu-Git</Button.Content>
+                      <Button.Content hidden>
+                        <Icon name="github"/>
+                      </Button.Content>
+                    </Button>
                   </Link>
               </Modal.Description>
             </Modal.Content>
