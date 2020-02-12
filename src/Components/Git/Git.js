@@ -2,11 +2,14 @@ import React from "react";
 import { Grid } from "semantic-ui-react";
 import { connect } from "react-redux";
 import SidePanel from "./Components/Sidepanel/SidePanel";
-import Test from './Components/Container/Test'
+import Test from './Components/Views/Test'
 import '../../App.css'
 const Git = ({ currentUser}) => (
-  <Grid columns="equal" className="git-app" style={{ background: "#1b1c1d" }}>
+  <Grid columns="equal" className="git-app" style={{ background: "" }}>
     <SidePanel key={currentUser && currentUser.uid} currentUser={currentUser} />
+    <Grid.Column>
+      <Test/>
+    </Grid.Column>
   </Grid>
 );
 
