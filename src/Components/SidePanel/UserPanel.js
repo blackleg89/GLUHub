@@ -17,6 +17,7 @@ class UserPanel extends React.Component {
     blob:null,
     userRef: firebase.auth().currentUser,
     storageRef: firebase.storage().ref(),
+    isHovering: false,
     metadata:{
       contentType:"image/png"
     }
@@ -26,7 +27,8 @@ class UserPanel extends React.Component {
   closeModal = () => this.setState({ modal: false });
   openLmao = () => this.setState({lmao:true})
   closeLmao = () => this.setState({lmao:false})
-
+  startHover = () => this.setState({isHovering:true})
+  stoppeHovering = () => this.setState({isHovering:false})
 
   componentDidMount() {
     var userId = this.state.user.uid;
@@ -133,7 +135,16 @@ class UserPanel extends React.Component {
                 <Image src={user.photoURL} spaced="right" avatar />
                 {user.displayName}
               </span>
-              <Icon name="setting" size="small" className="setting-user" spaced="right" style={{display:"inline-block", paddingLeft:"20px"}} onClick={this.openModal}/>
+              <Icon name="setting" 
+                size="small" 
+                loading = {this.state.isHovering === true}
+                className="setting-user"
+                spaced="right" 
+                style={{display:"inline-block"}} 
+                onClick={this.openModal}
+                onMouseEnter = {this.startHover}
+                onMouseLeave ={this.stoppeHovering}
+              />
             </Header>
           </Grid.Row>
           <Modal open={modal} onClose={this.closeModal} basic closeIcon> 
