@@ -8,20 +8,6 @@ class SidePanel extends React.Component {
     user: firebase.auth().currentUser
   }
 
-  componentDidMount(){
-    this.checkMyRepos();
-  }
-
-  checkMyRepos = () =>{
-    const check = axios.get(`https://api.github.com/users/${this.state.user.displayName}`)
-      .then(response =>{
-        this.setState({
-          repos: response.data.items
-        })
-        console.log(response)
-      })
-      console.log(check)
-  }
 
   render() {
 
@@ -35,7 +21,6 @@ class SidePanel extends React.Component {
         vertical
         style={{fontSize: "1.2rem"}}
       >
-        <Button onClick={this.checkMyRepos}/>
         <UserPanel currentUser={currentUser} />
       </Menu>
     );
