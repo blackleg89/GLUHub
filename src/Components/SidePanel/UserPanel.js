@@ -193,6 +193,7 @@ class UserPanel extends React.Component {
                   </Button.Content>
                 </Button>
                 {this.state.admin === true ? <Message>Admin</Message> : <Message>Not an Admin</Message>}
+                {this.state.admin === true &&
                   <Link to="/uwu">
                     <Button animated>
                       <Button.Content visible>Glu-Git</Button.Content>
@@ -201,6 +202,7 @@ class UserPanel extends React.Component {
                       </Button.Content>
                     </Button>
                   </Link>
+                }
               </Modal.Description>
             </Modal.Content>
           </Modal>
