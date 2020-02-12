@@ -1,5 +1,5 @@
 import React from "react";
-import firebase from "../../../firebase";
+import firebase from "../../../../firebase";
 // prettier-ignore
 import { Grid, Header, Icon,  Image, Modal, Button , Message, Input} from "semantic-ui-react";
 import { Link } from "react-router-dom";
@@ -70,7 +70,7 @@ class UserPanel extends React.Component {
                 size="small"
                 className="setting-user"
                 spaced="right"
-                style={{ display: "inline-block", paddingLeft: "20px" }}
+                style={{ display: "inline-block" }}
                 onClick={this.openModal}
               />
             </Header>
