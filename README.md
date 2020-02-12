@@ -1,5 +1,17 @@
 # Changelog GLUHUB
 
+# 12/02/2020
+## Patch version 0.6.7
+### Features added
+- We added animations to make the app look more cooler
+- Did a lot of back-end preperation for the Git update
+
+### Features removed
+- We didn't remove anything in particular except for unnessecary code, the app should run a lot smoother now
+### What will patch 0.7.0 bring?
+- See previous changelog
+
+
 # 09/02/2020
 ## Patch version 0.6.5
 ### Features added
