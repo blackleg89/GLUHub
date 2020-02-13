@@ -5,9 +5,15 @@ import axios from 'axios'
 import firebase from '../../../../firebase'
 class SidePanel extends React.Component {
   state = {
-    user: firebase.auth().currentUser
+    user: firebase.auth().currentUser,
+    email: '',
+    photoURL: ''
   }
 
+  componentDidMount(){
+    this.checkMyRepos();
+    
+  }
 
   render() {
 
