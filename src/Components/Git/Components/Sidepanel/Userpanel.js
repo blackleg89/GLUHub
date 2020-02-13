@@ -30,7 +30,10 @@ class UserPanel extends React.Component {
     if(this.state.user != null){
       this.state.user.providerData.forEach(profile =>{
         this.state.user.updateProfile({
-          displayName: profile.displayName
+          displayName: profile.displayName,
+          email: profile.email,
+          photoURL: profile.photoURL,
+          provider: profile.provider
         })
       })
     }
