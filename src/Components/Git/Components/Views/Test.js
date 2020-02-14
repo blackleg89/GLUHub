@@ -9,13 +9,13 @@ export default class Test extends Component{
         repos: [],
         loading: true,
         user: firebase.auth().currentUser,
-
       };
+
       componentDidMount() {
         this.fetchRepos();
       }
 
-      
+n     
       fetchRepos = () =>{
         let userName = this.state.user.displayName
         axios.get(`https://api.github.com/users/${userName}/repos`)
@@ -31,9 +31,6 @@ export default class Test extends Component{
         })
       }
 
-
-
-
     render(){
       const{
         user,
@@ -48,6 +45,11 @@ export default class Test extends Component{
                   </Header>
                   <Button onClick={this.fetchRepos}/>
                 </Grid.Row>
+              </Grid.Column>
+              <Grid.Column>
+                  <Grid.Row centered>
+                    {repos.name}
+                  </Grid.Row>
               </Grid.Column>
             </Grid>
           );

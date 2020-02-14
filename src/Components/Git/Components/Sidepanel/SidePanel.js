@@ -10,10 +10,6 @@ class SidePanel extends React.Component {
     photoURL: ''
   }
 
-  componentDidMount(){
-    this.checkMyRepos();
-    
-  }
 
   render() {
 
