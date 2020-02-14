@@ -4,37 +4,40 @@ import axios from 'axios'
 // import SearchForm from '../Data/SearchForm';
 // import RepoList from '../Data/RepoList';
 import {Button, Grid, Label, Header} from 'semantic-ui-react'
-export default class Test extends Component {
-    constructor() {
-        super();
-        this.state = {
-          repos: [],
-          loading: true,
-          user: firebase.auth().currentUser
-        };
-      } 
+export default class Test extends Component{
+        state = {
+        repos: [],
+        loading: true,
+        user: firebase.auth().currentUser,
+
+      };
       componentDidMount() {
         this.fetchRepos();
       }
 
       
-      fetchRepos = (query = this.state.user.displayName) =>{
-        axios.get(`https://api.github.com/users/${query}/repos`)
+      fetchRepos = () =>{
+        let userName = this.state.user.displayName
+        axios.get(`https://api.github.com/users/${userName}/repos`)
         .then(response =>{
           this.setState({
-            query: query,
             repos: response.data.items,
             loading:false
           })
+          console.log(response)
         })
         .catch(error =>{
           console.error(error)
         })
       }
 
+
+
+
     render(){
       const{
-        user
+        user,
+        repos
       } = this.state
         return (
             <Grid style={{background:"#000"}}>
@@ -43,6 +46,7 @@ export default class Test extends Component {
                   <Header inverted as="h2">
                     <Header.Content>{user.displayName}</Header.Content>
                   </Header>
+                  <Button onClick={this.fetchRepos}/>
                 </Grid.Row>
               </Grid.Column>
             </Grid>
