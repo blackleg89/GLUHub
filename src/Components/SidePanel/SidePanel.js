@@ -19,6 +19,8 @@ class SidePanel extends React.Component {
         className="menuUserpanel"
       
       >
+
+      
         <UserPanel currentUser={currentUser} />
         <Channels currentUser={currentUser}/>
         <DirectMessages currentUser={currentUser} />

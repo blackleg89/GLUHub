@@ -1,5 +1,5 @@
 import React from "react";
-import { Menu, Button } from "semantic-ui-react";
+import { Menu, Button,Dropdown } from "semantic-ui-react";
 import UserPanel from "./Userpanel";
 import axios from 'axios'
 import firebase from '../../../../firebase'
@@ -9,7 +9,6 @@ class SidePanel extends React.Component {
     email: '',
     photoURL: ''
   }
-
 
   render() {
 

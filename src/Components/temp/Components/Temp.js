@@ -28,10 +28,8 @@ export default class Temp extends React.Component {
           console.log(this.state.responses.length);
         }
 
-        response.map(r => (
-            <div>
-                {r}
-            </div>
+        response.data.map(r => (
+            console.log(r)
         ))
       });
   };
@@ -39,6 +37,6 @@ export default class Temp extends React.Component {
  
 
   render() {
-    return <div>{this.displayRepos}</div>;
+    return null
   }
 }
