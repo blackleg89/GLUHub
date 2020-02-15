@@ -6,7 +6,8 @@ import { Grid, Header, Icon,  Image, Modal, Button , Message, Input} from "seman
 import { Link } from "react-router-dom";
 class UserPanel extends React.Component {
   state = {
-    user: this.props.currentUser,
+    user:this.props.currentUser,
+    currentUser: firebase.auth().currentUser,
     modal: false,
     usersRef: firebase.database().ref("users"),
     admin: false,
@@ -49,12 +50,23 @@ class UserPanel extends React.Component {
     if(this.state.user != null){
       this.state.user.providerData.forEach(profile =>{
         this.state.user.updateProfile({
-          displayName: profile.displayName
+          displayName: profile.displayName,
+          providerId: profile.providerId
         })
+      })
+    }
+
+    if(this.state.currentUser.providerData[0].providerId === 'github.com'){
+      this.setState({
+        providerId:'github.com'
       })
     }
   }
 
+
+  test = () =>{
+    console.log(this.state.currentUser.providerId)
+  }
 
 
   uploadCroppedImage = () => {
@@ -134,6 +146,7 @@ class UserPanel extends React.Component {
       lmao,
       previewImage,
       croppedImage,
+      currentUser
     } = this.state;
     const { primaryColor } = this.props;
 
@@ -180,6 +193,7 @@ class UserPanel extends React.Component {
                     <Icon name="arrow right"/>
                   </Button.Content>
                 </Button>
+                <Button onClick={this.test}>Test me!</Button>
                 <Button animated href="https://discord.gg/hfhT2HV" target="_blank">
                   <Button.Content visible>Support</Button.Content>
                   <Button.Content hidden>
@@ -193,14 +207,16 @@ class UserPanel extends React.Component {
                   </Button.Content>
                 </Button>
                 {this.state.admin === true ? <Message>Admin</Message> : <Message>Not an Admin</Message>}
-                <Link to="/uwu">
-                  <Button animated>
-                    <Button.Content visible>Glu-Git</Button.Content>
-                    <Button.Content hidden>
-                      <Icon name="github"/>
-                    </Button.Content>
-                  </Button>
-                </Link>
+                {currentUser.providerData[0].providerId === 'github.com'&&
+                  <Link to="/uwu">
+                    <Button animated>
+                      <Button.Content visible>Glu-Git</Button.Content>
+                      <Button.Content hidden>
+                        <Icon name="github"/>
+                      </Button.Content>
+                    </Button>
+                  </Link>
+                }
               </Modal.Description>
             </Modal.Content>
           </Modal>
