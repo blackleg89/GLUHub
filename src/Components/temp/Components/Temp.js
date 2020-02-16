@@ -2,7 +2,7 @@ import React from "react";
 import firebase from "../../../firebase";
 import axios from "axios";
 import { Segment, Header, Button } from "semantic-ui-react";
-
+import GitHeader from './Header/Header'
 export default class Temp extends React.Component {
   constructor() {
     super();
