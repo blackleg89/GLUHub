@@ -22,6 +22,7 @@ class SidePanel extends React.Component {
         vertical
         style={{fontSize: "1.2rem"}}
       >
+        <Button>Hallo</Button>
         <UserPanel currentUser={currentUser} />
       </Menu>
     );

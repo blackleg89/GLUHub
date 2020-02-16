@@ -12,15 +12,14 @@ class UserPanel extends React.Component {
     admin: false,
     userRef: firebase.auth().currentUser,
     storageRef: firebase.storage().ref(),
-    responses: [],
-    response:[]
+    hover:false
   };
 
   openModal = () => this.setState({ modal: true });
   closeModal = () => this.setState({ modal: false });
-
+  startedHover = () => this.setState({hover: true})
+  stoppedHover = () => this.setState({hover:false})
   componentDidMount() {
-    this.fetchRepos()
     var userId = this.state.user.uid;
     firebase
       .database()
@@ -43,24 +42,7 @@ class UserPanel extends React.Component {
     }
   }
 
-  fetchRepos = () => {
-    axios
-      .get(`https://api.github.com/users/${this.state.user.displayName}/repos`)
-      .then(response => {
-        this.setState({
-          responses: response.data
-        });
-        if (this.state.responses.length) {
-          console.log(this.state.responses.length);
-        }
-
-        response.data.map(r => {
-          this.setState(r => this.setState({response: r.response.concat(r)}))
-
-        })
-        console.log(this.state.response)
-      });
-  };
+ 
 
   handleSignout = () => {
     firebase
@@ -69,13 +51,7 @@ class UserPanel extends React.Component {
       .then(() => console.log("signed out!"));
   };
 
-  checkRepo = () =>{
-    const {
-      response
-    } = this.state
 
-    console.log(response[0].responses[0].name)
-  }
 
   render() {
     const {
@@ -100,6 +76,9 @@ class UserPanel extends React.Component {
                 {user.displayName}
               </span>
               <Icon
+                loading = {this.state.hover}
+                onMouseEnter={this.startedHover}
+                onMouseLeave={this.stoppedHover}
                 name="setting"
                 size="small"
                 className="setting-user"
@@ -114,11 +93,26 @@ class UserPanel extends React.Component {
             <Modal.Content image>
               <Image src={user.photoURL} wrapped size="small" spaced="left"/>
               <Modal.Description>
-                <Link to="/"><Button>Go back to chat</Button></Link> 
-                <Button inverted onClick={this.checkRepo}>Check repo</Button>
-
-                <Button onClick={this.handleSignout}>Signout</Button>
-                <Button href="https://discord.gg/hfhT2HV" target="_blank">Support Discord server</Button>
+                <Link to="/">
+                  <Button animated>
+                    <Button.Content visible>Chat</Button.Content>
+                    <Button.Content hidden>
+                      <Icon name="chat"/>
+                    </Button.Content>
+                  </Button>
+                </Link> 
+                <Button animated onClick={this.handleSignout}>
+                  <Button.Content visible>Sign out</Button.Content>
+                  <Button.Content hidden>
+                    <Icon name="arrow right"/>
+                  </Button.Content>
+                </Button>
+                <Button animated href="https://discord.gg/hfhT2HV" target="_blank">
+                  <Button.Content visible>Support</Button.Content>
+                  <Button.Content hidden>
+                    <Icon name="discord"/>
+                  </Button.Content>
+                </Button> 
               </Modal.Description>
             </Modal.Content>
           </Modal>

@@ -54,19 +54,10 @@ class UserPanel extends React.Component {
           providerId: profile.providerId
         })
       })
-    }
-
-    if(this.state.currentUser.providerData[0].providerId === 'github.com'){
-      this.setState({
-        providerId:'github.com'
-      })
-    }
+    } 
   }
 
 
-  test = () =>{
-    console.log(this.state.currentUser.providerId)
-  }
 
 
   uploadCroppedImage = () => {
@@ -193,7 +184,6 @@ class UserPanel extends React.Component {
                     <Icon name="arrow right"/>
                   </Button.Content>
                 </Button>
-                <Button onClick={this.test}>Test me!</Button>
                 <Button animated href="https://discord.gg/hfhT2HV" target="_blank">
                   <Button.Content visible>Support</Button.Content>
                   <Button.Content hidden>

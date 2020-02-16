@@ -172,11 +172,6 @@ ul{
   cursor: pointer;
 }
 
-span:hover{
-  text-decoration: underline;
-  transition: 0.5s;
-}
-
 .emoijpicker {
   position: absolute;
 }
