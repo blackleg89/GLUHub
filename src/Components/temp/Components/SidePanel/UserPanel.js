@@ -3,6 +3,7 @@ import firebase from "../../../../firebase";
 // prettier-ignore
 import { Grid, Header, Icon,  Image, Modal, Button , Message, Input} from "semantic-ui-react";
 import { Link } from "react-router-dom";
+import axios from 'axios'
 class UserPanel extends React.Component {
   state = {
     user: firebase.auth().currentUser,
@@ -11,12 +12,15 @@ class UserPanel extends React.Component {
     admin: false,
     userRef: firebase.auth().currentUser,
     storageRef: firebase.storage().ref(),
+    responses: [],
+    response:[]
   };
 
   openModal = () => this.setState({ modal: true });
   closeModal = () => this.setState({ modal: false });
 
   componentDidMount() {
+    this.fetchRepos()
     var userId = this.state.user.uid;
     firebase
       .database()
@@ -39,12 +43,39 @@ class UserPanel extends React.Component {
     }
   }
 
+  fetchRepos = () => {
+    axios
+      .get(`https://api.github.com/users/${this.state.user.displayName}/repos`)
+      .then(response => {
+        this.setState({
+          responses: response.data
+        });
+        if (this.state.responses.length) {
+          console.log(this.state.responses.length);
+        }
+
+        response.data.map(r => {
+          this.setState(r => this.setState({response: r.response.concat(r)}))
+
+        })
+        console.log(this.state.response)
+      });
+  };
+
   handleSignout = () => {
     firebase
       .auth()
       .signOut()
       .then(() => console.log("signed out!"));
   };
+
+  checkRepo = () =>{
+    const {
+      response
+    } = this.state
+
+    console.log(response[0].responses[0].name)
+  }
 
   render() {
     const {
@@ -84,6 +115,8 @@ class UserPanel extends React.Component {
               <Image src={user.photoURL} wrapped size="small" spaced="left"/>
               <Modal.Description>
                 <Link to="/"><Button>Go back to chat</Button></Link> 
+                <Button inverted onClick={this.checkRepo}>Check repo</Button>
+
                 <Button onClick={this.handleSignout}>Signout</Button>
                 <Button href="https://discord.gg/hfhT2HV" target="_blank">Support Discord server</Button>
               </Modal.Description>

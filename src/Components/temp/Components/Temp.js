@@ -9,34 +9,18 @@ export default class Temp extends React.Component {
     this.state = {
       repos: [],
       user: firebase.auth().currentUser,
-      responses: []
     };
   }
 
-  componentDidMount() {
-    this.fetchRepos();
-  }
+  
 
-  fetchRepos = () => {
-    axios
-      .get(`https://api.github.com/users/${this.state.user.displayName}/repos`)
-      .then(response => {
-        this.setState({
-          responses: response.data
-        });
-        if (this.state.responses.length) {
-          console.log(this.state.responses.length);
-        }
 
-        response.data.map(r => (
-            console.log(r)
-        ))
-      });
-  };
 
  
 
   render() {
-    return null
+    return (
+      <Button inverted onClick={this.checkRepo}>Check repo</Button>
+    )
   }
 }
