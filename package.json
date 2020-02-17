@@ -10,6 +10,7 @@
   "main": "./public/index.html",
   "homepage": "./",
   "dependencies": {
+    "axios": "^0.19.2",
     "classnames": "^2.2.6",
     "cross-env": "^6.0.3",
     "firebase": "^7.6.1",

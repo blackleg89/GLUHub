@@ -214,7 +214,9 @@ class Channels extends React.Component {
           onMouseEnter={this.isHovering}
           onMouseLeave={this.isNotHovering}
         >
-          {this.state.admin === true && this.state.isHovering === true &&  <Icon name="ellipsis vertical" size="normal" onClick={this.openLmao}/>}
+
+          {/* TODO: Needs refactoring */}
+          {this.state.admin === true && this.state.isHovering === true && this.state.lmao === false &&  <Icon name="ellipsis vertical" onClick={this.openLmao}/>}
           {this.getNotificationCount(channel) && (
             <Label color="red">{this.getNotificationCount(channel)}</Label>
           )}
