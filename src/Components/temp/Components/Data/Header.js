@@ -12,7 +12,7 @@ class GitHeader extends React.Component{
             <Segment clearing>
                 <Header fluid="true" as="h2" floated="left" style={{marginBottom: 0}}>
                     <Header.Content>
-                        Repositories for: {user.displayName}
+                        {user.displayName}
                     </Header.Content>
                 </Header>
                 <Header floated="right">

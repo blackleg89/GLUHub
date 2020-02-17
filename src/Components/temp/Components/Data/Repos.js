@@ -55,7 +55,7 @@ class Repos extends React.Component{
                           <div>
                             <Button onClick={this.checkRepo}>Check me!</Button>
                             <Button onClick={this.test}>Test</Button>
-                            <Button onClick={() => console.log(responses[0])}>Responses</Button>
+                            <Button onClick={() => console.log(responses)}>Responses</Button>
                           </div>
                       </Segment>
                   </React.Fragment>
