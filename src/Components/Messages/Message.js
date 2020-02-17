@@ -17,7 +17,20 @@ const Message= ({message, user}) => {
     const timeFromNow = timestamp => moment(timestamp).fromNow()
 
     const makeAdmin = (message, user) =>{
-      console.log(message.id)
+      firebase
+        .database()
+        .ref("users/" + message.user.id + "/admin")
+        .on("value", snap =>{
+          if(snap.val() === true){
+            console.log('already admin!')
+          }else{
+            firebase.database().ref("users/" + message.user.id).set({
+              admin:true
+            })
+            
+            console.log(snap)
+          }
+        })
     }
 
     return (
@@ -34,18 +47,16 @@ const Message= ({message, user}) => {
                     )}
                 </Comment.Content>
             </Comment>
-            <Modal open={showModal} basic closeIcon size="mini" onClose={() => setModal(false)}>
-              <Modal.Content>
+            <Modal open={showModal} basic closeIcon onClose={() => setModal(false)}>
                 <Modal.Header>
                   {message.user.name}
                 </Modal.Header>
                 <Modal.Content image>
-                  <Image wrapped small size="small" src={message.user.avatar}/>
+                  <Image wrapped small size="small" src={message.user.avatar}/>   
+                  <Modal.Description>
+                      <Button onClick={() => makeAdmin(message, user)}>Test</Button>
+                  </Modal.Description>
                 </Modal.Content>
-                <Modal.Description>
-                    <Button onClick={makeAdmin}>Test</Button>
-                </Modal.Description>
-              </Modal.Content>
             </Modal>
         </div>
     )
