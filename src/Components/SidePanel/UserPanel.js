@@ -6,7 +6,8 @@ import { Grid, Header, Icon,  Image, Modal, Button , Message, Input} from "seman
 import { Link } from "react-router-dom";
 class UserPanel extends React.Component {
   state = {
-    user: this.props.currentUser,
+    user:this.props.currentUser,
+    currentUser: firebase.auth().currentUser,
     modal: false,
     usersRef: firebase.database().ref("users"),
     admin: false,
@@ -49,11 +50,13 @@ class UserPanel extends React.Component {
     if(this.state.user != null){
       this.state.user.providerData.forEach(profile =>{
         this.state.user.updateProfile({
-          displayName: profile.displayName
+          displayName: profile.displayName,
+          providerId: profile.providerId
         })
       })
-    }
+    } 
   }
+
 
 
 
@@ -134,6 +137,7 @@ class UserPanel extends React.Component {
       lmao,
       previewImage,
       croppedImage,
+      currentUser
     } = this.state;
     const { primaryColor } = this.props;
 
@@ -193,7 +197,7 @@ class UserPanel extends React.Component {
                   </Button.Content>
                 </Button>
                 {this.state.admin === true ? <Message>Admin</Message> : <Message>Not an Admin</Message>}
-                {this.state.admin === true &&
+                {currentUser.providerData[0].providerId === 'github.com'&&
                   <Link to="/uwu">
                     <Button animated>
                       <Button.Content visible>Glu-Git</Button.Content>

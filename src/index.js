@@ -6,6 +6,8 @@ import firebase from './firebase'
 import Spinner from './Spinner'
 import App from './Components/App'
 import Login from './Components/auth/Login'
+import Git from './Components/Git/Git'
+import Test from './Components/temp/Test'
 import {
     BrowserRouter as Router,
     Switch,
@@ -41,6 +43,7 @@ class Root extends React.Component{
                 <Route exact path="/" component={App}/>
                 <Route path="/umu" component={Register} />
                 <Route path="/owo" component={Login} />
+                <Route path="/uwu" component={Git}/>
             </Switch>
         )
     }
