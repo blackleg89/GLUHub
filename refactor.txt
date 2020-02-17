@@ -1,9 +1,9 @@
 import React, {useState}  from "react";
 import moment from "moment";
-import { Comment, Image, Modal, Button} from "semantic-ui-react";
-import firebase from '../../firebase'
+import { Comment, Image, Modal} from "semantic-ui-react";
+
 const Message= ({message, user}) => {
-  
+
     const [showModal, setModal] = useState(false)
 
     const isOwnMessage = (message, user) =>{
@@ -14,11 +14,9 @@ const Message= ({message, user}) => {
         return message.hasOwnProperty("image") && !message.hasOwnProperty("content")
     }
 
-    const timeFromNow = timestamp => moment(timestamp).fromNow()
 
-    const makeAdmin = (message, user) =>{
-      console.log(message.id)
-    }
+
+    const timeFromNow = timestamp => moment(timestamp).fromNow()
 
     return (
         <div>
@@ -43,11 +41,12 @@ const Message= ({message, user}) => {
                   <Image wrapped small size="small" src={message.user.avatar}/>
                 </Modal.Content>
                 <Modal.Description>
-                    <Button onClick={makeAdmin}>Test</Button>
+                  Lmao
                 </Modal.Description>
               </Modal.Content>
             </Modal>
         </div>
     )
 }
+
 export default Message
