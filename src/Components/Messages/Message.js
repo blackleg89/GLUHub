@@ -14,6 +14,8 @@ const Message= ({message, user}) => {
         return message.hasOwnProperty("image") && !message.hasOwnProperty("content")
     }
 
+
+
     const timeFromNow = timestamp => moment(timestamp).fromNow()
 
     return (
@@ -30,11 +32,17 @@ const Message= ({message, user}) => {
                     )}
                 </Comment.Content>
             </Comment>
-            <Modal open={showModal} onClose={() => setModal(false)}>
+            <Modal open={showModal} basic closeIcon size="mini" onClose={() => setModal(false)}>
               <Modal.Content>
                 <Modal.Header>
-                  
+                  {message.user.name}
                 </Modal.Header>
+                <Modal.Content image>
+                  <Image wrapped small size="small" src={message.user.avatar}/>
+                </Modal.Content>
+                <Modal.Description>
+                  Lmao
+                </Modal.Description>
               </Modal.Content>
             </Modal>
         </div>
