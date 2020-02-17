@@ -27,7 +27,7 @@ class Root extends React.Component{
         firebase.auth().onAuthStateChanged(user =>{
             if(user){
                 this.props.setUser(user);
-                this.props.history.push("/uwu")
+                this.props.history.push("/")
             }else{
                 this.props.history.push("/owo")
                 this.props.clearUser()
@@ -43,7 +43,7 @@ class Root extends React.Component{
                 <Route exact path="/" component={App}/>
                 <Route path="/umu" component={Register} />
                 <Route path="/owo" component={Login} />
-                <Route path="/uwu" component={Test}/>
+                <Route path="/uwu" component={Git}/>
             </Switch>
         )
     }
