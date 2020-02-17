@@ -32,4 +32,4 @@ export const setPrivateChannel = isPrivateChannel => {
         isPrivateChannel
       }
     };
-  };
+};

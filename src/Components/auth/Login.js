@@ -20,7 +20,11 @@ class Login extends React.Component{
         loading: false,
         auth: firebase.auth(),
         modal:false,
-        provider: new firebase.auth.GithubAuthProvider()
+        provider: new firebase.auth.GithubAuthProvider(),
+        tokenGit: "",
+        userGit: "",
+        usersRef: firebase.database().ref("users"),
+        user: firebase.auth().currentUser
     }
 
     displayErrors=  errors =>   
@@ -44,14 +48,16 @@ class Login extends React.Component{
 
     //login with github
     loginGithub = () =>{
-        firebase.auth().signInWithPopup(this.state.provider).then(function(result){
-            let token = result.credential.accessToken
-            let user = result.user
-        }).catch(function(error){
-            console.error(error)
-        })
+        firebase
+            .auth()
+            .signInWithPopup(this.state.provider)
+            .then((result)=>{
+                this.setState({tokenGit: result.credential.accessToken, userGit: result.user})
+                
+            })
+        
     }
-
+    
 
     handleSubmit = event => {
         event.preventDefault();
@@ -149,6 +155,7 @@ class Login extends React.Component{
                         >
                             Submit
                         </Button>
+                        
                   </Form>
               </Modal.Content>
               

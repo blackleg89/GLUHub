@@ -29,7 +29,6 @@ class Messages extends React.Component {
     typingUsers: [],
     connectedRef: firebase.database().ref(".info/connected"),
     listeners: [],
-    modal:false
   };
 
   componentDidMount() {
@@ -46,15 +45,11 @@ class Messages extends React.Component {
     this.removeListeners(this.state.listeners);
     this.state.connectedRef.off();
   }
-
   removeListeners = listeners => {
     listeners.forEach(listener => {
       listener.ref.child(listener.id).off(listener.event);
     });
   };
-
-  openModal = () => this.setState({modal:true})
-  closeModal = () => this.setState({modal:false})
 
   componentDidUpdate(prevProps, prevState) {
     if (this.messagesEnd) {
@@ -165,6 +160,7 @@ class Messages extends React.Component {
     );
   };
 
+
   starChannel = () => {
     if (this.state.isChannelStarred) {
       this.state.usersRef.child(`${this.state.user.uid}/starred`).update({
@@ -250,6 +246,8 @@ class Messages extends React.Component {
           key={message.timestamp}
           message={message}
           user={this.state.user}
+          onMouseEnter={this.isHovering}
+          onMouseLeave={this.isNotHovering}
         />
         
       </div>

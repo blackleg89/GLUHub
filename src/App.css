@@ -2,8 +2,8 @@ html,
 body,
 .app {
   height: 100vh;
-  background: #1b1c1d;
   padding: 1em;
+  background: #1b1c1d;
 }
 
 /* SidePanel.js */
@@ -19,6 +19,99 @@ body,
   overflow-y: scroll;
   max-width:1200px!important;
 }
+
+
+.main-title {
+  font-size: 1.4em;
+  line-height: 80px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0;
+}
+
+.search-form input:only-of-type {
+  width: 100%;
+  margin-right: -40px;
+  padding-right: 35px;
+}
+
+.search-button {
+  float: right;
+  margin-right: -10px;
+}
+
+.icn-search {
+  font-weight: 700;
+}
+
+.icon-gif {
+  font-size: 6em;
+  margin-bottom: 0;
+  color: #7bcbc4;
+  display: block;
+}
+
+.no-repos  {
+  color: #7bcbc4;
+  height: 140px;
+  padding-top: 62px;
+  text-align: center;
+  font-size: 1.25em;
+}
+
+.repo-list a {
+  display: block;
+  margin: auto;
+}
+
+.repo-wrap {
+  background-color: #fff;
+  margin-bottom: .8em;
+  position: relative;
+}
+
+.repo-wrap img {
+  min-width: 100%;
+}
+
+/* ================================= 
+  Layout Styles
+==================================== */
+
+.inner,
+.main-content {
+  width: 90%;
+  max-width: 1025px;
+  margin: auto;
+  padding-left:350px;
+}
+
+.main-header {
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  min-height: 80px;
+  z-index: 1000;
+}
+
+.main-content::after {
+  content: " ";
+  display: table;
+  clear: both;
+}
+
+.is-hidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
 
 /* MessageForm.js */
 .message__form {
@@ -47,10 +140,6 @@ body,
 
 }
 
-button{
-  vertical-align: middle;
-  text-align: center;
-}
 
 .wrapper{
   text-align: center;
@@ -76,6 +165,8 @@ ul{
 .hehexd{
   font-size:16px;
 }
+
+
 
 .span-userpanel:hover{
   cursor: pointer;
@@ -251,7 +342,6 @@ span:hover{
 
 .setting-user:hover{
     cursor: pointer;
-    text-decoration: underline;
 }
  .add-icon:hover{
    cursor: pointer;
@@ -264,7 +354,7 @@ span:hover{
 
 
 .menuUserpanel{
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .hahaxd:visited{

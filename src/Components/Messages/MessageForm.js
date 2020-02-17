@@ -18,7 +18,6 @@ class MessageForm extends React.Component {
     loading: false,
     errors: [],
     modal: false,
-    emojiPicker: false
   };
 
   componentWillUnmount() {
