@@ -1,9 +1,9 @@
 import React, {useState}  from "react";
 import moment from "moment";
-import { Comment, Image, Modal, Button} from "semantic-ui-react";
-import firebase from '../../firebase'
+import { Comment, Image, Modal} from "semantic-ui-react";
+
 const Message= ({message, user}) => {
-  
+
     const [showModal, setModal] = useState(false)
 
     const isOwnMessage = (message, user) =>{
@@ -14,24 +14,9 @@ const Message= ({message, user}) => {
         return message.hasOwnProperty("image") && !message.hasOwnProperty("content")
     }
 
-    const timeFromNow = timestamp => moment(timestamp).fromNow()
 
-    const makeAdmin = (message, user) =>{
-      firebase
-        .database()
-        .ref("users/" + message.user.id + "/admin")
-        .on("value", snap =>{
-          if(snap.val() === true){
-            console.log('already admin!')
-          }else{
-            firebase.database().ref("users/" + message.user.id).set({
-              admin:true
-            })
-            
-            console.log(snap)
-          }
-        })
-    }
+
+    const timeFromNow = timestamp => moment(timestamp).fromNow()
 
     return (
         <div>
@@ -47,18 +32,21 @@ const Message= ({message, user}) => {
                     )}
                 </Comment.Content>
             </Comment>
-            <Modal open={showModal} basic closeIcon onClose={() => setModal(false)}>
+            <Modal open={showModal} basic closeIcon size="mini" onClose={() => setModal(false)}>
+              <Modal.Content>
                 <Modal.Header>
                   {message.user.name}
                 </Modal.Header>
                 <Modal.Content image>
-                  <Image wrapped small size="small" src={message.user.avatar}/>   
-                  <Modal.Description>
-                      <Button onClick={() => makeAdmin(message, user)}>Test</Button>
-                  </Modal.Description>
+                  <Image wrapped small size="small" src={message.user.avatar}/>
                 </Modal.Content>
+                <Modal.Description>
+                  Lmao
+                </Modal.Description>
+              </Modal.Content>
             </Modal>
         </div>
     )
 }
+
 export default Message
