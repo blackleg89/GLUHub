@@ -68,7 +68,7 @@ const Message= ({message, user}) => {
                 Make {message.user.name} admin
               </Modal.Header>
               <Modal.Content>
-                <p>Are you?</p>
+                <p>Are you sure?</p>
               </Modal.Content>
               <Modal.Actions>
                 <Button onClick={()=> setConfirm(false)}negative>No</Button>
