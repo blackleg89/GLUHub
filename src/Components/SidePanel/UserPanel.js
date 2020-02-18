@@ -2,7 +2,7 @@ import React from "react";
 import firebase from "../../firebase";
 import AvatarEditor from "react-avatar-editor";
 // prettier-ignore
-import { Grid, Header, Icon,  Image, Modal, Button , Message, Input} from "semantic-ui-react";
+import { Grid, Header, Icon,  Image, Modal, Button , Message, Input, Card} from "semantic-ui-react";
 import { Link } from "react-router-dom";
 class UserPanel extends React.Component {
   state = {
@@ -177,7 +177,9 @@ class UserPanel extends React.Component {
               {user.displayName}
             </Modal.Header>
             <Modal.Content image>
+            <Card onClick={this.openLmao} animated>
               <Image wrapped small size="small" src={user.photoURL} />
+            </Card>
               <Modal.Description>
                 <Button animated onClick={this.handleSignout}>
                   <Button.Content visible>Sign out</Button.Content>
@@ -191,12 +193,7 @@ class UserPanel extends React.Component {
                     <Icon name="discord"/>
                   </Button.Content>
                 </Button> 
-                <Button onClick={this.openLmao} animated>
-                  <Button.Content visible>Avatar</Button.Content>
-                  <Button.Content hidden>
-                    <Icon name="picture"/>
-                  </Button.Content>
-                </Button>
+              
                 {this.state.admin === true ? <Message>Admin</Message> : null}
                 {currentUser.providerData[0].providerId === 'github.com'&&
                   <Link to="/uwu">
