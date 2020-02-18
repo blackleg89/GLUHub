@@ -52,7 +52,7 @@ const Message= ({message, user}) => {
                     )}
                 </Comment.Content>
             </Comment>
-            <Modal open={showModal} basic closeIcon onClose={() => setModal(false)}>
+            <Modal open={showModal} closeIcon onClose={() => setModal(false)}>
                 <Modal.Header>
                   {message.user.name}
                 </Modal.Header>
