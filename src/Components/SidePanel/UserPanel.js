@@ -11,6 +11,7 @@ class UserPanel extends React.Component {
     modal: false,
     usersRef: firebase.database().ref("users"),
     admin: false,
+    moderator: false,
     lmao: false,
     git: false,
     uploadedCroppedImage: "",
