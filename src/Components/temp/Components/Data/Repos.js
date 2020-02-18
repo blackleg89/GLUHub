@@ -10,8 +10,10 @@ class Repos extends React.Component{
     state ={
         response:[],
         user: firebase.auth().currentUser,
-        responses:[]
+        repositories:[]
     }
+
+
 
 
     componentDidMount(){
@@ -32,12 +34,12 @@ class Repos extends React.Component{
           .get(`https://api.github.com/users/${this.state.user.displayName}/repos`)
           .then(response => {
             this.setState({
-              responses: response.data
+              repositories: response.data
             });
-            if (this.state.responses.length) {
-              console.log(this.state.responses.length);
+            if (this.state.repositories.length) {
+              console.log(this.state.repositories.length);
             }
-            console.log(this.state.responses)
+            console.log(this.state.repositories)
           });
       };  
 
@@ -46,7 +48,8 @@ class Repos extends React.Component{
       }
 
       render(){
-          const {responses} = this.state
+          const {repositories} = this.state
+          console.log(JSON.stringify(repositories[0]))
           return(
               <div>
                   <React.Fragment>
@@ -55,8 +58,9 @@ class Repos extends React.Component{
                           <div>
                             <Button onClick={this.checkRepo}>Check me!</Button>
                             <Button onClick={this.test}>Test</Button>
-                            <Button onClick={() => console.log(responses)}>Responses</Button>
+                            <Button onClick={() => console.log(repositories)}>Responses</Button>
                           </div>
+                          {/* <h1>{repositories[0].name}</h1> */}
                       </Segment>
                   </React.Fragment>
               </div>

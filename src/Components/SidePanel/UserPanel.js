@@ -196,7 +196,7 @@ class UserPanel extends React.Component {
                     <Icon name="picture"/>
                   </Button.Content>
                 </Button>
-                {this.state.admin === true ? <Message>Admin</Message> : <Message>Not an Admin</Message>}
+                {this.state.admin === true ? <Message>Admin</Message> : null}
                 {currentUser.providerData[0].providerId === 'github.com'&&
                   <Link to="/uwu">
                     <Button animated>
