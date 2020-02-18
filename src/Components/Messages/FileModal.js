@@ -39,7 +39,7 @@ class FileModal extends React.Component {
 
     return (
       <Modal basic open={modal} onClose={closeModal}>
-        <Modal.Header>Select an File</Modal.Header>
+        <Modal.Header>Select an image file</Modal.Header>
         <Modal.Content>
           <Input
             onChange={this.addFile}
