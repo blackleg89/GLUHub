@@ -5,7 +5,7 @@ import firebase from '../../firebase'
 const Message= ({message, user}) => {
     const [showModal, setModal] = useState(false)
     const [showConfirm, setConfirm] = useState(false)
-    const [showAdmin, setAdmin] = useState(false)
+
     const isOwnMessage = (message, user) =>{
         return message.user.id === user.uid ? "message__self" : ""
     }
@@ -81,34 +81,21 @@ const Message= ({message, user}) => {
                 <Modal.Content image>
                   <Image wrapped small size="small" src={message.user.avatar}/>  
                   <Modal.Description>
-                      <Button onClick={()=> setConfirm(true)}>Make user Moderator</Button>
-                      {/* <Button onClick={()=> setAdmin(true)}>Make user Admin</Button> */}
+                      <Button onClick={()=> setConfirm(true)}>Make user moderator</Button>
                   </Modal.Description>
                 </Modal.Content>
             </Modal>
             <Modal open={showConfirm} closeIcon size="mini" onClose ={()=> setConfirm(false)}>
               <Modal.Header>
-                Make {message.user.name} moderator
+                Make {message.user.name} admin
               </Modal.Header>
               <Modal.Content>
                 <p>Are you sure?</p>
               </Modal.Content>
               <Modal.Actions>
                 <Button onClick={()=> setConfirm(false)}negative>No</Button>
-                <Button onClick={() => makeModerator(message, user)} positive icon="checkmark" labelPosition="right" content="Yes"/>
-              </Modal.Actions>
-            {/* </Modal>
-            <Modal open={showAdmin} closeIcon onClose={() => setAdmin(false)}>
-              <Modal.Header>
-                Make {message.user.name} admin? 
-              </Modal.Header>
-              <Modal.Content>
-                Are you sure?
-              </Modal.Content>
-              <Modal.Actions>
-                <Button onClick={() => setAdmin(false)} negative>No</Button>
                 <Button onClick={() => makeAdmin(message, user)} positive icon="checkmark" labelPosition="right" content="Yes"/>
-              </Modal.Actions> */}
+              </Modal.Actions>
             </Modal>
         </div>
     )

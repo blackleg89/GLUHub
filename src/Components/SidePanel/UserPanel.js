@@ -2,11 +2,11 @@ import React from "react";
 import firebase from "../../firebase";
 import AvatarEditor from "react-avatar-editor";
 // prettier-ignore
-import { Grid, Header, Icon,  Image, Modal, Button , Message, Input} from "semantic-ui-react";
+import { Grid, Header, Icon, Menu, Item, Image, Modal, Button , Message, Input, Label, Card} from "semantic-ui-react";
 import { Link } from "react-router-dom";
 class UserPanel extends React.Component {
   state = {
-    user:this.props.currentUser,
+    user: this.props.currentUser,
     currentUser: firebase.auth().currentUser,
     modal: false,
     usersRef: firebase.database().ref("users"),
@@ -23,7 +23,7 @@ class UserPanel extends React.Component {
     gitName: "",
     gitEmail: "",
     gitUID: "",
-    isHovering:false,
+    isHovering: false,
     metadata: {
       contentType: "image/png"
     }
@@ -35,8 +35,8 @@ class UserPanel extends React.Component {
   closeLmao = () => this.setState({ lmao: false });
   openGit = () => this.setState({ git: true });
   closeGit = () => this.setState({ git: false });
-  onHover = () => this.setState({isHovering:true})
-  stoppedHover =() => this.setState({isHovering:false})
+  onHover = () => this.setState({ isHovering: true });
+  stoppedHover = () => this.setState({ isHovering: false });
   componentDidMount() {
     var userId = this.state.user.uid;
     firebase
@@ -48,18 +48,15 @@ class UserPanel extends React.Component {
         }
       });
 
-    if(this.state.user != null){
-      this.state.user.providerData.forEach(profile =>{
+    if (this.state.user != null) {
+      this.state.user.providerData.forEach(profile => {
         this.state.user.updateProfile({
           displayName: profile.displayName,
           providerId: profile.providerId
-        })
-      })
-    } 
+        });
+      });
+    }
   }
-
-
-
 
   uploadCroppedImage = () => {
     const { storageRef, userRef, blob, metadata } = this.state;
@@ -147,67 +144,77 @@ class UserPanel extends React.Component {
         <Grid.Column>
           <Grid.Row style={{ padding: "1.2em", margin: 0 }}>
             {/* App Header */}
+
             <Header inverted floated="left" as="h2">
               <Icon name="chat" />
               <Header.Content color="white">GLU-Chat</Header.Content>
             </Header>
 
             {/* User Dropdown  */}
-            <Header style={{ padding: "0.25em"}} as="h3" inverted>
-              <span className="span-userpanel">
-                <Image src={user.photoURL} spaced="right" avatar />
-                {user.displayName}
-              </span>
+            <label className="label_username">
+              {/* <Image src={user.photoURL} avatar /> */}
+              {user.displayName}
               <Icon
-                onMouseEnter = {this.onHover}
-                onMouseLeave = {this.stoppedHover}
-                loading = {this.state.isHovering === true }
+                onMouseEnter={this.onHover}
+                onMouseLeave={this.stoppedHover}
+                loading={this.state.isHovering === true}
                 name="setting"
                 size="small"
+                style={{
+                  float: "right",
+                  marginTop: "10px",
+                  marginLeft: "10px",
+                  marginRight: "0px"
+                }}
                 className="setting-user"
-                spaced="right"
-                style={{ display: "inline-block" }}
                 onClick={this.openModal}
               />
-            </Header>
+            </label>
           </Grid.Row>
-          <Modal open={modal} onClose={this.closeModal} closeIcon>
-            <Modal.Header>
-              Settings for{" "}
-              {user.displayName}
-            </Modal.Header>
+          <Modal open={modal} onClose={this.closeModal} size="small" closeIcon>
+            <Modal.Header>Settings for {user.displayName}</Modal.Header>
             <Modal.Content image>
-              <Image wrapped small size="small" src={user.photoURL} />
+              <Image
+                className="avatar-us"
+                onClick={this.openLmao}
+                size="small"
+                src={user.photoURL}
+              />
               <Modal.Description>
                 <Button animated onClick={this.handleSignout}>
                   <Button.Content visible>Sign out</Button.Content>
                   <Button.Content hidden>
-                    <Icon name="arrow right"/>
+                    <Icon name="arrow right" />
                   </Button.Content>
                 </Button>
-                <Button animated href="https://discord.gg/hfhT2HV" target="_blank">
-                  <Button.Content visible>Support</Button.Content>
-                  <Button.Content hidden>
-                    <Icon name="discord"/>
-                  </Button.Content>
-                </Button> 
                 <Button onClick={this.openLmao} animated>
                   <Button.Content visible>Avatar</Button.Content>
                   <Button.Content hidden>
-                    <Icon name="picture"/>
+                    <Icon name="picture" />
                   </Button.Content>
                 </Button>
+                <Button
+                  animated
+                  href="https://discord.gg/hfhT2HV"
+                  target="_blank"
+                >
+                  <Button.Content visible>Support</Button.Content>
+                  <Button.Content hidden>
+                    <Icon name="discord" />
+                  </Button.Content>
+                </Button>
+
                 {this.state.admin === true ? <Message>Admin</Message> : null}
-                {currentUser.providerData[0].providerId === 'github.com'&&
+                {currentUser.providerData[0].providerId === "github.com" && (
                   <Link to="/uwu">
                     <Button animated>
                       <Button.Content visible>Glu-Git</Button.Content>
                       <Button.Content hidden>
-                        <Icon name="github"/>
+                        <Icon name="github" />
                       </Button.Content>
                     </Button>
                   </Link>
-                }
+                )}
               </Modal.Description>
             </Modal.Content>
           </Modal>
