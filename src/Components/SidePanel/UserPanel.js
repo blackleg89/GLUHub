@@ -47,15 +47,6 @@ class UserPanel extends React.Component {
           this.setState({ admin: true });
         }
       });
-
-    if (this.state.user != null) {
-      this.state.user.providerData.forEach(profile => {
-        this.state.user.updateProfile({
-          displayName: profile.displayName,
-          providerId: profile.providerId
-        });
-      });
-    }
   }
 
   uploadCroppedImage = () => {

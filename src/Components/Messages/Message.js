@@ -1,11 +1,12 @@
-import React, {useState}  from "react";
+import React, {useState, useEffect}  from "react";
 import moment from "moment";
 import { Comment, Image, Modal, Button} from "semantic-ui-react";
 import firebase from '../../firebase'
-const Message= ({message, user}) => {
-    const [showModal, setModal] = useState(false)
-    const [showConfirm, setConfirm] = useState(false)
+const Message= ({message, user, admin}) => {
+  const [showModal, setModal] = useState(false)
+  const [showConfirm, setConfirm] = useState(false)
 
+  
     const isOwnMessage = (message, user) =>{
         return message.user.id === user.uid ? "message__self" : ""
     }
@@ -16,49 +17,16 @@ const Message= ({message, user}) => {
 
     const timeFromNow = timestamp => moment(timestamp).fromNow()
 
-    const makeAdmin = (message, user) =>{
-      firebase.database().ref("users/" + message.user.id +"/admin").on("value", snap=>{
-        if(snap.val() === false){
-          return null
-        } else{
-          firebase
-          .database()
-          .ref("users/" + message.user.id + "/admin")
-          .on("value", snap =>{
-            if(snap.val() === true){
-              console.log('already admin!')
-            }else{
-              firebase.database().ref("users/" + message.user.id).set({
-                admin:true
-              }) 
-              console.log(snap)
-            }
-          })
-        }
-      })
+    const makeAdmin = (message, user, admin) =>{
+      if(admin === true){
+        firebase.database().ref("users/" + message.user.id).set({
+          admin:true
+        }).then(alert(`Succesfully made ${message.user.name} admin`))
+      }else{
+        alert("You don't have enough permission to do this.")
+      }
     }
 
-    const makeModerator = (message, user) =>{
-      firebase.database().ref("users/" + message.user.id +"/moderator").on("value", snap=>{
-        if(snap.val() === false){
-          return null
-        } else{
-          firebase
-          .database()
-          .ref("users/" + message.user.id + "/moderator")
-          .on("value", snap =>{
-            if(snap.val() === true){
-              console.log('You are already Moderator!')
-            }else{
-              firebase.database().ref("users/" + message.user.id).set({
-                moderator:true
-              }) 
-              console.log(snap)
-            }
-          })
-        }
-      })
-    }
 
     return (
         <div>
@@ -81,7 +49,7 @@ const Message= ({message, user}) => {
                 <Modal.Content image>
                   <Image wrapped small size="small" src={message.user.avatar}/>  
                   <Modal.Description>
-                      <Button onClick={()=> setConfirm(true)}>Make user moderator</Button>
+                      <Button onClick={()=> setConfirm(true)}>Make user Admin</Button>
                   </Modal.Description>
                 </Modal.Content>
             </Modal>
@@ -94,7 +62,7 @@ const Message= ({message, user}) => {
               </Modal.Content>
               <Modal.Actions>
                 <Button onClick={()=> setConfirm(false)}negative>No</Button>
-                <Button onClick={() => makeAdmin(message, user)} positive icon="checkmark" labelPosition="right" content="Yes"/>
+                <Button onClick={() => makeAdmin(message, user, admin)} positive icon="checkmark" labelPosition="right" content="Yes"/>
               </Modal.Actions>
             </Modal>
         </div>
