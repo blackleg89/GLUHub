@@ -2,7 +2,7 @@ import React from "react";
 import firebase from "../../firebase";
 import AvatarEditor from "react-avatar-editor";
 // prettier-ignore
-import { Grid, Header, Icon,  Image, Modal, Button , Message, Input, Card} from "semantic-ui-react";
+import { Grid, Header, Icon, Menu, Item, Image, Modal, Button , Message, Input, Card} from "semantic-ui-react";
 import { Link } from "react-router-dom";
 class UserPanel extends React.Component {
   state = {
@@ -147,44 +147,96 @@ class UserPanel extends React.Component {
         <Grid.Column>
           <Grid.Row style={{ padding: "1.2em", margin: 0 }}>
             {/* App Header */}
+            
             <Header inverted floated="left" as="h2">
               <Icon name="chat" />
               <Header.Content color="white">GLU-Chat</Header.Content>
             </Header>
 
             {/* User Dropdown  */}
-            <Header style={{ padding: "0.25em"}} as="h3" inverted>
-              <span className="span-userpanel">
-                <Image src={user.photoURL} spaced="right" avatar />
+            <React.Fragment>
+        <Menu.Menu className="menu">
+          <Menu.Item>
+            <span>
+              <Icon name="exchange" /> CHANNELS 
+            </span>{" "}
+            ({channels.length})
+            {this.state.admin === true && <Icon name="plus" className="add-icon" onClick={this.openModal}/>}
+          </Menu.Item>
+          {this.displayChannels(channels)} 
+        </Menu.Menu>
+        <Modal basic open={modal} closeIcon size="small" onClose={this.closeModal}>
+        <Modal.Header>Add a Channel</Modal.Header>
+          <Modal.Content>
+            <Form onSubmit={this.handleSubmit}>
+              <Form.Field>
+                <Input
+                  fluid
+                  label="Name of Channel"
+                  name="channelName"
+                  onChange={this.handleChange}
+                />
+              </Form.Field>
+
+              <Form.Field>
+                <Input
+                  fluid
+                  label="About the Channel"
+                  name="channelDetails"
+                  onChange={this.handleChange}
+                />
+              </Form.Field>
+            </Form>
+          </Modal.Content>
+          <Modal.Actions>
+            <Button color="red" inverted onClick={this.closeModal}>
+              <Icon name="remove" /> Cancel
+            </Button>
+            <Button color="green" inverted onClick={this.handleSubmit}>
+              <Icon name="checkmark" /> Add
+            </Button>
+          </Modal.Actions>
+        </Modal> 
+      
+      </React.Fragment>
+            <Header style={{ padding: "0.25em "}}as="h3" inverted>
+            <Item>
+            <span className="span-userpanel">
+                <Image src={user.photoURL} avatar />
                 {user.displayName}
               </span>
-              <Icon
+            <Icon
                 onMouseEnter = {this.onHover}
                 onMouseLeave = {this.stoppedHover}
                 loading = {this.state.isHovering === true }
                 name="setting"
                 size="small"
                 className="setting-user"
-                spaced="right"
-                style={{ display: "inline-block" }}
+                style={{display: "inline-block"}}
                 onClick={this.openModal}
               />
+          </Item>
+              
             </Header>
           </Grid.Row>
-          <Modal open={modal} onClose={this.closeModal} closeIcon>
+          <Modal open={modal} onClose={this.closeModal} size="small" closeIcon>
             <Modal.Header>
               Settings for{" "}
               {user.displayName}
             </Modal.Header>
             <Modal.Content image>
-            <Card onClick={this.openLmao} animated>
-              <Image wrapped small size="small" src={user.photoURL} />
-            </Card>
+              <Image className="avatar-us" onClick={this.openLmao} size="small" src={user.photoURL} />
               <Modal.Description>
                 <Button animated onClick={this.handleSignout}>
                   <Button.Content visible>Sign out</Button.Content>
                   <Button.Content hidden>
                     <Icon name="arrow right"/>
+                  </Button.Content>
+                </Button>
+                <Button onClick={this.openLmao} animated>
+                  <Button.Content visible>Avatar</Button.Content>
+                  <Button.Content hidden>
+                    <Icon name="picture"/>
                   </Button.Content>
                 </Button>
                 <Button animated href="https://discord.gg/hfhT2HV" target="_blank">
