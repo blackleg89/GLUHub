@@ -5,7 +5,7 @@ import firebase from '../../firebase'
 const Message= ({message, user, admin}) => {
   const [showModal, setModal] = useState(false)
   const [showConfirm, setConfirm] = useState(false)
-
+  const [showBan, setBan] = useState(false)
   
     const isOwnMessage = (message, user) =>{
         return message.user.id === user.uid ? "message__self" : ""
@@ -22,6 +22,15 @@ const Message= ({message, user, admin}) => {
         firebase.database().ref("users/" + message.user.id).set({
           admin:true
         }).then(alert(`Succesfully made ${message.user.name} admin`))
+      }else{
+        alert("You don't have enough permission to do this.")
+      }
+    }
+
+    const banUser = (message, user, admin) =>{
+      if(admin === true){
+        let userToRemove = firebase.database().ref("users/" + message.user.id)
+        console.log(userToRemove)
       }else{
         alert("You don't have enough permission to do this.")
       }
@@ -50,6 +59,7 @@ const Message= ({message, user, admin}) => {
                   <Image wrapped small size="small" src={message.user.avatar}/>  
                   <Modal.Description>
                       <Button onClick={()=> setConfirm(true)}>Make user Admin</Button>
+                      <Button onCLick={() => setBan(true)}>Ban user</Button>
                   </Modal.Description>
                 </Modal.Content>
             </Modal>
