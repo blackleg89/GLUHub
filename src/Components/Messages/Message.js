@@ -6,7 +6,7 @@ const Message= ({message, user, admin}) => {
   const [showModal, setModal] = useState(false)
   const [showConfirm, setConfirm] = useState(false)
   const [showBan, setBan] = useState(false)
-  
+  const [showRemove, setRemove] = useState(false)
     const isOwnMessage = (message, user) =>{
         return message.user.id === user.uid ? "message__self" : ""
     }
@@ -38,6 +38,15 @@ const Message= ({message, user, admin}) => {
     }
 
 
+    const removeAdmin = (message, user, admin) => {
+      if(admin === true){
+        firebase.database().ref("users/" + message.user.id).set({
+          admin:false
+        })
+      }
+    }
+
+
     return (
         <div>
             <Comment>
@@ -59,8 +68,14 @@ const Message= ({message, user, admin}) => {
                 <Modal.Content image>
                   <Image wrapped small size="small" src={message.user.avatar}/>  
                   <Modal.Description>
+              
                       <Button onClick={()=> setConfirm(true)}>Make user Admin</Button>
-                      <Button onClick={() => setBan(true)}>Ban user</Button>
+                      {admin === true &&
+                        <Button onClick={() => setBan(true)}>Ban user</Button>
+                      } 
+                      {admin === true &&
+                        <Button onClick={() => setRemove(true)}>Remove admin</Button>
+                      }
                   </Modal.Description>
                 </Modal.Content>
             </Modal>
