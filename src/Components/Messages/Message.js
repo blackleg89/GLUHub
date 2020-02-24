@@ -30,7 +30,8 @@ const Message= ({message, user, admin}) => {
     const banUser = (message, user, admin) =>{
       if(admin === true){
         let userToRemove = firebase.database().ref("users/" + message.user.id)
-        console.log(userToRemove)
+        admin.auth().deleteUser(userToRemove)
+        alert('User succesfully removed')
       }else{
         alert("You don't have enough permission to do this.")
       }
@@ -59,7 +60,7 @@ const Message= ({message, user, admin}) => {
                   <Image wrapped small size="small" src={message.user.avatar}/>  
                   <Modal.Description>
                       <Button onClick={()=> setConfirm(true)}>Make user Admin</Button>
-                      <Button onCLick={() => setBan(true)}>Ban user</Button>
+                      <Button onClick={() => setBan(true)}>Ban user</Button>
                   </Modal.Description>
                 </Modal.Content>
             </Modal>
@@ -73,6 +74,18 @@ const Message= ({message, user, admin}) => {
               <Modal.Actions>
                 <Button onClick={()=> setConfirm(false)}negative>No</Button>
                 <Button onClick={() => makeAdmin(message, user, admin)} positive icon="checkmark" labelPosition="right" content="Yes"/>
+              </Modal.Actions>
+            </Modal>
+            <Modal open={showBan} closeIcon size="mini" onClose={()=> setBan(false)}>
+              <Modal.Header>
+                Ban {message.user.name} ?
+              </Modal.Header>
+              <Modal.Content>
+                <p>Are you sure?</p>
+              </Modal.Content>
+              <Modal.Actions>
+                <Button onClick={() => setBan(false)} negative>No</Button>
+                <Button onClick={() => banUser(message, user, admin)} positive icon="checkmark" labelPosition="right" content="Yes"/>
               </Modal.Actions>
             </Modal>
         </div>
