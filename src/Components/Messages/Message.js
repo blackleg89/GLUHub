@@ -6,7 +6,7 @@ const Message= ({message, user, admin}) => {
   const [showModal, setModal] = useState(false)
   const [showConfirm, setConfirm] = useState(false)
   const [showBan, setBan] = useState(false)
-  
+  const [showRemove, setRemove] = useState(false)
     const isOwnMessage = (message, user) =>{
         return message.user.id === user.uid ? "message__self" : ""
     }
@@ -37,6 +37,16 @@ const Message= ({message, user, admin}) => {
       }
     }
 
+    const removeAdmin = (message, user, admin) =>{
+      if(admin === true){
+        firebase.database().ref("users/" + message.user.id).set({
+          admin:false
+        })
+        console.log(`Successfully removed ${message.user.name} as admin.`)
+      }else{
+        alert("You don't have enough permission to do this")
+      }
+    }
 
     return (
         <div>
@@ -61,6 +71,9 @@ const Message= ({message, user, admin}) => {
                   <Modal.Description>
                       <Button onClick={()=> setConfirm(true)}>Make user Admin</Button>
                       <Button onClick={() => setBan(true)}>Ban user</Button>
+                      {admin === true &&
+                        <Button onClick={()=> setRemove(true)}>Remove admin</Button>
+                      }
                   </Modal.Description>
                 </Modal.Content>
             </Modal>
@@ -86,6 +99,15 @@ const Message= ({message, user, admin}) => {
               <Modal.Actions>
                 <Button onClick={() => setBan(false)} negative>No</Button>
                 <Button onClick={() => banUser(message, user, admin)} positive icon="checkmark" labelPosition="right" content="Yes"/>
+              </Modal.Actions>
+            </Modal>
+            <Modal open={showRemove} closeIcon size="mini" onClose={() => setRemove(false)}>
+              <Modal.Content>
+                <p>Are you sure?</p>
+              </Modal.Content>
+              <Modal.Actions>
+                <Button onClick={() => setRemove(false)} negative>No</Button>
+                <Button onClick={() => removeAdmin(message, user, admin)} positive icon="checkmark" labelPosition="right" content="Yes"/>
               </Modal.Actions>
             </Modal>
         </div>
