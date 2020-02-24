@@ -6,7 +6,7 @@ import { Grid, Header, Icon, Menu, Item, Image, Modal, Button , Message, Input, 
 import { Link } from "react-router-dom";
 class UserPanel extends React.Component {
   state = {
-    user: this.props.currentUser,
+    user: firebase.auth().currentUser,
     currentUser: firebase.auth().currentUser,
     modal: false,
     usersRef: firebase.database().ref("users"),
@@ -39,6 +39,7 @@ class UserPanel extends React.Component {
   stoppedHover = () => this.setState({ isHovering: false });
   componentDidMount() {
     var userId = this.state.user.uid;
+    var currentUser = this.state.currentUser
     firebase
       .database()
       .ref("users/" + userId + "/admin")
@@ -47,6 +48,12 @@ class UserPanel extends React.Component {
           this.setState({ admin: true });
         }
       });
+
+      if(currentUser.providerData[0].providerId === "github.com"){        
+          currentUser.updateProfile({
+            name: currentUser.displayName  
+          })
+      }
   }
 
   uploadCroppedImage = () => {
