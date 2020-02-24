@@ -1,25 +1,27 @@
+/* Plain HTML styles */
 html,
 body,
 .app {
   height: 100vh;
-  background: #1b1c1d;
   padding: 1em;
+  background: #1b1c1d;
 }
 
-/* SidePanel.js */
-.menu {
-  padding-bottom: 2em;
-}
-.white{
-  color:white!important;
-}
-/* Messages.js */
-.messages {
-  height: 66vh;
-  overflow-y: scroll;
-  max-width:1200px!important;
+link {
+  vertical-align: middle;
+  text-align: center;
 }
 
+li {
+  text-decoration: none;
+}
+
+ul {
+  text-decoration: none;
+}
+/* End Plain HTML styles */
+
+/* ### Section Messages */
 /* MessageForm.js */
 .message__form {
   position: fixed !important;
@@ -28,67 +30,17 @@ body,
   left: 0;
   right: 1em;
   z-index: 180;
-  background-color:#1b1c1d!important;
+  background-color: #1b1c1d !important;
+}
+/* end MessageForm.js */
 
+/* Messages.js */
+.messages {
+  height: 66vh;
+  overflow-y: scroll;
+  max-width: 1200px !important;
 }
-
-.big{
-  font-size:32px!important;
-  vertical-align: middle;
-}
-
-.centered{
-  text-align: center!important;
-}
-
-.warning{
-  position: absolute;
-  top: 25%;
-
-}
-
-button{
-  vertical-align: middle;
-  text-align: center;
-}
-
-.wrapper{
-  text-align: center;
-}
-
-link{
-  vertical-align: middle;
-  text-align: center;
-}
-
-.hehexd:hover{
-  color:black;
-  text-decoration:underline;
-  cursor: pointer;
-}
-li{
-  text-decoration: none;
-}
-
-ul{
-  text-decoration: none;
-}
-.hehexd{
-  font-size:16px;
-}
-
-.span-userpanel:hover{
-  cursor: pointer;
-}
-
-span:hover{
-  text-decoration: underline;
-  transition: 0.5s;
-}
-
-.emoijpicker {
-  position: absolute;
-}
+/* end Messages.js */
 
 /* Message.js */
 .message__self {
@@ -96,36 +48,17 @@ span:hover{
   padding-left: 8px;
 }
 
-
 .message__image {
   padding: 1em;
-  max-width:400px!important;
+  max-width: 400px !important;
 }
+/* end Message.js */
 
-/* ProgressBar.js */
-.progress__bar {
-  margin: 0.3em 0 0 0 !important;
+/* emoji */
+.emoijpicker {
+  position: absolute;
 }
-
-/* ColorPanel.js */
-.color__container {
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  width: 35px;
-  border-radius: 3px;
-}
-
-.color__square {
-  width: 35px;
-  height: 35px;
-}
-
-.color__overlay {
-  width: 85px;
-  height: 35px;
-  transform: rotate(225deg);
-}
+/* end emoji */
 
 /* Typing.js */
 .user__typing {
@@ -166,7 +99,139 @@ span:hover{
 .typing__dot:nth-child(3) {
   animation-delay: 0.4s;
 }
+/* end typing.js */
+/* ### End Section Messages */
 
+/* ### Section Layout */
+/* Layout Styles */
+.inner,
+.main-content {
+  width: 90%;
+  max-width: 1025px;
+  margin: auto;
+  padding-left: 350px;
+}
+
+.main-header {
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  min-height: 80px;
+  z-index: 1000;
+}
+
+.main-content::after {
+  content: " ";
+  display: table;
+  clear: both;
+}
+
+.is-hidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+.wrapper {
+  text-align: center;
+}
+/* End Layout Styles */
+
+/* SidePanel.js */
+.menu {
+  padding-bottom: 2em;
+}
+.white {
+  color: white !important;
+}
+/* End SidePanel.js */
+
+/* ProgressBar.js */
+.progress__bar {
+  margin: 0.3em 0 0 0 !important;
+}
+/* end ProgressBar.js */
+
+/* Text Styles */
+.big {
+  font-size: 32px !important;
+  vertical-align: middle;
+}
+
+.warning {
+  position: absolute;
+  top: 25%;
+}
+
+.centered {
+  text-align: center !important;
+}
+
+.main-title {
+  font-size: 1.4em;
+  line-height: 80px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0;
+}
+/* End Text Styles */
+
+/* Image Styles */
+/* End Image Styles */
+/* ### End Section Layout */
+
+/* ### USER SECTION */
+.span-userpanel:hover {
+  cursor: pointer;
+}
+
+.menuUserpanel {
+  overflow-y: auto;
+}
+
+.setting-user:hover {
+  cursor: pointer;
+}
+/* ### END USER SECTION */
+
+/* ### Section Links */
+.link-app {
+  color: black;
+  text-decoration: none;
+}
+
+.link-app:visited {
+  color: black;
+}
+
+.link-app:hover {
+  cursor: pointed;
+  color: black;
+  text-decoration: underline;
+}
+
+.link-chat {
+  color: black;
+}
+
+.link-chat:visited {
+  color: black;
+}
+
+.link-chat:hover {
+  color: black;
+  text-decoration: underline;
+}
+/* ### End Section Links */
+
+/* ### Section KeyFrames */
+/* Keyframes LoadingFade */
 @keyframes loadingFade {
   0% {
     opacity: 0;
@@ -178,138 +243,91 @@ span:hover{
     opacity: 0;
   }
 }
+/* End Keyframes LoadingFade */
+/* ### End Section KeyFrames */
 
-/* Skeleton.js
-.skeleton {
-  position: relative;
-  overflow: hidden;
-  height: 40px;
-  margin-bottom: 10px;
+/* ### Section Onzin */
+.hahaxd:visited {
+  color: white;
 }
 
-.skeleton::after {
-  content: "";
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 50%;
-  height: 100%;
-  animation: sweep 2s infinite;
-  background-image: linear-gradient(
-    to left,
-    transparent,
-    rgba(255, 255, 255, 0.4),
-    transparent
-  );
+.hahaxd:hover {
+  color: white;
 }
 
-@keyframes sweep {
-  0% {
-    transform: translateX(-100%);
-  }
-  50% {
-    transform: translateX(150%);
-  }
-  100% {
-    transform: translateX(-100%);
-  }
-}
-
-.skeleton__avatar {
-  height: 35px;
-  width: 35px;
-  border-radius: 3px;
-  background-color: rgba(58, 57, 57, 0.3);
-}
-
-.skeleton__author {
-  background-color: rgba(58, 57, 57, 0.3);
-  width: 120px;
-  height: 10px;
-  border-radius: 3px;
-  position: absolute;
-  bottom: 30px;
-  left: 40px;
-  right: 0;
-}
-
-.skeleton__details {
-  background-color: rgba(58, 57, 57, 0.3);
-  height: 20px;
-  border-radius: 3px;
-  position: absolute;
-  bottom: 5px;
-  left: 40px;
-  right: 20px;
-} */
-
-/* .hahaxd{
-  color:white;
-  text-decoration: none;
-} */
-
-.setting-user:hover{
-    cursor: pointer;
-    text-decoration: underline;
-}
- .add-icon:hover{
-   cursor: pointer;
- }
-
-
-.channels-app:hover{
-  
-}
-
-
-.menuUserpanel{
-  overflow-y: auto;
-}
-
-.hahaxd:visited{
-  color:white;
-}
-
-.hahaxd:hover{
-  color:white;
-}
-
-.link-chat{
-  color:black;
-
-}
-
-.link-chat:visited{
-  color:black;
-}
-
-.link-chat:hover{
-  color:black;
-  text-decoration: underline;
-}
-
-.lmao{
+.lmao {
   font-weight: bold;
 }
 
-.lmao:hover{
+.lmao:hover {
   text-decoration: underline;
-  color:gray;
+  color: gray;
   cursor: pointer;
 }
 
-.link-app{
-  color:black;
-  text-decoration: none;
+.hehexd {
+  font-size: 16px;
 }
 
-.link-app:visited{
-  color:black;
-}
-
-.link-app:hover{
-  cursor:pointed;
-  color:black;
+.hehexd:hover {
+  color: black;
   text-decoration: underline;
+  cursor: pointer;
 }
+/* ### End Section Onzin */
+
+/* ### Section UI */
+.add-icon:hover {
+  cursor: pointer;
+}
+
+.search-form input:only-of-type {
+  width: 100%;
+  margin-right: -40px;
+  padding-right: 35px;
+}
+
+.search-button {
+  float: right;
+  margin-right: -10px;
+}
+
+.icn-search {
+  font-weight: 700;
+}
+
+.icon-gif {
+  font-size: 6em;
+  margin-bottom: 0;
+  color: #7bcbc4;
+  display: block;
+}
+
+.avatar-us {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: box-shadow, transform;
+  transition-property: box-shadow, transform;
+  border-radius: 5%;
+}
+.avatar-us:hover,
+.avatar-us:focus,
+.avatar-us:active {
+  box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.label_username {
+  color: rgb(141, 142, 142);
+  padding-left: 0px;
+  margin-left: 0px;
+  line-height: 1.8;
+}
+/* ### End Section UI */

@@ -29,8 +29,7 @@ class Messages extends React.Component {
     typingUsers: [],
     connectedRef: firebase.database().ref(".info/connected"),
     listeners: [],
-    modal:false,
-    isHovering:false
+    admin:false
   };
 
   componentDidMount() {
@@ -41,23 +40,26 @@ class Messages extends React.Component {
       this.addListeners(channel.id);
       this.addUserStarsListener(channel.id, user.uid);
     }
+
+    const userId = user.uid
+    firebase.database().ref("users/" + userId + "/admin").on("value", snap=>{
+      if(snap.val() === true){
+        this.setState({admin:true})
+      }
+
+      console.log(this.state.admin)
+    })
   }
 
   componentWillUnmount() {
     this.removeListeners(this.state.listeners);
     this.state.connectedRef.off();
   }
-
-  isHovering = () => this.setState({isHovering:true})
-  isNotHovering =() => this.setState({isHovering:false})
   removeListeners = listeners => {
     listeners.forEach(listener => {
       listener.ref.child(listener.id).off(listener.event);
     });
   };
-
-  openModal = () => this.setState({modal:true})
-  closeModal = () => this.setState({modal:false})
 
   componentDidUpdate(prevProps, prevState) {
     if (this.messagesEnd) {
@@ -256,6 +258,7 @@ class Messages extends React.Component {
           user={this.state.user}
           onMouseEnter={this.isHovering}
           onMouseLeave={this.isNotHovering}
+          admin={this.state.admin}
         />
         
       </div>

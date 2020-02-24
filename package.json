@@ -17,9 +17,11 @@
   "main": "./public/electron.js",
   "homepage": "./",
   "dependencies": {
+    "axios": "^0.19.2",
     "classnames": "^2.2.6",
     "cross-env": "^6.0.3",
     "firebase": "^7.6.1",
+    "firebase-admin": "^8.9.2",
     "md5": "^2.2.1",
     "mime-types": "^2.1.25",
     "moment": "^2.24.0",

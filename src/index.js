@@ -6,7 +6,7 @@ import firebase from './firebase'
 import Spinner from './Spinner'
 import App from './Components/App'
 import Login from './Components/auth/Login'
-import Warning from './Components/Warning'
+import Test from './Components/temp/Test'
 import {
     BrowserRouter as Router,
     Switch,
@@ -28,7 +28,7 @@ class Root extends React.Component{
                 this.props.setUser(user);
                 this.props.history.push("/")
             }else{
-                this.props.history.push("/uwu")
+                this.props.history.push("/owo")
                 this.props.clearUser()
             }
         })
@@ -42,7 +42,7 @@ class Root extends React.Component{
                 <Route exact path="/" component={App}/>
                 <Route path="/umu" component={Register} />
                 <Route path="/owo" component={Login} />
-                <Route path="/uwu" component={Warning}/>
+                <Route path="/uwu" component={Test}/>
             </Switch>
         )
     }
