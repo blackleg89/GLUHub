@@ -1,5 +1,23 @@
 # Changelog GLUHUB
 
+# 25/02/2020
+## Patch version 0.7.0
+### Features added
+- We re-worked some of the user interface.
+    - More big changes to the UI TBA
+- We added the user modal! 
+    - Make other users admin
+    - Remove users as admin
+### Features removed
+- We removed the avatar users saw next to their name in the side panel
+- This update didn't bring the github integration. It's a lot more work than first thought, so this feature is postponed for now. Release date TBA.
+- Hella bugs
+### What will patch 0.7.2 bring?
+- Functionality to mute users
+- Functionality to ban users
+- QOL updates
+
+
 # 12/02/2020
 ## Patch version 0.6.7
 ### Features added
