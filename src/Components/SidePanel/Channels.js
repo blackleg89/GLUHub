@@ -8,7 +8,7 @@ import { Menu, Icon, Label, Modal, Form, Input, Button, Dropdown } from "semanti
 class Channels extends React.Component {
   state = {
     activeChannel: "",
-    user: this.props.currentUser,
+    user: firebase.auth().currentUser,
     channel: null,
     channels: [],
     channelName: "",

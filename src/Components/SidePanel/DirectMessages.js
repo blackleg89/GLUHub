@@ -7,7 +7,7 @@ import { Menu, Icon, Label } from "semantic-ui-react";
 class DirectMessages extends React.Component {
   state = {
     activeChannel: "",
-    user: this.props.currentUser,
+    user: firebase.auth().currentUser,
     users: [],
     usersRef: firebase.database().ref("users"),
     connectedRef: firebase.database().ref(".info/connected"),

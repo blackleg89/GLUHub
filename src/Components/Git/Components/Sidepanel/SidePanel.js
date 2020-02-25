@@ -1,12 +1,17 @@
 import React from "react";
-import { Menu, Button } from "semantic-ui-react";
-import {Link} from 'react-router-dom'
-import UserPanel from "./UserPanel";
-import Channels from "./Channels";
-import DirectMessages from "./DirectMessages";
-
+import { Menu, Button,Dropdown } from "semantic-ui-react";
+import UserPanel from "./Userpanel";
+import axios from 'axios'
+import firebase from '../../../../firebase'
 class SidePanel extends React.Component {
+  state = {
+    user: firebase.auth().currentUser,
+    email: '',
+    photoURL: ''
+  }
+
   render() {
+
     const { currentUser} = this.props;
 
     return (
@@ -16,14 +21,9 @@ class SidePanel extends React.Component {
         fixed="left"
         vertical
         style={{fontSize: "1.2rem"}}
-        className="menuUserpanel"
-      
       >
-
-      
+        <Button>Hallo</Button>
         <UserPanel currentUser={currentUser} />
-        <Channels currentUser={currentUser}/>
-        <DirectMessages currentUser={currentUser} />
       </Menu>
     );
   }
