@@ -41,7 +41,7 @@ const Message= ({message, user, admin}) => {
       if(admin === true){
         firebase.database().ref("users/" + message.user.id).set({
           admin:false
-        })
+        }).then(alert(`Successfully removed ${message.user.name} as admin`))
         console.log(`Successfully removed ${message.user.name} as admin.`)
       }else{
         alert("You don't have enough permission to do this")
