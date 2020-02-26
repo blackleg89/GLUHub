@@ -50,8 +50,9 @@ class UserPanel extends React.Component {
       });
 
       if(currentUser.providerData[0].providerId === "github.com"){        
-          currentUser.updateProfile({
-            name: currentUser.displayName  
+          firebase.database().ref("users/" + currentUser.uid).set({
+            name:this.state.user.displayName,
+            admin:this.state.admin
           })
       }
   }
@@ -62,6 +63,7 @@ class UserPanel extends React.Component {
     storageRef
       .child(`avatars/users/${userRef.uid}`)
       .put(blob, metadata)
+      
       .then(snap => {
         snap.ref.getDownloadURL().then(downloadURL => {
           this.setState({ uploadedCroppedImage: downloadURL }, () =>
