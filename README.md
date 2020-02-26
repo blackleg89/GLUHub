@@ -1,5 +1,14 @@
 # Changelog GLUHUB
 
+## 26/02/2020
+### Hotfix version 0.7.1
+### Bugs squashed
+- Users that logged in with github didn't appear in the DM's list
+- Back-end problems
+    - Users that logged in didn't appear in the database. This was also the reason they didn't load into the DM's list.
+    - Boolean values that kept resetting, especially the state for the admin.
+
+
 # 25/02/2020
 ## Patch version 0.7.0
 ### Features added
