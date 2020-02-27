@@ -52,10 +52,8 @@ class Login extends React.Component{
             .auth()
             .signInWithRedirect(this.state.provider)
             .then((result)=>{
-                this.setState({tokenGit: result.credential.accessToken, userGit: result.user})
-                
+                this.setState({tokenGit: result.credential.accessToken, userGit: result.user})   
             })
-        
     }
     
 
