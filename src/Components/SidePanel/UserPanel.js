@@ -47,7 +47,6 @@ class UserPanel extends React.Component {
         if (snap.val() === true) {
           this.setState({ admin: true });
         }
-
         if(currentUser.providerData[0].providerId === "github.com"){        
           firebase.database().ref("users/" + currentUser.uid).set({
             name:this.state.user.displayName,
@@ -55,7 +54,6 @@ class UserPanel extends React.Component {
           })
         }
       })
-
   }
 
   uploadCroppedImage = () => {
