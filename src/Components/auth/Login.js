@@ -50,7 +50,7 @@ class Login extends React.Component{
     loginGithub = () =>{
         firebase
             .auth()
-            .signInWithPopup(this.state.provider)
+            .signInWithRedirect(this.state.provider)
             .then((result)=>{
                 this.setState({tokenGit: result.credential.accessToken, userGit: result.user})
                 
