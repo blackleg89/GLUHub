@@ -38,30 +38,30 @@ class Repos extends React.Component{
               console.log(this.state.responses.length);
             }
             console.log(this.state.responses)
-          });
-      };  
+        });
+    };  
 
-      test = () =>{
-          console.log(JSON.stringify(this.state.responses[0].name))
-      }
+    test = () =>{
+        console.log(JSON.stringify(this.state.responses[0].name))
+    }
 
-      render(){
-          const {responses} = this.state
-          return(
-              <div>
-                  <React.Fragment>
-                      <Header currentUser={this.props.currentUser}/>
-                      <Segment>
-                          <div>
+    render(){
+        const {responses} = this.state
+        return(
+            <div>
+                <React.Fragment>
+                    <Header currentUser={this.props.currentUser}/>
+                    <Segment>
+                        <div>
                             <Button onClick={this.checkRepo}>Check me!</Button>
                             <Button onClick={this.test}>Test</Button>
                             <Button onClick={() => console.log(responses)}>Responses</Button>
-                          </div>
-                      </Segment>
-                  </React.Fragment>
-              </div>
-          )
-      }
+                        </div>
+                    </Segment>
+                </React.Fragment>
+            </div>
+        )
+    }
 }
 
 export default Repos
