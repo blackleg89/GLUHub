@@ -188,7 +188,7 @@ class DirectMessages extends React.Component {
             {this.getNotificationCount(user) && (
               <Label color="red">{this.getNotificationCount(user)}</Label>
             )}
-            @ {user.displayName}
+            @ {user.name}
           </Menu.Item>
         ))}
       </Menu.Menu>

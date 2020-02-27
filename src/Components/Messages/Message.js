@@ -20,7 +20,8 @@ const Message= ({message, user, admin}) => {
     const makeAdmin = (message, user, admin) =>{
       if(admin === true){
         firebase.database().ref("users/" + message.user.id).set({
-          admin:true
+          admin:true,
+          name: message.user.name
         }).then(alert(`Succesfully made ${message.user.name} admin`))
       }else{
         alert("You don't have enough permission to do this.")
@@ -39,8 +40,9 @@ const Message= ({message, user, admin}) => {
     const removeAdmin = (message, user, admin) =>{
       if(admin === true){
         firebase.database().ref("users/" + message.user.id).set({
-          admin:false
-        })
+          admin:false,
+          name:message.user.name
+        }).then(alert(`Successfully removed ${message.user.name} as admin`))
         console.log(`Successfully removed ${message.user.name} as admin.`)
       }else{
         alert("You don't have enough permission to do this")

@@ -1,5 +1,32 @@
 # Changelog GLUHUB
 
+## 26/02/2020
+### Hotfix version 0.7.1
+### Bugs squashed
+- Users that logged in with github didn't appear in the DM's list
+- Back-end problems
+    - Users that logged in didn't appear in the database. This was also the reason they didn't load into the DM's list.
+    - Boolean values that kept resetting, especially the state for the admin.
+
+
+# 25/02/2020
+## Patch version 0.7.0
+### Features added
+- We re-worked some of the user interface.
+    - More big changes to the UI TBA
+- We added the user modal! 
+    - Make other users admin
+    - Remove users as admin
+### Features removed
+- We removed the avatar users saw next to their name in the side panel
+- This update didn't bring the github integration. It's a lot more work than first thought, so this feature is postponed for now. Release date TBA.
+- Hella bugs
+### What will patch 0.7.2 bring?
+- Functionality to mute users
+- Functionality to ban users
+- QOL updates
+
+
 # 12/02/2020
 ## Patch version 0.6.7
 ### Features added
