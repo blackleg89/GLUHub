@@ -1,7 +1,7 @@
 # Changelog GLUHUB
 
-## 26/02/2020
-### Hotfix version 0.7.1
+# 26/02/2020
+## Hotfix version 0.7.1
 ### Bugs squashed
 - Users that logged in with github didn't appear in the DM's list
 - Back-end problems
