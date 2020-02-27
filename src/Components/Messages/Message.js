@@ -28,16 +28,6 @@ const Message= ({message, user, admin}) => {
       }
     }
 
-    const banUser = (message, user, admin) =>{
-      if(admin === true){
-        let userToRemove = firebase.database().ref("users/" + message.user.id)
-        admin.auth().deleteUser(userToRemove)
-        alert('User succesfully removed')
-      }else{
-        alert("You don't have enough permission to do this.")
-      }
-    }
-
     const removeAdmin = (message, user, admin) =>{
       if(admin === true){
         firebase.database().ref("users/" + message.user.id).set({
@@ -71,11 +61,12 @@ const Message= ({message, user, admin}) => {
                 <Modal.Content image>
                   <Image wrapped small size="small" src={message.user.avatar}/>  
                   <Modal.Description>
+                    {admin === true &&
                       <Button onClick={()=> setConfirm(true)}>Make user Admin</Button>
-                      <Button onClick={() => setBan(true)}>Ban user</Button>
-                      {admin === true &&
-                        <Button onClick={()=> setRemove(true)}>Remove admin</Button>
-                      }
+                    }
+                    {admin === true &&
+                      <Button onClick={()=> setRemove(true)}>Remove admin</Button>
+                    }
                   </Modal.Description>
                 </Modal.Content>
             </Modal>
@@ -89,18 +80,6 @@ const Message= ({message, user, admin}) => {
               <Modal.Actions>
                 <Button onClick={()=> setConfirm(false)}negative>No</Button>
                 <Button onClick={() => makeAdmin(message, user, admin)} positive icon="checkmark" labelPosition="right" content="Yes"/>
-              </Modal.Actions>
-            </Modal>
-            <Modal open={showBan} closeIcon size="mini" onClose={()=> setBan(false)}>
-              <Modal.Header>
-                Ban {message.user.name} ?
-              </Modal.Header>
-              <Modal.Content>
-                <p>Are you sure?</p>
-              </Modal.Content>
-              <Modal.Actions>
-                <Button onClick={() => setBan(false)} negative>No</Button>
-                <Button onClick={() => banUser(message, user, admin)} positive icon="checkmark" labelPosition="right" content="Yes"/>
               </Modal.Actions>
             </Modal>
             <Modal open={showRemove} closeIcon size="mini" onClose={() => setRemove(false)}>
