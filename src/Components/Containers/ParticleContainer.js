@@ -15,53 +15,45 @@ export default () =>(
         params={{
             "particles": {
                 "number": {
-                    "value": 240,
+                    "value": 120,
                     "density": {
-                        "enable": false
-                    }
-                },
-                "size": {
-                    "value": 3,
-                    "random": true,
-                    "anim": {
-                        "speed": 4,
-                        "size_min": 0.3
+                        "enable": true,
+                        "value_area": 1500
                     }
                 },
                 "line_linked": {
-                    "enable": false
+                    "enable": true,
+                    "opacity": 0.02
                 },
                 "move": {
-                    "random": true,
-                    "speed": 1,
-                    "direction": "top",
-                    "out_mode": "out"
+                    "direction": "right",
+                    "speed": 0.8
+                },
+                "size": {
+                    "value": 1
+                },
+                "opacity": {
+                    "anim": {
+                        "enable": true,
+                        "speed": 1,
+                        "opacity_min": 0.05
+                    }
                 }
             },
             "interactivity": {
                 "events": {
-                    "onhover": {
-                        "enable": true,
-                        "mode": "bubble"
-                    },
                     "onclick": {
                         "enable": true,
-                        "mode": "repulse"
+                        "mode": "push"
                     }
                 },
                 "modes": {
-                    "bubble": {
-                        "distance": 250,
-                        "duration": 2,
-                        "size": 0,
-                        "opacity": 0
-                    },
-                    "repulse": {
-                        "distance": 400,
-                        "duration": 4
+                    "push": {
+                        "particles_nb": 1
                     }
                 }
-            }
+            },
+            "retina_detect": true
         }}/>
     </div>
 
