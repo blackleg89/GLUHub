@@ -2,10 +2,10 @@ import React, {useState, useEffect}  from "react";
 import moment from "moment";
 import { Comment, Image, Modal, Button} from "semantic-ui-react";
 import firebase from '../../firebase'
+
 const Message= ({message, user, admin}) => {
   const [showModal, setModal] = useState(false)
   const [showConfirm, setConfirm] = useState(false)
-  const [showBan, setBan] = useState(false)
   const [showRemove, setRemove] = useState(false)
     const isOwnMessage = (message, user) =>{
         return message.user.id === user.uid ? "message__self" : ""
@@ -36,7 +36,7 @@ const Message= ({message, user, admin}) => {
         }).then(alert(`Successfully removed ${message.user.name} as admin`))
         console.log(`Successfully removed ${message.user.name} as admin.`)
       }else{
-        alert("You don't have enough permission to do this")
+        alert("Oopsie woopsie!! Jij kan dit niet doen :(")
       }
     }
 

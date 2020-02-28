@@ -10,6 +10,8 @@ import {
     Icon,
 } from "semantic-ui-react";
 import { Link } from 'react-router-dom'
+import Particles from 'react-particles-js'
+import ParticlesContainer from '../Containers/ParticleContainer'
 class Register extends Component {
     state ={
         username:"",
@@ -133,78 +135,81 @@ class Register extends Component {
             loading
         } = this.state;
         return(
-            <Grid textAlign="center" verticalAlign="middle" className="app">
-                <Grid.Column style={{maxWidth: 450}}>
-                    <Header as="h1" icon color="blue" textAlign="center">
-                        <Icon name="hand spock" color="blue"/>
-                        Register for GLU-Hub
-                    </Header>
-                    <Form onSubmit={this.handleSubmit} size="large">
-                        <Form.Input
-                            fluid
-                            name="username"
-                            placeholder="Username"
-                            onChange={this.handleChange}
-                            value={username}
-                            type="text"
-                            icon="user"
-                            iconPosition="left"
-                        />
-                        
-                        <Form.Input
-                            fluid
-                            name="email"
-                            placeholder="Email Address"
-                            onChange={this.handleChange}
-                            value={email}
-                            type="email"
-                            icon="mail"
-                            iconPosition="left"
-                        />
+            <div>
+                <ParticlesContainer/>
+                <Grid textAlign="center" verticalAlign="middle" className="app">
+                    <Grid.Column style={{maxWidth: 450}}>
+                        <Header as="h1" icon color="white" textAlign="center">
+                            <Icon name="signup" color="white"/>
+                            Register for GLU-Hub
+                        </Header>
+                        <Form onSubmit={this.handleSubmit} size="large">
+                            <Form.Input
+                                fluid
+                                name="username"
+                                placeholder="Username"
+                                onChange={this.handleChange}
+                                value={username}
+                                type="text"
+                                icon="user"
+                                iconPosition="left"
+                            />
+                            
+                            <Form.Input
+                                fluid
+                                name="email"
+                                placeholder="Email Address"
+                                onChange={this.handleChange}
+                                value={email}
+                                type="email"
+                                icon="mail"
+                                iconPosition="left"
+                            />
 
-                        <Form.Input
-                            fluid
-                            name="password"
-                            placeholder="Password"
-                            onChange={this.handleChange}
-                            value={password}
-                            type="password"
-                            icon="lock"
-                            iconPosition="left"
-                        />
+                            <Form.Input
+                                fluid
+                                name="password"
+                                placeholder="Password"
+                                onChange={this.handleChange}
+                                value={password}
+                                type="password"
+                                icon="lock"
+                                iconPosition="left"
+                            />
 
-                        <Form.Input 
-                            fluid
-                            name="passwordConfirmation"
-                            placeholder="Confirmation"
-                            onChange={this.handleChange}
-                            value={passwordConfirmation}
-                            type="password"
-                            icon="lock"
-                            iconPosition="left"
-                        />
+                            <Form.Input 
+                                fluid
+                                name="passwordConfirmation"
+                                placeholder="Confirmation"
+                                onChange={this.handleChange}
+                                value={passwordConfirmation}
+                                type="password"
+                                icon="lock"
+                                iconPosition="left"
+                            />
 
-                        <Button
-                            disabled={loading}
-                            className={loading ? "loading" : ""}
-                            color="blue"
-                            fluid
-                            size="large"
-                        >
-                            Register
-                        </Button>
-                    </Form>
-                    {errors.length > 0 && (
-                        <Message error>
-                            <h3>Error</h3>
-                            {this.displayErrors(errors)}
+                            <Button
+                                disabled={loading}
+                                className={loading ? "loading" : ""}
+                                color="blue"
+                                fluid
+                                size="large"
+                            >
+                                Register
+                            </Button>
+                        </Form>
+                        {errors.length > 0 && (
+                            <Message error>
+                                <h3>Error</h3>
+                                {this.displayErrors(errors)}
+                            </Message>
+                        )}
+                        <Message>
+                            Already have an acount? <Link to="/owo">Login</Link>
                         </Message>
-                    )}
-                    <Message>
-                        Already have an acount? <Link to="/owo">Login</Link>
-                    </Message>
-                </Grid.Column>  
-            </Grid>
+                    </Grid.Column>  
+                </Grid>
+            </div>
         )
     }
 }
