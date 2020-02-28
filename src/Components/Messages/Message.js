@@ -36,7 +36,7 @@ const Message= ({message, user, admin}) => {
         }).then(alert(`Successfully removed ${message.user.name} as admin`))
         console.log(`Successfully removed ${message.user.name} as admin.`)
       }else{
-        alert("You don't have enough permission to do this")
+        alert("Oopsie woopsie!! Jij kan dit niet doen :(")
       }
     }
 
