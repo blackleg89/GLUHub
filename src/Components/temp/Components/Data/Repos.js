@@ -49,14 +49,15 @@ class Repos extends React.Component{
           return(
               <div>
                   <React.Fragment>
-                      <Header currentUser={this.props.currentUser}/>
+                      <Header currentUser={this.props.currentUser}>
+                      </Header>
                       <Segment>
                           <div>
                             <Button onClick={this.checkRepo}>Check me!</Button>
                             <Button onClick={this.test}>Test</Button>
                             <Button onClick={() => console.log(repositories)}>Responses</Button>
                           </div>
-                          {/* <h1>{repositories[0].name}</h1> */}
+
                       </Segment>
                   </React.Fragment>
               </div>
