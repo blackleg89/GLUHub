@@ -22,7 +22,7 @@ class Register extends Component {
         loading:false,
         usersRef: firebase.database().ref("users"),
         admin:false,
-        muted:false
+        moderator:false
     }
 
     isFormValid =() => {
@@ -84,7 +84,7 @@ class Register extends Component {
                       createdUser.user.email
                   )}?d=identicon`,
                   admin:this.state.admin,
-                  muted:this.state.muted
+                  moderator: this.state.moderator
 
                 })
                 .then(() => {
@@ -115,7 +115,7 @@ class Register extends Component {
             name: createdUser.user.displayName,
             avatar: createdUser.user.photoURL,
             admin:this.state.admin,
-            muted:this.state.muted
+            moderator:this.state.moderator
         })
     }
     
