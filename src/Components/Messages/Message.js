@@ -27,7 +27,7 @@ const Message= ({message, user, admin}) => {
         name: message.user.name
       }).then(alert(`Succesfully made ${message.user.name} admin`))
     }else{
-      alert("You don't have enough permission to do this.")
+      alert("You don't have enough to do this.")
     }
   }
 
