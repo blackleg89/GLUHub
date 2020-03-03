@@ -106,12 +106,6 @@ class UserPanel extends React.Component {
                   <Button.Content hidden>
                     <Icon name="arrow right"/>
                   </Button.Content>
-                </Button>
-                <Button animated href="https://discord.gg/hfhT2HV" target="_blank">
-                  <Button.Content visible>Support</Button.Content>
-                  <Button.Content hidden>
-                    <Icon name="discord"/>
-                  </Button.Content>
                 </Button> 
               </Modal.Description>
             </Modal.Content>

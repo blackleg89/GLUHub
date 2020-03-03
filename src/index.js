@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Register from './Components/auth/Register'
-import serviceWorker from './serviceWorker'
+import * as serviceWorker from './serviceWorker'
 import firebase from './firebase'
 import Spinner from './Spinner'
 import App from './Components/App'
@@ -26,7 +26,7 @@ class Root extends React.Component{
         firebase.auth().onAuthStateChanged(user =>{
             if(user){
                 this.props.setUser(user);
-                this.props.history.push("/")
+                this.props.history.push('/')
             }else{
                 this.props.history.push("/owo")
                 this.props.clearUser()

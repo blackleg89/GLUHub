@@ -6,3 +6,5 @@ storage.rules
 build/
 .firebase/
 dist/
+firebaseAdmin.js
+serviceaccountKey.json

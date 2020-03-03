@@ -6,7 +6,7 @@ import { Grid, Header, Icon, Menu, Item, Image, Modal, Button , Message, Input, 
 import { Link } from "react-router-dom";
 class UserPanel extends React.Component {
   state = {
-    user: this.props.currentUser,
+    user: firebase.auth().currentUser,
     currentUser: firebase.auth().currentUser,
     modal: false,
     usersRef: firebase.database().ref("users"),
@@ -39,6 +39,7 @@ class UserPanel extends React.Component {
   stoppedHover = () => this.setState({ isHovering: false });
   componentDidMount() {
     var userId = this.state.user.uid;
+    var currentUser = this.state.currentUser
     firebase
       .database()
       .ref("users/" + userId + "/admin")
@@ -46,16 +47,13 @@ class UserPanel extends React.Component {
         if (snap.val() === true) {
           this.setState({ admin: true });
         }
-      });
-
-    if (this.state.user != null) {
-      this.state.user.providerData.forEach(profile => {
-        this.state.user.updateProfile({
-          displayName: profile.displayName,
-          providerId: profile.providerId
-        });
-      });
-    }
+        if(currentUser.providerData[0].providerId === "github.com"){        
+          firebase.database().ref("users/" + currentUser.uid).set({
+            name:this.state.user.displayName,
+            admin:this.state.admin
+          })
+        }
+      })
   }
 
   uploadCroppedImage = () => {
@@ -64,6 +62,7 @@ class UserPanel extends React.Component {
     storageRef
       .child(`avatars/users/${userRef.uid}`)
       .put(blob, metadata)
+      
       .then(snap => {
         snap.ref.getDownloadURL().then(downloadURL => {
           this.setState({ uploadedCroppedImage: downloadURL }, () =>
@@ -193,17 +192,6 @@ class UserPanel extends React.Component {
                     <Icon name="picture" />
                   </Button.Content>
                 </Button>
-                <Button
-                  animated
-                  href="https://discord.gg/hfhT2HV"
-                  target="_blank"
-                >
-                  <Button.Content visible>Support</Button.Content>
-                  <Button.Content hidden>
-                    <Icon name="discord" />
-                  </Button.Content>
-                </Button>
-
                 {this.state.admin === true ? <Message>Admin</Message> : null}
                 {currentUser.providerData[0].providerId === "github.com" && (
                   <Link to="/uwu">

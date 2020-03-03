@@ -13,14 +13,10 @@ class Repos extends React.Component{
         repositories:[]
     }
 
-
-
-
     componentDidMount(){
         this.fetchRepos()
     }
 
-    
     checkRepo = () =>{
         const{
             responses
