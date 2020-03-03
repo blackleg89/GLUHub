@@ -192,17 +192,6 @@ class UserPanel extends React.Component {
                     <Icon name="picture" />
                   </Button.Content>
                 </Button>
-                <Button
-                  animated
-                  href="https://discord.gg/hfhT2HV"
-                  target="_blank"
-                >
-                  <Button.Content visible>Support</Button.Content>
-                  <Button.Content hidden>
-                    <Icon name="discord" />
-                  </Button.Content>
-                </Button>
-
                 {this.state.admin === true ? <Message>Admin</Message> : null}
                 {currentUser.providerData[0].providerId === "github.com" && (
                   <Link to="/uwu">
