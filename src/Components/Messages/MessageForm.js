@@ -18,6 +18,7 @@ class MessageForm extends React.Component {
     loading: false,
     errors: [],
     modal: false,
+    muted:false
   };
 
   componentWillUnmount() {
@@ -26,6 +27,8 @@ class MessageForm extends React.Component {
       this.setState({ uploadTask: null });
     }
   }
+
+  
 
   openModal = () => this.setState({ modal: true });
 
@@ -76,24 +79,33 @@ class MessageForm extends React.Component {
     const { getMessagesRef } = this.props;
     const { message, channel, user, typingRef } = this.state;
 
-    if (message) {
-      this.setState({ loading: true });
-      getMessagesRef()
-        .child(channel.id)
-        .push()
-        .set(this.createMessage())
-        .then(() => {
-          this.setState({ loading: false, message: "", errors: [] });
-          typingRef
-            .child(channel.id)
-            .child(user.uid)
-            .remove();
-        })
-        .catch(err => {
-          console.error(err);
-          this.setState({
-            loading: false,
-            errors: this.state.errors.concat(err)
+    if(this.state.muted) {      
+      this.setState({
+        muted: false
+      });
+
+      console.log("muted");
+      return null;
+    } else {
+      if (message) {
+        this.setState({ loading: true });
+        getMessagesRef()
+          .child(channel.id)
+          .push()
+          .set(this.createMessage())
+          .then(() => {
+            this.setState({ loading: false, message: "", errors: [] });
+            typingRef
+              .child(channel.id)
+              .child(user.uid)
+              .remove();
+          })
+          .catch(err => {
+            console.error(err);
+            this.setState({
+              loading: false,
+              errors: this.state.errors.concat(err)
+            });
           });
         });
     } else {
