@@ -17,7 +17,7 @@ class MessageForm extends React.Component {
     user: this.props.currentUser,
     loading: false,
     errors: [],
-    modal: false,
+    modal: false
   };
 
   componentWillUnmount() {
@@ -95,9 +95,9 @@ class MessageForm extends React.Component {
             loading: false,
             errors: this.state.errors.concat(err)
           });
-        };
-    )}
-  };
+        });
+    };
+  }
 
   getPath = () => {
     if (this.props.isPrivateChannel) {
@@ -215,5 +215,4 @@ class MessageForm extends React.Component {
     );
   }
 }
-
 export default MessageForm;
