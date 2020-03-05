@@ -17,7 +17,7 @@ class MessageForm extends React.Component {
     user: this.props.currentUser,
     loading: false,
     errors: [],
-    modal: false,
+    modal: false
   };
 
   componentWillUnmount() {
@@ -96,12 +96,8 @@ class MessageForm extends React.Component {
             errors: this.state.errors.concat(err)
           });
         });
-    } else {
-      this.setState({
-        errors: this.state.errors.concat({ message: "Add a message" })
-      });
-    }
-  };
+    };
+  }
 
   getPath = () => {
     if (this.props.isPrivateChannel) {
@@ -219,5 +215,4 @@ class MessageForm extends React.Component {
     );
   }
 }
-
 export default MessageForm;

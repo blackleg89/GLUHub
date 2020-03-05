@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Register from './Components/auth/Register'
-import serviceWorker from './serviceWorker'
+import * as serviceWorker from './serviceWorker'
 import firebase from './firebase'
 import Spinner from './Spinner'
 import App from './Components/App'
