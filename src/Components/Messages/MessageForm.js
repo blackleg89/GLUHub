@@ -95,12 +95,8 @@ class MessageForm extends React.Component {
             loading: false,
             errors: this.state.errors.concat(err)
           });
-        });
-    } else {
-      this.setState({
-        errors: this.state.errors.concat({ message: "Add a message" })
-      });
-    }
+        };
+    )}
   };
 
   getPath = () => {
