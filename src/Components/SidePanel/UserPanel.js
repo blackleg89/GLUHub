@@ -203,6 +203,7 @@ class UserPanel extends React.Component {
                     </Button>
                   </Link>
                 )}
+                <Button href="https://forms.gle/Q4WiwfD5bEssXrZ57" target="_blank">Bug forum</Button>
               </Modal.Description>
             </Modal.Content>
           </Modal>
