@@ -17,7 +17,7 @@ class MessageForm extends React.Component {
     user: this.props.currentUser,
     loading: false,
     errors: [],
-    modal: false,
+    modal: false
   };
 
   componentWillUnmount() {
@@ -76,14 +76,14 @@ class MessageForm extends React.Component {
     const { getMessagesRef } = this.props;
     const { message, channel, user, typingRef } = this.state;
 
-    if (message) {
+    if (message.length < 100) {
       this.setState({ loading: true });
       getMessagesRef()
         .child(channel.id)
         .push()
         .set(this.createMessage())
         .then(() => {
-          this.setState({ loading: false, message: "", errors: [] });
+          this.setState({ loading: false, message: "", errors: []});
           typingRef
             .child(channel.id)
             .child(user.uid)
@@ -96,12 +96,10 @@ class MessageForm extends React.Component {
             errors: this.state.errors.concat(err)
           });
         });
-    } else {
-      this.setState({
-        errors: this.state.errors.concat({ message: "Add a message" })
-      });
+    }else{
+      alert('Message is too long')
     }
-  };
+  }
 
   getPath = () => {
     if (this.props.isPrivateChannel) {
@@ -219,5 +217,4 @@ class MessageForm extends React.Component {
     );
   }
 }
-
 export default MessageForm;

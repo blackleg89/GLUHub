@@ -47,7 +47,6 @@ class UserPanel extends React.Component {
         if (snap.val() === true) {
           this.setState({ admin: true });
         }
-
         if(currentUser.providerData[0].providerId === "github.com"){        
           firebase.database().ref("users/" + currentUser.uid).set({
             name:this.state.user.displayName,
@@ -55,7 +54,6 @@ class UserPanel extends React.Component {
           })
         }
       })
-
   }
 
   uploadCroppedImage = () => {
@@ -194,17 +192,6 @@ class UserPanel extends React.Component {
                     <Icon name="picture" />
                   </Button.Content>
                 </Button>
-                <Button
-                  animated
-                  href="https://discord.gg/hfhT2HV"
-                  target="_blank"
-                >
-                  <Button.Content visible>Support</Button.Content>
-                  <Button.Content hidden>
-                    <Icon name="discord" />
-                  </Button.Content>
-                </Button>
-
                 {this.state.admin === true ? <Message>Admin</Message> : null}
                 {currentUser.providerData[0].providerId === "github.com" && (
                   <Link to="/uwu">
@@ -216,6 +203,7 @@ class UserPanel extends React.Component {
                     </Button>
                   </Link>
                 )}
+                <Button href="https://forms.gle/Q4WiwfD5bEssXrZ57" target="_blank">Bug forum</Button>
               </Modal.Description>
             </Modal.Content>
           </Modal>

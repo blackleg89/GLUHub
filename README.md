@@ -1,7 +1,14 @@
 # Changelog GLUHUB
 
-## 26/02/2020
-### Hotfix version 0.7.1
+# 28/02/2020
+## Hotfix version 0.7.1.5
+### In this hotfix we re-designed some of the UI of our app.
+- We changed the login & register screen to have a slick new background.
+    - We achieved this by using react-particles if any of u were wondering.
+- We are planning on re-designing our entire app, so keep your eyes peeled for that.
+
+# 26/02/2020
+## Hotfix version 0.7.1
 ### Bugs squashed
 - Users that logged in with github didn't appear in the DM's list
 - Back-end problems
