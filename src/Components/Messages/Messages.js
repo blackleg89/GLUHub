@@ -327,11 +327,6 @@ class Messages extends React.Component {
             getMessagesRef={this.getMessagesRef}
           />
         </React.Fragment>
-        <Modal open={modal} onClose={this.closeModal}>
-          <Modal.Header>
-            {user.displayName}
-          </Modal.Header>
-        </Modal>
       </div>
     );
   }
