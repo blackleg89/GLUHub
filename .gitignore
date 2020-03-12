@@ -8,3 +8,4 @@ build/
 dist/
 firebaseAdmin.js
 serviceaccountKey.json
+.env
