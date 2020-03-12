@@ -32,7 +32,7 @@ class Messages extends React.Component {
     admin:false
   };
 
-  componentDidMount() {
+  componentDidMount(prevProps, prevState) {
     const { channel, user, listeners } = this.state;
 
     if (channel && user) {
@@ -49,6 +49,9 @@ class Messages extends React.Component {
 
       console.log(this.state.admin)
     })
+    if(this.messagesEnd){
+      this.scrollToBottom()
+    }
   }
 
   componentWillUnmount() {
@@ -60,13 +63,6 @@ class Messages extends React.Component {
       listener.ref.child(listener.id).off(listener.event);
     });
   };
-
-  componentDidUpdate(prevProps, prevState) {
-    if (this.messagesEnd) {
-      this.scrollToBottom();
-    }
-  }
-
  
   addToListeners = (id, ref, event) => {
     const index = this.state.listeners.findIndex(listener => {
@@ -327,11 +323,6 @@ class Messages extends React.Component {
             getMessagesRef={this.getMessagesRef}
           />
         </React.Fragment>
-        <Modal open={modal} onClose={this.closeModal}>
-          <Modal.Header>
-            {user.displayName}
-          </Modal.Header>
-        </Modal>
       </div>
     );
   }
