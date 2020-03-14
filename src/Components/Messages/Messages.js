@@ -49,6 +49,9 @@ class Messages extends React.Component {
 
       console.log(this.state.admin)
     })
+  }
+
+  componentDidUpdate(prevProps, prevState){
     if(this.messagesEnd){
       this.scrollToBottom()
     }

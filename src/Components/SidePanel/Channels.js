@@ -232,7 +232,7 @@ class Channels extends React.Component {
                 Kanaal opties voor {this.state.activeChannelName}
               </Modal.Header>
               <Modal.Description>
-                <Button onClick={this.deleteChannel}>Verwijder kanaal</Button>
+                <Button onClick={this.deleteChannel}>Verwijder {this.state.activeChannelName}</Button>
               </Modal.Description>
             </Modal>
           
