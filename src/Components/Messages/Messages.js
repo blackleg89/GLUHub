@@ -61,6 +61,14 @@ class Messages extends React.Component {
     this.removeListeners(this.state.listeners);
     this.state.connectedRef.off();
   }
+
+
+  componentDidUpdate(prevProps, prevState){
+    if(this.messagesEnd){
+      this.scrollToBottom()
+    }
+  }
+
   removeListeners = listeners => {
     listeners.forEach(listener => {
       listener.ref.child(listener.id).off(listener.event);
