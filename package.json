@@ -45,7 +45,7 @@
   },
   "devDependencies": {
     "concurrently": "^5.1.0",
-    "electron": "^7.1.11",
+    "electron": "^8.1.1",
     "electron-builder": "^21.2.0",
     "electron-connect": "^0.6.3",
     "wait-on": "^3.3.0"
@@ -59,6 +59,7 @@
     "release": "npm react-build && electron-builder --publish=always",
     "build": "react-scripts build",
     "start": "react-scripts start",
-    "dev": "concurrently \"cross-env BROWSER=none npm run react-start\" \"wait-on http://localhost:3000 && electron .\""
+    "dev": "concurrently \"cross-env BROWSER=none npm run react-start\" \"wait-on http://localhost:3000 && electron .\"",
+    "preelectron-pack": "npm run build"
   }
 }

@@ -17,7 +17,8 @@ class MessageForm extends React.Component {
     user: this.props.currentUser,
     loading: false,
     errors: [],
-    modal: false
+    modal: false,
+    messagesSend:0
   };
 
   componentWillUnmount() {
@@ -96,8 +97,17 @@ class MessageForm extends React.Component {
             errors: this.state.errors.concat(err)
           });
         });
-    }else{
+        this.setState(prevState =>{
+          return {messagesSend: prevState.messagesSend + 1}
+        })
+        console.log(this.state.messagesSend)
+    }else if (message.length > 100){
       alert(`Your messages is too long, th cap for now is 100 characters.yours is ${message.length} characters long`)
+    }
+
+    if(this.state.messagesSend > 10){
+      alert("Wow, settle down buddy. You're sending way too many messages.")
+      this.setState({messagesSend:0})
     }
   }
 
