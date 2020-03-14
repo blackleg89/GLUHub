@@ -18,7 +18,6 @@ import {createStore} from 'redux'
 import {Provider, connect} from 'react-redux'
 import rootReducer from'./reducers'
 import {setUser, clearUser} from './actions'
-require ('dotenv').config()
 
 const store = createStore(rootReducer)
 
