@@ -107,7 +107,12 @@ class MessageForm extends React.Component {
 
     if(this.state.messagesSend > 10){
       alert("Wow, settle down buddy. You're sending way too many messages.")
-      this.setState({messagesSend:0})
+      
+      setTimeout(()=>{
+        this.setState({messagesSend:0})
+        console.log('reset')
+      }, 5000)
+
     }
   }
 
