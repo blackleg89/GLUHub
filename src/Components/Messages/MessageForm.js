@@ -97,7 +97,7 @@ class MessageForm extends React.Component {
           });
         });
     }else{
-      alert('Message is too long')
+      alert(`Your message is too long, the current character cap is 100. Your message is ${message.length} characters long`)
     }
   }
 
