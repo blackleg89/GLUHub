@@ -77,7 +77,7 @@ class MessageForm extends React.Component {
     const { getMessagesRef } = this.props;
     const { message, channel, user, typingRef } = this.state;
 
-    if (message.length < 100) {
+    if (message.length < 100 && message.length > 0) {
       this.setState({ loading: true });
       getMessagesRef()
         .child(channel.id)
