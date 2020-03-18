@@ -9,6 +9,7 @@ import MessageForm from "./MessageForm";
 import Message from "./Message";
 import Typing from "./Typing";
 import Skeleton from "./Skeleton";
+import { variable, link } from "semantic-ui-react";
 
 class Messages extends React.Component {
   state = {
@@ -258,7 +259,16 @@ class Messages extends React.Component {
         />
         
       </div>
+
     ));
+
+   // hier voor de hyper link (in progress)
+
+    // var Conversation = "linkje";
+  
+    // Conversation = Conversation.replace(/(www\..+?)(\s|$)/g, function(text, link) {
+    // return '<a href="http://'+ link +'">'+ link +'</a>';
+    // })
 
   displayChannelName = channel => {
     return channel

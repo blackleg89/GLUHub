@@ -24,6 +24,7 @@
     "react-avatar-editor": "^11.0.4",
     "react-dom": "^16.12.0",
     "react-fps-stats": "^0.1.2",
+    "react-native-hyperlink": "0.0.19",
     "react-particles-js": "^2.7.1",
     "react-redux": "^7.1.3",
     "react-router-dom": "^5.1.2",
