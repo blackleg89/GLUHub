@@ -1,0 +1,16 @@
+html,
+body,
+.app {
+  height: 100vh;
+  padding: 1em;
+  background: #1b1c1d;
+}
+.menuUserpanel {
+    overflow-y: auto;
+}
+.label_username {
+    color: white;
+    padding-left: 0px;
+    margin-left: 0px;
+    line-height: 1.8;
+}

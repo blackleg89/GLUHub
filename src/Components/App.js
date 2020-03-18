@@ -1,12 +1,16 @@
-import React from 'react';
-import './App.css';
+import React from 'react'
+import {Grid} from 'semantic-ui-react'
+import '../App.css'
+import {connect} from 'react-redux'
+import SidePanel from './SidePanel/SidePanel'
 
-function App() {
-  return (
-    <div className="App">
-        <p>hallo</p>
-    </div>
-  );
-}
+const App = ({currentUser}) => (
+  <Grid columns="equal" className="app" style={{background: "#1b1c1d"}}>
+    <SidePanel key={currentUser && currentUser.uid} currentUser={currentUser}/>
+  </Grid>
+)
 
-export default App;
+const mapStateToProps = state => ({
+  currentUser:state.user.currentUser
+})
+export default connect(mapStateToProps)(App);
