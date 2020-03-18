@@ -14,3 +14,7 @@ body,
     margin-left: 0px;
     line-height: 1.8;
 }
+
+.setting-user:hover{
+  cursor: pointer;
+}

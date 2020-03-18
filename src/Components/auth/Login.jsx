@@ -163,7 +163,7 @@ class Login extends React.Component{
                 </Message>
             )}
             <Message>
-                Don't have an account? <Link to="/register  ">Register</Link><br/>
+                Don't have an account? <Link to="/register">Register</Link><br/>
             </Message>
                 <Button onClick={this.openModal}>Wachtwoord vergeten?</Button>
                 <Button onClick={this.loginGithub}>Login met github</Button>
