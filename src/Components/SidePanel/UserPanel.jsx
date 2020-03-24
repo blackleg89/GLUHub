@@ -197,7 +197,7 @@ class UserPanel extends React.Component {
                   </Button.Content>
                 </Button>
                 {this.state.admin === true ? <Message>Admin</Message> : null}
-              </Modal.Description>
+              </Modal.Description>  
             </Modal.Content>
           </Modal>
           <Modal open={avatar} onClose={this.closeAvatar}>
