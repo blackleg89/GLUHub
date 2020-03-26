@@ -11,7 +11,6 @@ import {
     Modal
 } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
-import ParticleContainer from '../Containers/ParticleContainer'
 class Login extends React.Component{
     state = {
         email: "",
@@ -88,7 +87,6 @@ class Login extends React.Component{
         const {email, errors,  password,loading, modal} = this.state
         return(
         <div>   
-            <ParticleContainer/>
             <Grid textAlign="center" verticalAlign="middle" className="app">
                 <Grid.Column style={{ maxWidth: 450 }}>
                     <Header as="h1" icon color="blue" textAlign="center">
@@ -132,7 +130,7 @@ class Login extends React.Component{
             </Form>
             <Modal size="mini" open={modal} onClose={this.closeModal}>
                 <Modal.Header>
-                    Wachtwoord vergeten
+                    Forgot password
                 </Modal.Header>
                 <Modal.Content>
                     <Form onSubmit={this.resetPassword} size="mini">
@@ -165,7 +163,7 @@ class Login extends React.Component{
                 </Message>
             )}
             <Message>
-                Don't have an account? <Link to="/umu">Register</Link><br/>
+                Don't have an account? <Link to="/register">Register</Link><br/>
             </Message>
                 <Button onClick={this.openModal}>Wachtwoord vergeten?</Button>
                 <Button onClick={this.loginGithub}>Login met github</Button>

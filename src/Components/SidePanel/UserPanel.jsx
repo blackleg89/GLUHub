@@ -1,9 +1,19 @@
-import React from "react";
-import firebase from "../../firebase";
-import AvatarEditor from "react-avatar-editor";
-// prettier-ignore
-import { Grid, Header, Icon, Menu, Item, Image, Modal, Button , Message, Input, Label, Card} from "semantic-ui-react";
-import { Link } from "react-router-dom";
+import React from 'react'
+import firebase from '../../firebase'
+import {
+    Grid,
+    Header,
+    Icon, 
+    Image,
+    Modal,
+    Button,
+    Message,
+    Input,
+} from 'semantic-ui-react'
+import AvatarEditor from 'react-avatar-editor'
+import Snackbar from '@material-ui/core/Snackbar'
+import Alert from '@material-ui/lab/Alert'
+import {Link} from 'react-router-dom'
 class UserPanel extends React.Component {
   state = {
     user: firebase.auth().currentUser,
@@ -11,18 +21,14 @@ class UserPanel extends React.Component {
     modal: false,
     usersRef: firebase.database().ref("users"),
     admin: false,
-    moderator: false,
-    lmao: false,
-    git: false,
+    avatar: false,
     uploadedCroppedImage: "",
     previewImage: "",
     croppedImage: "",
     blob: null,
     userRef: firebase.auth().currentUser,
     storageRef: firebase.storage().ref(),
-    gitName: "",
-    gitEmail: "",
-    gitUID: "",
+    snack:false,
     isHovering: false,
     metadata: {
       contentType: "image/png"
@@ -31,12 +37,11 @@ class UserPanel extends React.Component {
 
   openModal = () => this.setState({ modal: true });
   closeModal = () => this.setState({ modal: false });
-  openLmao = () => this.setState({ lmao: true });
-  closeLmao = () => this.setState({ lmao: false });
-  openGit = () => this.setState({ git: true });
-  closeGit = () => this.setState({ git: false });
+  openAvatar = () => this.setState({ avatar: true });
+  closeAvatar = () => this.setState({ avatar: false });
   onHover = () => this.setState({ isHovering: true });
   stoppedHover = () => this.setState({ isHovering: false });
+  closeSnack = () => this.setState({snack:false})
   componentDidMount() {
     var userId = this.state.user.uid;
     var currentUser = this.state.currentUser
@@ -79,7 +84,8 @@ class UserPanel extends React.Component {
       })
       .then(() => {
         console.log("PhotoURL updated");
-        this.closeLmao();
+        this.closeAvatar();
+        this.setState({snack:true, avatar:false, modal:false})
       })
       .catch(err => {
         console.error(err);
@@ -131,22 +137,20 @@ class UserPanel extends React.Component {
     const {
       user,
       modal,
-      lmao,
+      avatar,
       previewImage,
-      croppedImage,
-      currentUser
+      croppedImage
     } = this.state;
-    const { primaryColor } = this.props;
 
     return (
-      <Grid style={{ background: primaryColor }}>
+      <Grid>
         <Grid.Column>
           <Grid.Row style={{ padding: "1.2em", margin: 0 }}>
             {/* App Header */}
 
             <Header inverted floated="left" as="h2">
-              <Icon name="chat" />
-              <Header.Content color="white">GLU-Chat</Header.Content>
+              <Icon name="github" />
+              <Header.Content color="white">nog bedenken</Header.Content>
             </Header>
 
             {/* User Dropdown  */}
@@ -171,7 +175,7 @@ class UserPanel extends React.Component {
             </label>
           </Grid.Row>
           <Modal open={modal} onClose={this.closeModal} size="small" closeIcon>
-            <Modal.Header>Settings for {user.displayName}</Modal.Header>
+            <Modal.Header>Settings for {user.displayName} {this.state.currentUser.providerData[0].providerId === 'github.com' ? <Icon name="github"/> : null}</Modal.Header>
             <Modal.Content image>
               <Image
                 className="avatar-us"
@@ -183,31 +187,20 @@ class UserPanel extends React.Component {
                 <Button animated onClick={this.handleSignout}>
                   <Button.Content visible>Sign out</Button.Content>
                   <Button.Content hidden>
-                    <Icon name="arrow right" />
+                    <Icon name="arrow right"/>
                   </Button.Content>
                 </Button>
-                <Button onClick={this.openLmao} animated>
+                <Button onClick={this.openAvatar} animated>
                   <Button.Content visible>Avatar</Button.Content>
                   <Button.Content hidden>
                     <Icon name="picture" />
                   </Button.Content>
                 </Button>
                 {this.state.admin === true ? <Message>Admin</Message> : null}
-                {currentUser.providerData[0].providerId === "github.com" && (
-                  <Link to="/uwu">
-                    <Button animated>
-                      <Button.Content visible>Glu-Git</Button.Content>
-                      <Button.Content hidden>
-                        <Icon name="github" />
-                      </Button.Content>
-                    </Button>
-                  </Link>
-                )}
-                <Button href="https://forms.gle/Q4WiwfD5bEssXrZ57" target="_blank">Bug forum</Button>
-              </Modal.Description>
+              </Modal.Description>  
             </Modal.Content>
           </Modal>
-          <Modal open={lmao} onClose={this.closeLmao}>
+          <Modal open={avatar} onClose={this.closeAvatar}>
             <Modal.Header>Change Avatar</Modal.Header>
             <Modal.Content>
               <Input
@@ -257,15 +250,19 @@ class UserPanel extends React.Component {
               <Button color="green" inverted onClick={this.handleCropImage}>
                 <Icon name="image" /> Preview
               </Button>
-              <Button color="red" inverted onClick={this.closeLmao}>
+              <Button color="red" inverted onClick={this.closeAvatar}>
                 <Icon name="remove" /> Cancel
               </Button>
             </Modal.Actions>
           </Modal>
-        </Grid.Column>
-      </Grid>
-    );
-  }
+              <Snackbar open={this.state.snack} autoHideDuration={3000} onClose={this.closeSnack}>
+                  <Alert onClose={this.closeSnack} severity="success">
+                    Avatar changed successfully!
+                  </Alert>
+              </Snackbar>
+            </Grid.Column>
+          </Grid>
+        )
+    }
 }
-
-export default UserPanel;
+export default UserPanel
