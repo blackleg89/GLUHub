@@ -147,16 +147,13 @@ class UserPanel extends React.Component {
         <Grid.Column>
           <Grid.Row style={{ padding: "1.2em", margin: 0 }}>
             {/* App Header */}
-
             <Header inverted floated="left" as="h2">
-              <Icon name="github" />
-              <Header.Content color="white">nog bedenken</Header.Content>
+              <Icon name="github" size="large"/>
+              <Header.Content color="white" >Away & Connected</Header.Content>
             </Header>
-
             {/* User Dropdown  */}
-            <label className="label_username">
-              {/* <Image src={user.photoURL} avatar /> */}
-              {user.displayName}
+              <Image src={user.photoURL} avatar size="tiny" className="hover"onClick={this.openModal}/>
+              <p1>{user.displayName}</p1>
               <Icon
                 onMouseEnter={this.onHover}
                 onMouseLeave={this.stoppedHover}
@@ -172,7 +169,6 @@ class UserPanel extends React.Component {
                 className="setting-user"
                 onClick={this.openModal}
               />
-            </label>
           </Grid.Row>
           <Modal open={modal} onClose={this.closeModal} size="small" closeIcon>
             <Modal.Header>Settings for {user.displayName} {this.state.currentUser.providerData[0].providerId === 'github.com' ? <Icon name="github"/> : null}</Modal.Header>
@@ -196,6 +192,7 @@ class UserPanel extends React.Component {
                     <Icon name="picture" />
                   </Button.Content>
                 </Button>
+                <Link to="/test"><Button>Test</Button></Link> 
                 {this.state.admin === true ? <Message>Admin</Message> : null}
               </Modal.Description>  
             </Modal.Content>

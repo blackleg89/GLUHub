@@ -17,6 +17,7 @@ import Spinner from './Spinner'
 import Register from './Components/auth/Register'
 import App from './Components/App'
 import Login from './Components/auth/Login'
+import Lmao from './Components/Git/Containers/Root'
 const store = createStore(rootReducer)
 
 class Root extends React.Component{
@@ -40,6 +41,7 @@ class Root extends React.Component{
                 <Route exact path="/" component={App}/>
                 <Route path='/register' component={Register}/>
                 <Route path="/login" component={Login}/>
+                <Route path="/test" component={Lmao}/>
             </Switch>
         )
     }
