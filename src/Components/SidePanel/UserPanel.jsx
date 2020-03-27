@@ -192,7 +192,6 @@ class UserPanel extends React.Component {
                     <Icon name="picture" />
                   </Button.Content>
                 </Button>
-                <Link to="/test"><Button>Test</Button></Link> 
                 {this.state.admin === true ? <Message>Admin</Message> : null}
               </Modal.Description>  
             </Modal.Content>
