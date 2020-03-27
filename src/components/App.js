@@ -1,26 +1,15 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import {Grid} from 'semantic-ui-react'
+import {connect} from 'react-redux'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = ({currentUser}) => (
+  <Grid columns="equal" className="app" style={{background: "#1b1c1d"}}>
+    <p>Hallo</p>
+  </Grid>
+)
 
-export default App;
+const mapStateToProps = state => ({
+  currentUser:state.user.currentUser
+})
+
+export default connect(mapStateToProps)(App)
