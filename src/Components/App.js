@@ -1,6 +1,6 @@
 import React from 'react'
 import {Grid} from 'semantic-ui-react'
-import '../App.css'
+import '../css/App.css'
 import {connect} from 'react-redux'
 import SidePanel from './SidePanel/SidePanel'
 
