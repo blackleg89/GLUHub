@@ -150,29 +150,31 @@ class UserPanel extends React.Component {
 
             <Header inverted floated="left" as="h2">
               <Icon name="github" />
-              <Header.Content color="white">nog bedenken</Header.Content>
+              <Header.Content color="white">Away & Connected</Header.Content>
             </Header>
 
             {/* User Dropdown  */}
-            <label className="label_username">
-              {/* <Image src={user.photoURL} avatar /> */}
-              {user.displayName}
-              <Icon
-                onMouseEnter={this.onHover}
-                onMouseLeave={this.stoppedHover}
-                loading={this.state.isHovering === true}
-                name="setting"
-                size="small"
-                style={{
-                  float: "right",
-                  marginTop: "10px",
-                  marginLeft: "10px",
-                  marginRight: "0px"
-                }}
-                className="setting-user"
-                onClick={this.openModal}
-              />
-            </label>
+            <div className="header-name">
+              <label className="label_username">
+                <Image src={user.photoURL} size="mini" avatar />
+                {user.displayName}
+                <Icon
+                  onMouseEnter={this.onHover}
+                  onMouseLeave={this.stoppedHover}
+                  loading={this.state.isHovering === true}
+                  name="setting"
+                  size="small"
+                  style={{
+                    float: "right",
+                    marginTop: "10px",
+                    marginLeft: "10px",
+                    marginRight: "0px"
+                  }}
+                  className="setting-user"
+                  onClick={this.openModal}
+                />
+              </label>
+            </div>
           </Grid.Row>
           <Modal open={modal} onClose={this.closeModal} size="small" closeIcon>
             <Modal.Header>Settings for {user.displayName} {this.state.currentUser.providerData[0].providerId === 'github.com' ? <Icon name="github"/> : null}</Modal.Header>
