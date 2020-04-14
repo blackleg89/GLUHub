@@ -11,6 +11,7 @@ function createWindow() {
   mainWindow = new BrowserWindow({width: 900, height: 680});
   mainWindow.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`);
   mainWindow.on('closed', () => mainWindow = null);
+  mainWindow.setMenuBarVisibility(false)
 }
 
 app.on('ready', createWindow);

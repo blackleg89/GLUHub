@@ -137,7 +137,7 @@ class Register extends Component{
                     <Grid.Column style={{maxWidth: 450}}>
                         <Header as="h1" icon color="white" textAlign="center">
                             <Icon name="signup" color="white"/>
-                            Register for GLU-Hub
+                            Register for GLUhub
                         </Header>
                         <Form onSubmit={this.handleSubmit} size="large">
                             <Form.Input

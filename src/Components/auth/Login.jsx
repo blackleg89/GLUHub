@@ -11,6 +11,7 @@ import {
     Modal
 } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
+import '../../css/login.css'
 class Login extends React.Component{
     state = {
         email: "",
@@ -89,12 +90,13 @@ class Login extends React.Component{
         <div>   
             <Grid textAlign="center" verticalAlign="middle" className="app">
                 <Grid.Column style={{ maxWidth: 450 }}>
-                    <Header as="h1" icon color="blue" textAlign="center">
+                    <Header as="h1" icon color="blue" className ="header login" textAlign="center">
                         <Icon name="sign-in" color="blue"/>
-                        Login to Glu-Hub
+                        Login to GLUhub
                     </Header>
                     <Form onSubmit={this.handleSubmit} size="large">
                         <Form.Input
+                            className="input"
                             fluid
                             name="email"
                             icon="mail"
