@@ -1,0 +1,36 @@
+html,
+body,
+.app {
+  height: 100vh;
+  padding: 1em;
+  background: #1b1c1d;
+  color:white!important;
+}
+.menuUserpanel {
+    overflow-y: auto;
+}
+.label_username {
+  color: white;
+  padding-left: 0px;
+  margin-left: 0px;
+  line-height: 1.8;
+  font-size:16px!important;
+}
+
+.setting-user:hover{
+  cursor: pointer;
+}
+
+.icon-header-app{
+  display:inline-block!important;
+
+}
+p1{
+  color:white!important;
+  padding-left:15px!important;
+  font-size:20px!important;
+}
+
+.hover:hover{
+  cursor: pointer;
+}
