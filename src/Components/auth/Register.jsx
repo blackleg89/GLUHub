@@ -10,7 +10,7 @@ import {
     Icon
 } from 'semantic-ui-react'
 import {Link} from 'react-router-dom'
-
+import ParticleContainer from '../Containers/ParticleContainer'
 class Register extends Component{
     state ={
         username:"",
@@ -133,6 +133,7 @@ class Register extends Component{
 
         return(
             <div>
+                <ParticleContainer/>
                 <Grid textAlign="center" verticalAlign="middle" className="app">
                     <Grid.Column style={{maxWidth: 450}}>
                         <Header as="h1" icon color="white" textAlign="center">

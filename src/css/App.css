@@ -3,7 +3,7 @@ body,
 .app {
   height: 100vh;
   padding: 1em;
-  background: black;
+  background: #1b1c1d;
 }
 .menuUserpanel {
     overflow-y: auto;

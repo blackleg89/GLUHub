@@ -12,6 +12,7 @@ import {
 } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import '../../css/login.css'
+import ParticleContainer from '../Containers/ParticleContainer'
 class Login extends React.Component{
     state = {
         email: "",
@@ -88,6 +89,7 @@ class Login extends React.Component{
         const {email, errors,  password,loading, modal} = this.state
         return(
         <div>   
+            <ParticleContainer/>
             <Grid textAlign="center" verticalAlign="middle" className="app">
                 <Grid.Column style={{ maxWidth: 450 }}>
                     <Header as="h1" icon color="blue" className ="header login" textAlign="center">

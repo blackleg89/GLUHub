@@ -150,7 +150,7 @@ class UserPanel extends React.Component {
 
             <Header inverted floated="left" as="h2">
               <Icon name="github" />
-              <Header.Content color="white">Away & Connected</Header.Content>
+              <Header.Content color="white">GLUhub</Header.Content>
             </Header>
 
             {/* User Dropdown  */}
