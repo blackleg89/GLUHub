@@ -3,7 +3,7 @@ body,
 .app {
   height: 100vh;
   padding: 1em;
-  background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(55,50,50,1) 35%, rgba(10,142,168,1) 100%);
+  background: black;
 }
 .menuUserpanel {
     overflow-y: auto;

@@ -92,7 +92,7 @@ class Login extends React.Component{
                 <Grid.Column style={{ maxWidth: 450 }}>
                     <Header as="h1" icon color="blue" className ="header login" textAlign="center">
                         <Icon name="sign-in" color="blue"/>
-                        Login to Away & Connected
+                        Login to GLUhub
                     </Header>
                     <Form onSubmit={this.handleSubmit} size="large">
                         <Form.Input
